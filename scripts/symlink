@@ -103,7 +103,7 @@ createSymLinks() {
   ln -fsv "$DOTFILES/systemd" "$HOME/.config/systemd"
   ln -fsv "$DOTFILES/workstyle" "$HOME/.config/workstyle"
   ln -fsv "$DOTFILES/xfce4" "$HOME/.config/xfce4"
-  # ln -fsv "$DOTFILES/" "$HOME/.config/"
+  ln -fsv "$DOTFILES/icons" "$HOME/.icons"
   # ln -fsv "$DOTFILES/" "$HOME/.config/"
   # ln -fsv "$DOTFILES/" "$HOME/.config/"
 }
