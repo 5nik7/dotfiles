@@ -24,8 +24,8 @@ alias installed="grep -i installed /var/log/pacman.log"
 
 # use exa if available
 if [[ -x "$(command -v exa)" ]]; then
-  alias ll="exa -xHighmnSlFuU --all --octal-permissions --group-directories-first --icons"
-  alias l="exa -F --all --long --no-filesize --no-user --no-time --group-directories-first --icons --no-permissions"
+  alias ll="exa -HhgnSF --all --long --group-directories-first --icons --no-time"
+  alias l="exa -HF --all --long --no-filesize --no-user --no-time --group-directories-first --icons"
 else
   alias l="ls -lah ${colorflag}"
   alias ll="ls -lFh ${colorflag}"
