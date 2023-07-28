@@ -1,9 +1,9 @@
 lastupdatecheck: 0
 recentrepos:
-- /home/snikt/.dotfiles
-- /home/snikt/do75
+    - /home/snikt/.dotfiles
+    - /home/snikt/do75
 startuppopupversion: 5
 customcommandshistory:
-- nvim zsh
-- state
+    - nvim zsh
+    - state
 hidecommandlog: false

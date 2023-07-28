@@ -3,10 +3,10 @@
   "position": "top",
   "height": 25,
   "spacing": 3,
-  "margin": "5 0 -10 0",
+  "margin": "0 0 0 0",
   "modules-left": ["sway/workspaces", "sway/window"],
   "modules-center": [],
-  "modules-right": ["clock"],
+  "modules-right": [],
   "sway/workspaces": {
     "format": "{icon}",
     "on-click": "activate",
@@ -30,7 +30,5 @@
     "format": "{}",
     "max-length": 50
   },
-  "clock": {
-    "format": "\ue641 {:%I:%M}"
-  }
+
 }

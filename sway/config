@@ -16,8 +16,8 @@ xwayland enable
 font pango:JetBrainsMono Nerd Font 8
 default_border pixel 1
 default_floating_border pixel 1
-gaps inner 2
-gaps outer 2
+gaps inner 5
+gaps outer 5
 
 output * {
   bg ~/.config/wallpapers/c1.png fill
