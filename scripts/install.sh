@@ -8,7 +8,7 @@ BLD=$(tput bold)
 CNC=$(tput sgr0)
 LOG="install.log"
 
-dotfiles_folder=~/dotfiles
+dotdir=~/dotfiles
 source_folder=~/sources
 backup_folder=~/.Backups
 date=$(date +%Y%m%d-%H%M%S)
@@ -107,10 +107,10 @@ clear
 logo "Installing needed packages.."
 
 dependencias=(git base-devel base-devel cmake unzip ninja curl pacman-contrib xdg-user-dirs \
-              rustup nodejs luarocks go python-pip sway waybar sddm \
+              rustup nodejs luarocks go python-pip hyprland sway waybar-hyprland-git sddm-git wlogout wl-clipboard \
 			        ffmpeg neovim viewnior kitty alacritty foot dunst rofi exa ranger starship \
-			        polkit-gnome nwg-look-bin qt5ct htop ffmpegthumbs papirus-icon-theme \
-			        zsh exa ripgrep lazygit fd \
+			        polkit-gnome nwg-look-bin qt5ct htop ffmpegthumbs papirus-icon-theme catppuccin-gtk-theme-mocha \
+			        zsh exa ripgrep lazygit fd thunar \
 			        ttf-nerd-fonts-symbols-common otf-firamono-nerd inter-font otf-sora ttf-fantasque-nerd noto-fonts noto-fonts-emoji ttf-comfortaa \
 			        ttf-jetbrains-mono ttf-jetbrains-mono-nerd ttf-terminus-nerd ttf-inconsolata ttf-joypixels)
 
@@ -149,48 +149,69 @@ logo "Installing FZF"
 if [ ! -d "$fzf_folder" ]; then
   cd || exit
   git clone "$fzf_repo" "$fzf_folder"
-  unzip '*.zip' -d "$fzf_folder"
-  rm -rf '*.zip'
-  sudo cp -R "$HOME/Downloads/nerdfonts/" "/usr/share/fonts/"
+  $fzf_folder/install
 fi
-
-### Add Fonts for Waybar ###
-mkdir -p "$HOME/Downloads/nerdfonts/"
-cd "$HOME/Downloads/" || exit
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.1/CascadiaCode.zip
-unzip '*.zip' -d "$HOME/Downloads/nerdfonts/"
-rm -rf '*.zip'
-sudo cp -R "$HOME/Downloads/nerdfonts/" "/usr/share/fonts/"
-
-fc-cache -rv
-
+clear
 
 logo "Downloading dotfiles"
-[ -d ~/dotfiles ] && rm -rf ~/dotfiles
-printf "Cloning rice from https://github.com/gh0stzk/dotfiles\n"
-cd
-git clone --depth=1 https://github.com/gh0stzk/dotfiles.git
+[ -d $dotdir ] && rm -rf $dotdir
+printf "Cloning rice from https://github.com/5nik7/dotfiles\n"
+cd || exit
+git clone --depth=1 https://github.com/5nik7/dotfiles.git
 sleep 2
 clear
 
-### Copy Config Files ###
-read -n1 -rep "${CAT} Would you like to copy config files? (y,n)" CFG
-if [[ $CFG =~ ^[Yy]$ ]]; then
-    printf " Copying config files...\n"
-    cp -r dotconfig/dunst ~/.config/ 2>&1 | tee -a $LOG
-    cp -r dotconfig/hypr ~/.config/ 2>&1 | tee -a $LOG
-    cp -r dotconfig/kitty ~/.config/ 2>&1 | tee -a $LOG
-    cp -r dotconfig/pipewire ~/.config/ 2>&1 | tee -a $LOG
-    cp -r dotconfig/rofi ~/.config/ 2>&1 | tee -a $LOG
-    cp -r dotconfig/swaylock ~/.config/ 2>&1 | tee -a $LOG
-    cp -r dotconfig/waybar ~/.config/ 2>&1 | tee -a $LOG
-    cp -r dotconfig/wlogout ~/.config/ 2>&1 | tee -a $LOG
+logo "Backup files"
+printf "Backup files will be stored in %s%s%s/.Backups%s \n\n" "${BLD}" "${CRE}" "$HOME" "${CNC}"
+sleep 10
 
-    # Set some files as exacutable
-    chmod +x ~/.config/hypr/xdg-portal-hyprland
-    chmod +x ~/.config/waybar/scripts/waybar-wttr.py
+if [ ! -d "$backup_folder" ]; then
+  mkdir -p "$backup_folder"
 fi
 
+for folder in kitty nvim ranger zsh paru bat starship; do
+  if [ -d "$HOME/.config/$folder" ]; then
+    mv "$HOME/.config/$folder" "$backup_folder/${folder}_$date"
+    echo "$folder folder backed up successfully at $backup_folder/${folder}_$date"
+  else
+    echo "The folder $folder does not exist in $HOME/.config/"
+  fi
+done
+
+[ -f ~/.zshenv ] && mv ~/.zshenv $backup_folder/.zshenv-backup-"$(date +%Y.%m.%d-%H.%M.%S)"
+
+printf "%s%sDone!!%s\n\n" "${BLD}" "${CGR}" "${CNC}"
+sleep 5
+clear
+
+### Copy Config Files ###
+logo "DO75..."
+read -n1 -rep "${CAT} Would you like to copy config files? (y,n)" CFG
+if [[ $CFG =~ ^[Yy]$ ]]; then
+    [ ! -d ~/.config ] && mkdir -p ~/.config
+    [ ! -d ~/.local/bin ] && mkdir -p ~/.local/bin
+    [ ! -d ~/.local/share/applications ] && mkdir -p ~/.local/share/applications
+    [ ! -d ~/.local/share/fonts ] && mkdir -p ~/.local/share/fonts
+    printf " Copying config files...\n"
+    cp -rv $dotdir/nvim ~/.config/ 2>&1 | tee -a $LOG
+    cp -rv $dotdir/ranger ~/.config/ 2>&1 | tee -a $LOG
+    cp -rv $dotdir/kitty ~/.config/ 2>&1 | tee -a $LOG
+    cp -rv $dotdir/bat ~/.config/ 2>&1 | tee -a $LOG
+    cp -rv $dotdir/zsh ~/.config/ 2>&1 | tee -a $LOG
+    cp -rv $dotdir/starship ~/.config/ 2>&1 | tee -a $LOG
+    cp -rv $dotdir/paru ~/.config/ 2>&1 | tee -a $LOG
+    cp -rv $dotdir/fonts/* ~/.local/share/fonts/ 2>&1 | tee -a $LOG
+    cp -rv $dotdir/scripts/* ~/.local/bin/ 2>&1 | tee -a $LOG
+    cp -rv $dotdir/home/.zshenv ~/.zshenv 2>&1 | tee -a $LOG
+
+    # Set some files as exacutable
+    chmod +x ~/.config/ranger/scope.sh
+fi
+sleep 1
+clear
+
+
+logo "Autologin..."
 ### Enable SDDM Autologin ###
 read -n1 -rep 'Would you like to enable SDDM autologin? (y,n)' SDDM
 if [[ $SDDM == "Y" || $SDDM == "y" ]]; then
@@ -202,7 +223,8 @@ if [[ $SDDM == "Y" || $SDDM == "y" ]]; then
     sudo systemctl enable sddm
     sleep 3
 fi
-
+sleep 1
+clear
 
 ########## --------- Changing shell to zsh ---------- ##########
 
