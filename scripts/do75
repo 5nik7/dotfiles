@@ -17,20 +17,22 @@ dotdir=~/dotfiles
 dotrepo=https://github.com/5nik7/dotfiles.git
 backup_folder=~/.Backups
 date=$(date +%Y%m%d-%H%M%S)
+batcache=~/.cache/bat
+cachedir=~/.cache
 
 clear
 logo () {
 
 	local text="${1:?}"
 	echo -en "\n
-       ██████████      ███████    ██████████ ██████████
-      ░░███░░░░███   ███░░░░░███ ░███░░░░███░███░░░░░░█
-       ░███   ░░███ ███     ░░███░░░    ███ ░███     ░
-       ░███    ░███░███      ░███      ███  ░█████████
-       ░███    ░███░███      ░███     ███   ░░░░░░░░███
-       ░███    ███ ░░███     ███     ███     ███   ░███
-       ██████████   ░░░███████░     ███     ░░████████
-      ░░░░░░░░░░      ░░░░░░░      ░░░       ░░░░░░░░\n\n"
+    ██████████      ███████    ██████████ ██████████
+   ░░███░░░░███   ███░░░░░███ ░███░░░░███░███░░░░░░█
+    ░███   ░░███ ███     ░░███░░░    ███ ░███     ░
+    ░███    ░███░███      ░███      ███  ░█████████
+    ░███    ░███░███      ░███     ███   ░░░░░░░░███
+    ░███    ███ ░░███     ███     ███     ███   ░███
+    ██████████   ░░░███████░     ███     ░░████████
+   ░░░░░░░░░░      ░░░░░░░      ░░░       ░░░░░░░░\n\n"
     printf ' %s [%s%s %s%s %s]%s\n\n' "${CRE}" "${CNC}" "${CYE}" "${text}" "${CNC}" "${CRE}" "${CNC}"
 }
 
@@ -112,11 +114,10 @@ while true; do
   done
 clear
 
-
 logo "Installing Packages..."
 
-dependencias=(git base-devel base-devel cmake unzip ninja curl pacman-contrib xdg-user-dirs \
-              rustup nodejs luarocks go python-pip hyprland sway waybar-hyprland-git sddm-git wlogout wl-clipboard \
+dependencias=(git base-devel base-devel cmake unzip ninja curl pacman-contrib rustup nodejs npm luarocks go python-pip \
+              xdg-user-dirs hyprland sway waybar-hyprland-git sddm-git wlogout wl-clipboard \
 			        ffmpeg neovim viewnior kitty alacritty foot dunst rofi exa ranger starship \
 			        polkit-gnome nwg-look-bin qt5ct htop ffmpegthumbs papirus-icon-theme catppuccin-gtk-theme-mocha \
 			        zsh exa ripgrep lazygit fd thunar vim \
@@ -132,14 +133,10 @@ printf "%s%sChecking for required packages...%s\n" "${BLD}" "${CBL}" "${CNC}"
 for pkgs in "${dependencias[@]}"
 do
   if ! is_installed "$pkgs"; then
-    yay -S "$pkgs" --noconfirm
+    paru -S "$pkgs" --noconfirm
     printf "\n"
-    sleep 1
-    clear
   else
     printf '%s%s is already installed on your system!%s\n' "${CGR}" "$pkgs" "${CNC}"
-    sleep 1
-    clear
   fi
 done
 sleep 3
@@ -188,7 +185,7 @@ logo "Neovim."
         cd || exit
       fi
   else
-    printf "Cloning FZF from %s\n" "$neo_repo"
+    printf "Cloning Neovim from %s\n" "$neo_repo"
     cd || exit
     git clone "$neo_repo" "$neo_folder"
     cd $neo_folder || exit
@@ -230,7 +227,6 @@ for folder in kitty nvim ranger zsh paru bat starship; do
     echo "The folder $folder does not exist in $HOME/.config/"
   fi
 done
-clear
 
 [ -f ~/.zshrc ] && rm -rfv ~/.zshrc
 [ -f ~/.fzf.zsh ] && rm -rfv ~/.fzf.zsh
@@ -261,7 +257,42 @@ if [[ $CFG =~ ^[Yy]$ ]]; then
     cp -rv $dotdir/scripts/* ~/.local/bin/ 2>&1 | tee -a $LOG
     cp -rv $dotdir/home/.zshenv ~/.zshenv 2>&1 | tee -a $LOG
 
+    if [ ! -d "$cachedir" ]; then
+      mkdir -p "$cachedir"
+    fi
+
+    if [ ! -d "$batcache" ]; then
+      cp -rv $dotdir/cache/bat $cachedir 2>&1 | tee -a $LOG
+    fi
+
+    if [ ! -d "$HOME/.local/bin" ]; then
+      mkdir -p "$HOME/.local/bin"
+    fi
+
+    if [ ! -d "$HOME/.cargo/bin" ]; then
+      mkdir -p "$HOME/.cargo/bin"
+    fi
+
+    if [ ! -d "$HOME/node_modules/.bin" ]; then
+      mkdir -p "$HOME/node_modules/.bin"
+    fi
+
+    if [ ! -d "$HOME/.local/share/gem/ruby/3.0.0/bin" ]; then
+      mkdir -p "$HOME/.local/share/gem/ruby/3.0.0/bin"
+    fi
+
+    if [ ! -d "$HOME/go/bin" ]; then
+      mkdir -p "$HOME/go/bin"
+    fi
+
+
     # Set some files as exacutable
+    for files in *; do
+      if [ -f "$HOME/.local/bin/$files" ]; then
+        chmod +x "$HOME/.local/bin/$files"
+      fi
+    done
+
     chmod +x ~/.config/ranger/scope.sh
 fi
 sleep 1
@@ -294,3 +325,5 @@ else
   printf "%s%sYour shell is already zsh\nGood bye! installation finished, now reboot%s\n" "${BLD}" "${CGR}" "${CNC}"
   zsh
 fi
+clear
+logo "Process Completed."

@@ -5,7 +5,7 @@ if [ -w ~/.zsh_history -o -w ~ ]; then
 fi
 
 while read -r opt
-do 
+do
   setopt $opt
 done <<-EOF
 AUTOCD
