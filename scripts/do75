@@ -8,18 +8,13 @@ BLD=$(tput bold)
 CNC=$(tput sgr0)
 LOG="install.log"
 
-source_folder=~/sources
-fzf_folder=~/.fzf
-fzf_repo=https://github.com/junegunn/fzf
-neo_folder=~/sources/neovim
-neo_repo=https://github.com/neovim/neovim
-dotdir=~/dotfiles
+source_folder=$HOME/sources
+fzfdir=$HOME/.fzf
+fzfepo=https://github.com/junegunn/fzf
+neodir=$HOME/sources/neovim
+neorepo=https://github.com/neovim/neovim
+dotdir=$HOME/dotfiles
 dotrepo=https://github.com/5nik7/dotfiles.git
-backup_folder=~/.Backups
-date=$(date +%Y%m%d-%H%M%S)
-batcache=~/.cache/bat
-cachedir=~/.cache
-cnfg=~/.config
 
 clear
 logo () {
@@ -38,6 +33,7 @@ logo () {
 }
 
 ########## ---------- You must not run this as root ---------- ##########
+logo "This will probably break everything..."
 
 if [ "$(id -u)" = 0 ]; then
     echo "This script MUST NOT be run as root user."
@@ -125,7 +121,6 @@ dependencias=(git base-devel base-devel cmake unzip ninja curl pacman-contrib ru
 			        ttf-nerd-fonts-symbols-common otf-firamono-nerd inter-font otf-sora ttf-fantasque-nerd noto-fonts noto-fonts-emoji ttf-comfortaa \
 			        ttf-jetbrains-mono ttf-jetbrains-mono-nerd ttf-terminus-nerd ttf-inconsolata ttf-joypixels)
 
-paru -R --noconfirm swaylock waybar
 
 is_installed() {
   pacman -Qi "$1" &> /dev/null
@@ -136,7 +131,7 @@ printf "%s%sChecking for required packages...%s\n" "${BLD}" "${CBL}" "${CNC}"
 for pkgs in "${dependencias[@]}"
 do
   if ! is_installed "$pkgs"; then
-    paru -S "$pkgs" --noconfirm
+    yay -S "$pkgs" --noconfirm
     printf "\n"
   else
     printf '%s%s is already installed on your system!%s\n' "${CGR}" "$pkgs" "${CNC}"
@@ -152,31 +147,28 @@ if [ ! -e $HOME/.config/user-dirs.dirs ]; then
 else
 	echo "user-dirs.dirs already exists"
 fi
-sleep 2
-clear
 
 logo "FZF."
-  if [ -d "$fzf_folder" ]; then
+  if [ -d "$fzfdir" ]; then
     printf "Updating FZF\n"
-    cd $fzf_folder || exit
+    cd $fzfdir || exit
     git pull
     cd || exit
   else
-    printf "Cloning FZF from %s\n" "$fzf_repo"
+    printf "Cloning FZF from %s\n" "$fzfepo"
     cd || exit
-    git clone "$fzf_repo" "$fzf_folder"
-    chmod +x "$fzf_folder/install"
-    $fzf_folder/install
+    git clone "$fzfepo" "$fzfdir"
+    chmod +x "$fzfdir/install"
+    $fzfdir/install
 fi
 sleep 2
 clear
 
 logo "Neovim."
-  if [ -d "$neo_folder" ]; then
+  if [ -d "$neodir" ]; then
     printf "Updating Neovim\n"
-    cd $neo_folder || exit
+    cd $neodir || exit
     git pull
-    clear
     read -n1 -rep "Would you like to rebuild Neovim? (y,n)" NEOREBUILD
       if [[ $NEOREBUILD =~ ^[Yy]$ ]]; then
         make CMAKE_BUILD_TYPE=RelWithDebInfo
@@ -186,10 +178,10 @@ logo "Neovim."
         cd || exit
       fi
   else
-    printf "Cloning Neovim from %s\n" "$neo_repo"
+    printf "Cloning Neovim from %s\n" "$neorepo"
     cd || exit
-    git clone "$neo_repo" "$neo_folder"
-    cd $neo_folder || exit
+    git clone "$neorepo" "$neodir"
+    cd $neodir || exit
     make CMAKE_BUILD_TYPE=RelWithDebInfo
     sudo make install
     cd || exit
@@ -212,91 +204,74 @@ logo "Config files."
 sleep 2
 clear
 
-logo "Backup files"
-printf "Backup files will be stored in %s%s%s/.Backups%s \n\n" "${BLD}" "${CYE}" "$HOME" "${CNC}"
-sleep 5
-
-if [ ! -d "$backup_folder" ]; then
-  mkdir -p "$backup_folder"
-fi
-
-[ -f ~/.zshenv ] && mv ~/.zshenv $backup_folder/.zshenv-backup-"$(date +%Y.%m.%d-%H.%M.%S)"
-
-printf "%s%sDone!!%s\n\n" "${BLD}" "${CGR}" "${CNC}"
-sleep 5
-clear
-
 ### Copy Config Files ###
-logo "Do75 Distribution."
-read -n1 -rep "Would you like to copy config files? (y,n)" CFG
+logo "DO75 Distribution."
+read -n1 -rep "Symlink dotfiles? (y,n)" CFG
 if [[ $CFG =~ ^[Yy]$ ]]; then
-    [ ! -d ~/.config ] && mkdir -p ~/.config
-    [ ! -d ~/.local/bin ] && mkdir -p ~/.local/bin
-    [ ! -d ~/.local/share/applications ] && mkdir -p ~/.local/share/applications
-    [ ! -d ~/.local/share/fonts ] && mkdir -p ~/.local/share/fonts
+    [ ! -d $HOME/.config ] && mkdir -p $HOME/.config
+    [ ! -d $HOME/.local/bin ] && mkdir -p $HOME/.local/bin
+    [ ! -d $HOME/.local/share/applications ] && mkdir -p $HOME/.local/share/applications
+    [ ! -d $HOME/.local/share/fonts ] && mkdir -p $HOME/.local/share/fonts
 
-    printf " Copying config files...\n"
+    clear
+    logo "Deleting symlinks.\n"
 
-    folders=(kitty nvim ranger zsh paru bat starship bat dunst hypr rofi swaylock waybar wlogout)
+    rm -rfv "$HOME/.config/alacritty"
+    rm -rfv "$HOME/.config/bat"
+    rm -rfv "$HOME/.config/dunst"
+    rm -rfv "$HOME/.config/htop"
+    rm -rfv "$HOME/.config/hypr"
+    rm -rfv "$HOME/.config/kitty"
+    rm -rfv "$HOME/.config/lazygit"
+    rm -rfv "$HOME/.config/nvim"
+    rm -rfv "$HOME/.config/paru"
+    rm -rfv "$HOME/.config/ranger"
+    rm -rfv "$HOME/.config/rofi"
+    rm -rfv "$HOME/.config/starship"
+    rm -rfv "$HOME/.config/sway"
+    rm -rfv "$HOME/.config/swaylock"
+    rm -rfv "$HOME/.config/waybar"
+    rm -rfv "$HOME/.config/wlogout"
+    rm -rfv "$HOME/.config/zsh"
+    rm -rfv "$HOME/.nanorc"
+    rm -rfv "$HOME/.vimrc"
+    rm -rfv "$HOME/.xresources"
+    rm -rfv "$HOME/.zprofile"
+    rm -rfv "$HOME/.zshenv"
+    rm -rfv "$HOME/.zshrc"
 
-    for folder in "${folders[@]}"; do
-      if [ -d ~/.config/$folder ]; then
-        mv ~/.config/$folder $backup_folder/${folder}_$date
-        echo "%s backed up successfully at %s/%s_%s" "$folder" "$backup_folder" "${folder}" "$date"
-      fi
-    done
-
-    for folder in "${folders[@]}"; do
-        cp -rv ~/dotfiles/$folder ~/.config/
-    done
-
-    cp -rv "$dotdir/home/.zshenv" "$HOME" 2>&1 | tee -a $LOG
-    [ -f ~/.zshrc ] && rm -rfv ~/.zshrc
-    [ -f ~/.fzf.zsh ] && rm -rfv ~/.fzf.zsh
-
-    sleep 3
+    sleep 2
     clear
 
-    logo "Bins and Scripts."
+    logo "Creating symlinks."
+    ln -rfv "$dotdir/config/alacritty" "$HOME/.config/alacritty"
+    ln -rfv "$dotdir/config/bat" "$HOME/.config/bat"
+    ln -rfv "$dotdir/config/dunst" "$HOME/.config/dunst"
+    ln -rfv "$dotdir/config/htop" "$HOME/.config/htop"
+    ln -rfv "$dotdir/config/hypr" "$HOME/.config/hypr"
+    ln -rfv "$dotdir/config/kitty" "$HOME/.config/kitty"
+    ln -rfv "$dotdir/config/lazygit" "$HOME/.config/lazygit"
+    ln -rfv "$dotdir/config/nvim" "$HOME/.config/nvim"
+    ln -rfv "$dotdir/config/paru" "$HOME/.config/paru"
+    ln -rfv "$dotdir/config/ranger" "$HOME/.config/ranger"
+    ln -rfv "$dotdir/config/rofi" "$HOME/.config/rofi"
+    ln -rfv "$dotdir/config/starship" "$HOME/.config/starship"
+    ln -rfv "$dotdir/config/sway" "$HOME/.config/sway"
+    ln -rfv "$dotdir/config/swaylock" "$HOME/.config/swaylock"
+    ln -rfv "$dotdir/config/waybar" "$HOME/.config/waybar"
+    ln -rfv "$dotdir/config/wlogout" "$HOME/.config/wlogout"
+    ln -rfv "$dotdir/config/zsh" "$HOME/.config/zsh"
+    ln -rfv "$dotdir/home/.gitconfig" "$HOME/.gitconfig"
+    ln -rfv "$dotdir/home/.nanorc" "$HOME/.nanorc"
+    ln -rfv "$dotdir/home/.vimrc" "$HOME/.vimrc"
+    ln -rfv "$dotdir/home/.zshenv" "$HOME/.zshenv"
+    sleep 2
+    clear
 
-    if [ ! -d "$cachedir" ]; then
-      mkdir -pv "$cachedir"
-    fi
-
-    if [ ! -d "$batcache" ]; then
-      cp -rv $dotdir/cache/bat $cachedir 2>&1 | tee -a $LOG
-    fi
-
-    if [ ! -d "$HOME/.local/bin" ]; then
-      mkdir -pv "$HOME/.local/bin"
-    fi
-
-    if [ ! -d "$HOME/.cargo/bin" ]; then
-      mkdir -pv "$HOME/.cargo/bin"
-    fi
-
-    if [ ! -d "$HOME/node_modules/.bin" ]; then
-      mkdir -pv "$HOME/node_modules/.bin"
-    fi
-
-    if [ ! -d "$HOME/.local/share/gem/ruby/3.0.0/bin" ]; then
-      mkdir -pv "$HOME/.local/share/gem/ruby/3.0.0/bin"
-    fi
-
-    if [ ! -d "$HOME/go/bin" ]; then
-      mkdir -pv "$HOME/go/bin"
-    fi
-
-
-    # Set some files as exacutable
-    files="$HOME/.local/bin"
-    for file in $files; do
-        sudo chmod +x "$file"
-    done
 
     sudo chmod +x $HOME/.local/bin/ranger/scope.sh
-    sudo chmod +x $cnfg/hypr/xdg-portal-hyprland
-    sudo chmod +x $cnfg/waybar/scripts/waybar-wttr.py
+    sudo chmod +x $HOME/.config/hypr/xdg-portal-hyprland
+    sudo chmod +x $HOME/.config/waybar/scripts/waybar-wttr.py
 fi
 sleep 1
 clear
@@ -326,7 +301,7 @@ if [[ $SHELL != "/usr/bin/zsh" ]]; then
   chsh -s /usr/bin/zsh
 else
   printf "%s%sYour shell is already zsh\nGood bye! installation finished, now reboot%s\n" "${BLD}" "${CGR}" "${CNC}"
-  zsh
+  [ -f $HOME/.zshenv ] && zsh
 fi
 clear
-logo "Process Completed."
+logo "-- 5NIK7 --"
