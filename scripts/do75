@@ -140,8 +140,6 @@ do
     printf '%s%s is already installed on your system!%s\n' "${CGR}" "$pkgs" "${CNC}"
   fi
 done
-sleep 3
-clear
 
 ########## ---------- Preparing Folders ---------- ##########
 
