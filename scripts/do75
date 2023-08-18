@@ -237,15 +237,17 @@ if [[ $CFG =~ ^[Yy]$ ]]; then
 
     printf " Copying config files...\n"
 
-    cdir=(kitty nvim ranger zsh paru bat starship bat dunst hypr rofi swaylock waybar wlogout)
+    folders=(kitty nvim ranger zsh paru bat starship bat dunst hypr rofi swaylock waybar wlogout)
 
-    for folder in "${cdir[@]}"; do
-      if [ -d "$cnfg/$folder" ]; then
-        mv "$cnfg/$folder" "$backup_folder/${folder}_$date"
+    for folder in "${folders[@]}"; do
+      if [ -d ~/.config/$folder ]; then
+        mv ~/.config/$folder $backup_folder/${folder}_$date
         echo "%s backed up successfully at %s/%s_%s" "$folder" "$backup_folder" "${folder}" "$date"
-        echo "The folder %s does not exist in %s" "$folder" "$cnfg"
-        cp -rv "$dotdir/$folder" "$cnfg/" 2>&1 | tee -a $LOG
       fi
+    done
+
+    for folder in "${folders[@]}"; do
+        cp -rv ~/dotfiles/$folder ~/.config/
     done
 
     cp -rv "$dotdir/home/.zshenv" "$HOME" 2>&1 | tee -a $LOG
