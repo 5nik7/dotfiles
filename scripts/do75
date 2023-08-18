@@ -288,14 +288,14 @@ if [[ $CFG =~ ^[Yy]$ ]]; then
 
 
     # Set some files as exacutable
-    files="$HOME/.local/bin/*"
+    files="$HOME/.local/bin/"
     for file in "${files[@]}"; do
         chmod +x "$file"
     done
 
-    chmod +x "$cnfg/ranger/scope.sh"
-    chmod +x "$cnfg/hypr/xdg-portal-hyprland"
-    chmod +x "$cnfg/waybar/scripts/waybar-wttr.py"
+    chmod +x "$cnfg"/ranger/scope.sh
+    chmod +x "$cnfg"/hypr/xdg-portal-hyprland
+    chmod +x "$cnfg"/waybar/scripts/waybar-wttr.py
 fi
 sleep 1
 clear
