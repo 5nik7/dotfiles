@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 DOTFILES="$HOME/.dotfiles"
 
 main() {
@@ -124,5 +123,4 @@ createSymLinks() {
   ln -fsv "$DOTFILES/user-dirs.locale" "$HOME/.config/user-dirs.locale"
 }
 
-tr -d '\r' < original_script.sh > modified_script.sh
 main "$@"
