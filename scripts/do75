@@ -125,6 +125,8 @@ dependencias=(git base-devel base-devel cmake unzip ninja curl pacman-contrib ru
 			        ttf-nerd-fonts-symbols-common otf-firamono-nerd inter-font otf-sora ttf-fantasque-nerd noto-fonts noto-fonts-emoji ttf-comfortaa \
 			        ttf-jetbrains-mono ttf-jetbrains-mono-nerd ttf-terminus-nerd ttf-inconsolata ttf-joypixels)
 
+paru -R --noconfirm swaylock waybar
+
 is_installed() {
   pacman -Qi "$1" &> /dev/null
   return $?
@@ -245,6 +247,11 @@ if [[ $CFG =~ ^[Yy]$ ]]; then
         cp -rv "$dotdir/$folder" "$cnfg/" 2>&1 | tee -a $LOG
       fi
     done
+
+    cp -rv "$dotdir/home/.zshenv" "$HOME" 2>&1 | tee -a $LOG
+    [ -f ~/.zshrc ] && rm -rfv ~/.zshrc
+    [ -f ~/.fzf.zsh ] && rm -rfv ~/.fzf.zsh
+
     sleep 3
     clear
 
@@ -282,12 +289,12 @@ if [[ $CFG =~ ^[Yy]$ ]]; then
     # Set some files as exacutable
     files="$HOME/.local/bin"
     for file in $files; do
-        chmod +x "$file"
+        sudo chmod +x "$file"
     done
 
-    chmod +x $HOME/.local/bin/ranger/scope.sh
-    chmod +x $cnfg/hypr/xdg-portal-hyprland
-    chmod +x $cnfg/waybar/scripts/waybar-wttr.py
+    sudo chmod +x $HOME/.local/bin/ranger/scope.sh
+    sudo chmod +x $cnfg/hypr/xdg-portal-hyprland
+    sudo chmod +x $cnfg/waybar/scripts/waybar-wttr.py
 fi
 sleep 1
 clear
@@ -314,8 +321,6 @@ logo "Changing default shell to zsh"
 printf "%s%sIf your shell is not zsh will be changed now.\nYour root password is needed to make the change.\n\nAfter that is important for you to reboot.\n %s\n" "${BLD}" "${CYE}" "${CNC}"
 if [[ $SHELL != "/usr/bin/zsh" ]]; then
   echo "Changing shell to zsh, your root pass is needed."
-  [ -f ~/.zshrc ] && rm -rfv ~/.zshrc
-  [ -f ~/.fzf.zsh ] && rm -rfv ~/.fzf.zsh
   chsh -s /usr/bin/zsh
 else
   printf "%s%sYour shell is already zsh\nGood bye! installation finished, now reboot%s\n" "${BLD}" "${CGR}" "${CNC}"
