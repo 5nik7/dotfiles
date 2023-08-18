@@ -218,11 +218,6 @@ if [ ! -d "$backup_folder" ]; then
   mkdir -p "$backup_folder"
 fi
 
-
-
-[ -f ~/.zshrc ] && rm -rfv ~/.zshrc
-[ -f ~/.fzf.zsh ] && rm -rfv ~/.fzf.zsh
-
 [ -f ~/.zshenv ] && mv ~/.zshenv $backup_folder/.zshenv-backup-"$(date +%Y.%m.%d-%H.%M.%S)"
 
 printf "%s%sDone!!%s\n\n" "${BLD}" "${CGR}" "${CNC}"
@@ -246,7 +241,6 @@ if [[ $CFG =~ ^[Yy]$ ]]; then
       if [ -d "$cnfg/$folder" ]; then
         mv "$cnfg/$folder" "$backup_folder/${folder}_$date"
         echo "%s backed up successfully at %s/%s_%s" "$folder" "$backup_folder" "${folder}" "$date"
-      else
         echo "The folder %s does not exist in %s" "$folder" "$cnfg"
         cp -rv "$dotdir/$folder" "$cnfg/" 2>&1 | tee -a $LOG
       fi
@@ -286,14 +280,14 @@ if [[ $CFG =~ ^[Yy]$ ]]; then
 
 
     # Set some files as exacutable
-    files="$HOME/.local/bin/"
-    for file in "${files[@]}"; do
+    files="$HOME/.local/bin"
+    for file in $files; do
         chmod +x "$file"
     done
 
-    chmod +x "$cnfg"/ranger/scope.sh
-    chmod +x "$cnfg"/hypr/xdg-portal-hyprland
-    chmod +x "$cnfg"/waybar/scripts/waybar-wttr.py
+    chmod +x $HOME/.local/bin/ranger/scope.sh
+    chmod +x $cnfg/hypr/xdg-portal-hyprland
+    chmod +x $cnfg/waybar/scripts/waybar-wttr.py
 fi
 sleep 1
 clear
