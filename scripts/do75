@@ -8,12 +8,12 @@ BLD=$(tput bold)
 CNC=$(tput sgr0)
 LOG="install.log"
 
-source_folder=$HOME/sources
-fzfdir=$HOME/.fzf
+source_folder=~/sources
+fzfdir=~/.fzf
 fzfepo=https://github.com/junegunn/fzf
-neodir=$HOME/sources/neovim
+neodir=~/sources/neovim
 neorepo=https://github.com/neovim/neovim
-dotdir=$HOME/dotfiles
+dotdir=~/dotfiles
 dotrepo=https://github.com/5nik7/dotfiles.git
 
 clear
@@ -43,6 +43,10 @@ fi
 if [ ! -d "$source_folder" ]; then
   mkdir -p "$source_folder" || exit
 fi
+    [ ! -d ~/.config ] && mkdir -p ~/.config
+    [ ! -d ~/.local/bin ] && mkdir -p ~/.local/bin
+    [ ! -d ~/.local/share/applications ] && mkdir -p ~/.local/share/applications
+    [ ! -d ~/.local/share/fonts ] && mkdir -p ~/.local/share/fonts
 
 if ! command -v paru >/dev/null 2>&1; then
   read -n1 -rep "Would you like to install Paru? (y/n)" PARUINST
@@ -85,16 +89,6 @@ else
     printf '%s System Update to avoid issue.%s\n' "${CYE}" "${CNC}"
     yay -Syu --noconfirm 2>&1 | tee -a $LOG
 fi
-
-# Function to print error messages
-print_error() {
-    printf " %s%s%s\n" "$CRE" "$1" "$NC" >&2 "$CNC"
-}
-
-# Function to print success messages
-print_success() {
-    printf "%s%s%s%s\n" "$CGR" "$1" "$NC" "$CNC"
-}
 sleep 2
 clear
 
@@ -141,7 +135,7 @@ done
 ########## ---------- Preparing Folders ---------- ##########
 
 logo "Preparing Folders"
-if [ ! -e $HOME/.config/user-dirs.dirs ]; then
+if [ ! -e ~/.config/user-dirs.dirs ]; then
 	xdg-user-dirs-update
 	echo "Creating xdg-user-dirs"
 else
@@ -208,10 +202,10 @@ clear
 logo "DO75 Distribution."
 read -n1 -rep "Symlink dotfiles? (y,n)" CFG
 if [[ $CFG =~ ^[Yy]$ ]]; then
-    [ ! -d $HOME/.config ] && mkdir -p $HOME/.config
-    [ ! -d $HOME/.local/bin ] && mkdir -p $HOME/.local/bin
-    [ ! -d $HOME/.local/share/applications ] && mkdir -p $HOME/.local/share/applications
-    [ ! -d $HOME/.local/share/fonts ] && mkdir -p $HOME/.local/share/fonts
+    [ ! -d ~/.config ] && mkdir -p ~/.config
+    [ ! -d ~/.local/bin ] && mkdir -p ~/.local/bin
+    [ ! -d ~/.local/share/applications ] && mkdir -p ~/.local/share/applications
+    [ ! -d ~/.local/share/fonts ] && mkdir -p ~/.local/share/fonts
 
     clear
     logo "Deleting symlinks.\n"
@@ -269,9 +263,9 @@ if [[ $CFG =~ ^[Yy]$ ]]; then
     clear
 
 
-    sudo chmod +x $HOME/.local/bin/ranger/scope.sh
-    sudo chmod +x $HOME/.config/hypr/xdg-portal-hyprland
-    sudo chmod +x $HOME/.config/waybar/scripts/waybar-wttr.py
+    sudo chmod +x ~/.local/bin/ranger/scope.sh
+    sudo chmod +x ~/.config/hypr/xdg-portal-hyprland
+    sudo chmod +x ~/.config/waybar/scripts/waybar-wttr.py
 fi
 sleep 1
 clear
@@ -301,7 +295,7 @@ if [[ $SHELL != "/usr/bin/zsh" ]]; then
   chsh -s /usr/bin/zsh
 else
   printf "%s%sYour shell is already zsh\nGood bye! installation finished, now reboot%s\n" "${BLD}" "${CGR}" "${CNC}"
-  [ -f $HOME/.zshenv ] && zsh
+  [ -f ~/.zshenv ] && zsh
 fi
 clear
 logo "-- 5NIK7 --"
