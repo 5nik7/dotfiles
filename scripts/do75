@@ -58,7 +58,7 @@ if ! command -v paru >/dev/null 2>&1; then
 	  makepkg -si --noconfirm 2>&1 | tee -a $LOG
 	  cd || exit
   else
-	  printf "%s%sParu is already installed%s\n" "${BLD}" "${CGR}" "${CNC}"
+	  printf "%s%sParu is already installed.%s" "${BLD}" "${CGR}" "${CNC}"
     sleep 1
   fi
 fi
@@ -238,27 +238,27 @@ if [[ $CFG =~ ^[Yy]$ ]]; then
     clear
 
     logo "Creating symlinks."
-    ln -rfv "$dotdir/config/alacritty" "$HOME/.config/alacritty"
-    ln -rfv "$dotdir/config/bat" "$HOME/.config/bat"
-    ln -rfv "$dotdir/config/dunst" "$HOME/.config/dunst"
-    ln -rfv "$dotdir/config/htop" "$HOME/.config/htop"
-    ln -rfv "$dotdir/config/hypr" "$HOME/.config/hypr"
-    ln -rfv "$dotdir/config/kitty" "$HOME/.config/kitty"
-    ln -rfv "$dotdir/config/lazygit" "$HOME/.config/lazygit"
-    ln -rfv "$dotdir/config/nvim" "$HOME/.config/nvim"
-    ln -rfv "$dotdir/config/paru" "$HOME/.config/paru"
-    ln -rfv "$dotdir/config/ranger" "$HOME/.config/ranger"
-    ln -rfv "$dotdir/config/rofi" "$HOME/.config/rofi"
-    ln -rfv "$dotdir/config/starship" "$HOME/.config/starship"
-    ln -rfv "$dotdir/config/sway" "$HOME/.config/sway"
-    ln -rfv "$dotdir/config/swaylock" "$HOME/.config/swaylock"
-    ln -rfv "$dotdir/config/waybar" "$HOME/.config/waybar"
-    ln -rfv "$dotdir/config/wlogout" "$HOME/.config/wlogout"
-    ln -rfv "$dotdir/config/zsh" "$HOME/.config/zsh"
-    ln -rfv "$dotdir/home/.gitconfig" "$HOME/.gitconfig"
-    ln -rfv "$dotdir/home/.nanorc" "$HOME/.nanorc"
-    ln -rfv "$dotdir/home/.vimrc" "$HOME/.vimrc"
-    ln -rfv "$dotdir/home/.zshenv" "$HOME/.zshenv"
+    ln -fsv "$dotdir/config/alacritty" "$HOME/.config/alacritty"
+    ln -fsv "$dotdir/config/bat" "$HOME/.config/bat"
+    ln -fsv "$dotdir/config/dunst" "$HOME/.config/dunst"
+    ln -fsv "$dotdir/config/htop" "$HOME/.config/htop"
+    ln -fsv "$dotdir/config/hypr" "$HOME/.config/hypr"
+    ln -fsv "$dotdir/config/kitty" "$HOME/.config/kitty"
+    ln -fsv "$dotdir/config/lazygit" "$HOME/.config/lazygit"
+    ln -fsv "$dotdir/config/nvim" "$HOME/.config/nvim"
+    ln -fsv "$dotdir/config/paru" "$HOME/.config/paru"
+    ln -fsv "$dotdir/config/ranger" "$HOME/.config/ranger"
+    ln -fsv "$dotdir/config/rofi" "$HOME/.config/rofi"
+    ln -fsv "$dotdir/config/starship" "$HOME/.config/starship"
+    ln -fsv "$dotdir/config/sway" "$HOME/.config/sway"
+    ln -fsv "$dotdir/config/swaylock" "$HOME/.config/swaylock"
+    ln -fsv "$dotdir/config/waybar" "$HOME/.config/waybar"
+    ln -fsv "$dotdir/config/wlogout" "$HOME/.config/wlogout"
+    ln -fsv "$dotdir/config/zsh" "$HOME/.config/zsh"
+    ln -fsv "$dotdir/home/.gitconfig" "$HOME/.gitconfig"
+    ln -fsv "$dotdir/home/.nanorc" "$HOME/.nanorc"
+    ln -fsv "$dotdir/home/.vimrc" "$HOME/.vimrc"
+    ln -fsv "$dotdir/home/.zshenv" "$HOME/.zshenv"
     sleep 2
     clear
 
