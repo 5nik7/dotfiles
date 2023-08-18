@@ -19,6 +19,7 @@ backup_folder=~/.Backups
 date=$(date +%Y%m%d-%H%M%S)
 batcache=~/.cache/bat
 cachedir=~/.cache
+cnfg=~/.config
 
 clear
 logo () {
@@ -120,7 +121,7 @@ dependencias=(git base-devel base-devel cmake unzip ninja curl pacman-contrib ru
               xdg-user-dirs hyprland sway waybar-hyprland-git sddm-git wlogout wl-clipboard \
 			        ffmpeg neovim viewnior kitty alacritty foot dunst rofi exa ranger starship \
 			        polkit-gnome nwg-look-bin qt5ct htop ffmpegthumbs papirus-icon-theme catppuccin-gtk-theme-mocha \
-			        zsh exa ripgrep lazygit fd thunar vim \
+			        zsh exa ripgrep lazygit fd thunar vim bat pywal \
 			        ttf-nerd-fonts-symbols-common otf-firamono-nerd inter-font otf-sora ttf-fantasque-nerd noto-fonts noto-fonts-emoji ttf-comfortaa \
 			        ttf-jetbrains-mono ttf-jetbrains-mono-nerd ttf-terminus-nerd ttf-inconsolata ttf-joypixels)
 
@@ -219,14 +220,7 @@ if [ ! -d "$backup_folder" ]; then
   mkdir -p "$backup_folder"
 fi
 
-for folder in kitty nvim ranger zsh paru bat starship; do
-  if [ -d "$HOME/.config/$folder" ]; then
-    mv "$HOME/.config/$folder" "$backup_folder/${folder}_$date"
-    echo "$folder folder backed up successfully at $backup_folder/${folder}_$date"
-  else
-    echo "The folder $folder does not exist in $HOME/.config/"
-  fi
-done
+
 
 [ -f ~/.zshrc ] && rm -rfv ~/.zshrc
 [ -f ~/.fzf.zsh ] && rm -rfv ~/.fzf.zsh
@@ -245,20 +239,27 @@ if [[ $CFG =~ ^[Yy]$ ]]; then
     [ ! -d ~/.local/bin ] && mkdir -p ~/.local/bin
     [ ! -d ~/.local/share/applications ] && mkdir -p ~/.local/share/applications
     [ ! -d ~/.local/share/fonts ] && mkdir -p ~/.local/share/fonts
+
     printf " Copying config files...\n"
-    cp -rv $dotdir/nvim ~/.config/ 2>&1 | tee -a $LOG
-    cp -rv $dotdir/ranger ~/.config/ 2>&1 | tee -a $LOG
-    cp -rv $dotdir/kitty ~/.config/ 2>&1 | tee -a $LOG
-    cp -rv $dotdir/bat ~/.config/ 2>&1 | tee -a $LOG
-    cp -rv $dotdir/zsh ~/.config/ 2>&1 | tee -a $LOG
-    cp -rv $dotdir/starship ~/.config/ 2>&1 | tee -a $LOG
-    cp -rv $dotdir/paru ~/.config/ 2>&1 | tee -a $LOG
-    cp -rv $dotdir/fonts/* ~/.local/share/fonts/ 2>&1 | tee -a $LOG
-    cp -rv $dotdir/scripts/* ~/.local/bin/ 2>&1 | tee -a $LOG
-    cp -rv $dotdir/home/.zshenv ~/.zshenv 2>&1 | tee -a $LOG
+
+    cdir=(kitty nvim ranger zsh paru bat starship bat dunst hypr rofi swaylock waybar wlogout)
+
+    for folder in "${cdir[@]}"; do
+      if [ -d "$cnfg/$folder" ]; then
+        mv "$cnfg/$folder" "$backup_folder/${folder}_$date"
+        echo "%s backed up successfully at %s/%s_%s" "$folder" "$backup_folder" "${folder}" "$date"
+      else
+        echo "The folder %s does not exist in %s" "$folder" "$cnfg"
+        cp -rv "$dotdir/$folder" "$cnfg/" 2>&1 | tee -a $LOG
+      fi
+    done
+    sleep 3
+    clear
+
+    logo "Bins and Scripts."
 
     if [ ! -d "$cachedir" ]; then
-      mkdir -p "$cachedir"
+      mkdir -pv "$cachedir"
     fi
 
     if [ ! -d "$batcache" ]; then
@@ -266,34 +267,35 @@ if [[ $CFG =~ ^[Yy]$ ]]; then
     fi
 
     if [ ! -d "$HOME/.local/bin" ]; then
-      mkdir -p "$HOME/.local/bin"
+      mkdir -pv "$HOME/.local/bin"
     fi
 
     if [ ! -d "$HOME/.cargo/bin" ]; then
-      mkdir -p "$HOME/.cargo/bin"
+      mkdir -pv "$HOME/.cargo/bin"
     fi
 
     if [ ! -d "$HOME/node_modules/.bin" ]; then
-      mkdir -p "$HOME/node_modules/.bin"
+      mkdir -pv "$HOME/node_modules/.bin"
     fi
 
     if [ ! -d "$HOME/.local/share/gem/ruby/3.0.0/bin" ]; then
-      mkdir -p "$HOME/.local/share/gem/ruby/3.0.0/bin"
+      mkdir -pv "$HOME/.local/share/gem/ruby/3.0.0/bin"
     fi
 
     if [ ! -d "$HOME/go/bin" ]; then
-      mkdir -p "$HOME/go/bin"
+      mkdir -pv "$HOME/go/bin"
     fi
 
 
     # Set some files as exacutable
-    for files in *; do
-      if [ -f "$HOME/.local/bin/$files" ]; then
-        chmod +x "$HOME/.local/bin/$files"
-      fi
+    files="$HOME/.local/bin/*"
+    for file in "${files[@]}"; do
+        chmod +x "$file"
     done
 
-    chmod +x ~/.config/ranger/scope.sh
+    chmod +x "$cnfg/ranger/scope.sh"
+    chmod +x "$cnfg/hypr/xdg-portal-hyprland"
+    chmod +x "$cnfg/waybar/scripts/waybar-wttr.py"
 fi
 sleep 1
 clear
