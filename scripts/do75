@@ -299,3 +299,5 @@ else
 fi
 clear
 logo "-- 5NIK7 --"
+
+# vim:ft=sh:nowrap
