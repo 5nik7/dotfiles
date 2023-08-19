@@ -14,7 +14,7 @@ gaps inner 5
 gaps outer 5
 
 output * {
-  bg ~/.config/wallpapers/c1.png fill
+  bg ~/.wallpapers/c1.png fill
   mode 2560x1410@170Hz scale 1
   pos 0 0
 }
