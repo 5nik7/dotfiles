@@ -80,7 +80,4 @@ export FZF_DEFAULT_OPTS="
   --preview-window='65%'
   --preview-window='border-thinblock'"
 
-export repos="/mnt/c/repos/"
-export dots="/mnt/c/repos/dotfiles"
-
 # vim:ft=zsh

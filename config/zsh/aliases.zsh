@@ -48,6 +48,7 @@ alias d='ranger'
 alias update='sudo pacman -Syyuu --noconfirm'
 alias dots='cd $DOTFILES'
 alias do75='~/.scripts/do75'
+alias repos='cd /mnt/c/repos'
 
 alias lg="lazygit"
 
