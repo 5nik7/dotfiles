@@ -196,19 +196,12 @@ fi
 sleep 1
 clear
 
-logo "Permissions."
-sudo chmod +x ~/dotfiles/scripts/do75
-sudo chmod +x ~/dotfiles/scripts/generatecolorscheme.sh
-sudo chmod +x ~/dotfiles/scripts/setwallpaper.sh
-sudo chmod +x ~/dotfiles/config/hypr/xdg-portal-hyprland
-sudo chmod +x ~/dotfiles/config/waybar/scripts/waybar-wttr.py
-sudo chmod +x ~/dotfiles/config/ranger/scope.sh
-
 ### Copy Config Files ###
 logo "DO75 Distribution."
 read -n1 -rep "Symlink dotfiles? (y,n)" CFG
 if [[ $CFG =~ ^[Yy]$ ]]; then
 	[ ! -d ~/.config ] && mkdir -p ~/.config
+	[ ! -d ~/.scripts ] && mkdir -p ~/.scripts
 	[ ! -d ~/.local/bin ] && mkdir -p ~/.local/bin
 	[ ! -d ~/.local/share/applications ] && mkdir -p ~/.local/share/applications
 	[ ! -d ~/.local/share/fonts ] && mkdir -p ~/.local/share/fonts
@@ -216,31 +209,38 @@ if [[ $CFG =~ ^[Yy]$ ]]; then
 	clear
 	logo "Deleting symlinks.\n"
 
-	rm -rfv "$HOME/.config/alacritty"
-	rm -rfv "$HOME/.config/bat"
-	rm -rfv "$HOME/.config/btop"
-	rm -rfv "$HOME/.config/dunst"
-	rm -rfv "$HOME/.config/htop"
-	rm -rfv "$HOME/.config/hypr"
-	rm -rfv "$HOME/.config/kitty"
-	rm -rfv "$HOME/.config/lazygit"
-	rm -rfv "$HOME/.config/nvim"
-	rm -rfv "$HOME/.config/paru"
-	rm -rfv "$HOME/.config/ranger"
-	rm -rfv "$HOME/.config/rofi"
-	rm -rfv "$HOME/.config/starship"
-	rm -rfv "$HOME/.config/sway"
-	rm -rfv "$HOME/.config/swaylock"
-	rm -rfv "$HOME/.config/waybar"
-	rm -rfv "$HOME/.config/wlogout"
-	rm -rfv "$HOME/.config/zsh"
-	rm -rfv "$HOME/.nanorc"
-	rm -rfv "$HOME/.scripts"
-	rm -rfv "$HOME/.vimrc"
-	rm -rfv "$HOME/.xresources"
+	# rm -rfv "$HOME/.config/alacritty"
+	# rm -rfv "$HOME/.config/bat"
+	# rm -rfv "$HOME/.config/btop"
+	# rm -rfv "$HOME/.config/dunst"
+	# rm -rfv "$HOME/.config/htop"
+	# rm -rfv "$HOME/.config/hypr"
+	# rm -rfv "$HOME/.config/kitty"
+	# rm -rfv "$HOME/.config/lazygit"
+	# rm -rfv "$HOME/.config/nvim"
+	# rm -rfv "$HOME/.config/paru"
+	# rm -rfv "$HOME/.config/ranger"
+	# rm -rfv "$HOME/.config/rofi"
+	# rm -rfv "$HOME/.config/starship"
+	# rm -rfv "$HOME/.config/sway"
+	# rm -rfv "$HOME/.config/swaylock"
+	# rm -rfv "$HOME/.config/waybar"
+	# rm -rfv "$HOME/.config/wlogout"
+	# rm -rfv "$HOME/.config/zsh"
+	# rm -rfv "$HOME/.nanorc"
+	# rm -rfv "$HOME/.scripts"
+	# rm -rfv "$HOME/.vimrc"
+	# rm -rfv "$HOME/.xresources"
 	rm -rfv "$HOME/.zprofile"
-	rm -rfv "$HOME/.zshenv"
+	# rm -rfv "$HOME/.zshenv"
 	rm -rfv "$HOME/.zshrc"
+
+	sudo chmod +x ~/dotfiles/scripts/do75
+	sudo chmod +x ~/dotfiles/scripts/generatecolorscheme.sh
+	sudo chmod +x ~/dotfiles/scripts/setwallpaper.sh
+	sudo chmod +x ~/dotfiles/config/hypr/xdg-portal-hyprland
+	sudo chmod +x ~/dotfiles/config/waybar/scripts/waybar-wttr.py
+	sudo chmod +x ~/dotfiles/config/ranger/scope.sh
 
 	ln -fsv "$dotdir/config/alacritty" "$HOME/.config/alacritty"
 	ln -fsv "$dotdir/config/bat" "$HOME/.config/bat"
@@ -284,8 +284,6 @@ fi
 sleep 1
 clear
 
-########## --------- Changing shell to zsh ---------- ##########
-
 logo "Changing default shell to zsh"
 printf "%s%sIf your shell is not zsh will be changed now.\nYour root password is needed to make the change.\n\nAfter that is important for you to reboot.\n %s\n" "${BLD}" "${CYE}" "${CNC}"
 if [[ $SHELL != "/usr/bin/zsh" ]]; then
@@ -293,10 +291,11 @@ if [[ $SHELL != "/usr/bin/zsh" ]]; then
 	chsh -s /usr/bin/zsh
 else
 	printf "%s%sYour shell is already zsh\nGood bye! installation finished, now reboot%s\n" "${BLD}" "${CGR}" "${CNC}"
+fi
+
 clear
-sleep 1
 logo " Did I break it? "
 sleep 2
-clear
+enho " "
 
 # vim:ft=sh:nowrap
