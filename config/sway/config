@@ -14,7 +14,7 @@ gaps inner 5
 gaps outer 5
 
 output * {
-  bg ~/.wallpapers/c1.png fill
+  bg ~/.wallpapers/5.jpg fill
   mode 2560x1410@170Hz scale 1
   pos 0 0
 }
@@ -86,9 +86,9 @@ set $filemanager thunar
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu wofi --show run
+set $menu killall rofi || rofi -show drun -theme ~/.config/rofi/config.rasi
 
-set $powermenu nwgbar -f
+set $powermenu wlogout
 
 # set $cheat $term-float -t cheatsheet -e micro ~/.config/sway/cheatsheet.md
 
@@ -116,7 +116,7 @@ set $powermenu nwgbar -f
     bindsym $alt+Shift+Return exec $term-float
 
     # Open the power menu
-    bindsym $alt+Shift+e exec $powermenu
+    bindsym $alt+Shift+x exec $powermenu
 
     # Kill focused window
     bindsym $alt+q kill
