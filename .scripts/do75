@@ -263,7 +263,8 @@ if [[ $CFG =~ ^[Yy]$ ]]; then
 	ln -fsv "$dotdir/home/.nanorc" "$HOME/.nanorc"
 	ln -fsv "$dotdir/home/.vimrc" "$HOME/.vimrc"
 	ln -fsv "$dotdir/home/.zshenv" "$HOME/.zshenv"
-	ln -fsv "$dotdir/scripts" "$HOME/.scripts"
+	ln -fsv "$dotdir/scripts/*" "$HOME/.scripts/*"
+	ln -fsv "$dotdir/wallpapers/*" "$HOME/.wallpapers/*"
 
 fi
 sleep 1
