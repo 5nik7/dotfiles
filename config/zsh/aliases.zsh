@@ -43,10 +43,11 @@ alias mv='mv -v'
 alias cp='cp -vr'
 alias rm='rm -vrf'
 alias v="$EDITOR"
-alias vim="$EDITOR"
+alias vi="$EDITOR"
 alias d='ranger'
 alias update='sudo pacman -Syyuu --noconfirm'
 alias dots='cd $DOTFILES'
+alias do75='~/.scripts/do75'
 
 alias lg="lazygit"
 

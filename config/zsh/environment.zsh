@@ -9,6 +9,7 @@ _extend_path() {
   fi
 }
 
+_extend_path "$HOME/.scripts"
 _extend_path "$HOME/.local/bin"
 _extend_path "$HOME/.cargo/bin"
 _extend_path "$HOME/node_modules/.bin"
@@ -72,11 +73,14 @@ export FZF_DEFAULT_OPTS="
   --no-scrollbar
   --info=inline
   --border=thinblock
-  --margin='5%,5%,5%,5%'
-  --height='90%'
+  --margin='2%,2%,2%,2%'
+  --height='95%'
   --preview='bat -n --style=plain --color=always {}'
   --preview-window='right'
   --preview-window='65%'
   --preview-window='border-thinblock'"
+
+export repos="/mnt/c/repos/"
+export dots="/mnt/c/repos/dotfiles"
 
 # vim:ft=zsh
