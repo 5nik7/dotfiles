@@ -291,11 +291,8 @@ if [[ $SHELL != "/usr/bin/zsh" ]]; then
 	chsh -s /usr/bin/zsh
 else
 	printf "%s%sYour shell is already zsh\nGood bye! installation finished, now reboot%s\n" "${BLD}" "${CGR}" "${CNC}"
+	clear
+	logo " Did I break it? "
 fi
-
-clear
-logo " Did I break it? "
-sleep 2
-enho " "
 
 # vim:ft=sh:nowrap
