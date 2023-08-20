@@ -38,7 +38,7 @@ done
 sudo pacman -Syyuu --noconfirm
 
 dependencias=(git base-devel base-devel cmake unzip ninja curl unrar jq pacman-contrib rustup nodejs npm luarocks go python-pip
-	xdg-user-dirs hyprland sway waybar sddm-git wlogout wl-clipboard
+	xdg-user-dirs hyprland sway swaybg waybar sddm-git wlogout wl-clipboard mako Fcitx5
 	ffmpeg viewnior kitty alacritty foot dunst rofi exa ranger starship lsd
 	polkit-gnome nwg-look-bin qt5ct htop btop ffmpegthumbs papirus-icon-theme catppuccin-gtk-theme-mocha
 	zsh exa ripgrep lazygit fd thunar vim bat neofetch cmatrix imagemagick pywal firefox
@@ -69,7 +69,6 @@ symdot() {
 	rm -rfv "$confdir/bat"
 	rm -rfv "$confdir/btop"
 	rm -rfv "$confdir/dunst"
-	rm -rfv "$confdir/htop"
 	rm -rfv "$confdir/hypr"
 	rm -rfv "$confdir/kitty"
 	rm -rfv "$confdir/lazygit"
@@ -96,8 +95,7 @@ symdot() {
 	ln -fsv "$dotdir/alacritty" "$confdir/alacritty"
 	ln -fsv "$dotdir/bat" "$confdir/bat"
 	ln -fsv "$dotdir/dunst" "$confdir/dunst"
-	ln -fsv "$dotdir/htop" "$confdir/htop"
-	ln -fsv "$dotdir/kitty" "$confdir/kitt"
+	ln -fsv "$dotdir/kitty" "$confdir/kitty"
 	ln -fsv "$dotdir/hypr" "$confdir/hypr"
 	ln -fsv "$dotdir/lazygit" "$confdir/lazygit"
 	ln -fsv "$dotdir/nvim" "$confdir/nvim"
