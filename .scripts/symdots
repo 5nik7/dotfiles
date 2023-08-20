@@ -38,8 +38,8 @@ done
 sudo pacman -Syyuu --noconfirm
 
 dependencias=(git base-devel base-devel cmake unzip ninja curl unrar jq pacman-contrib rustup nodejs npm luarocks go python-pip
-	xdg-user-dirs hyprland sway swaybg waybar sddm-git wlogout wl-clipboard mako Fcitx5
-	ffmpeg viewnior kitty alacritty foot dunst rofi exa ranger starship lsd
+	xdg-user-dirs hyprland sway swaybg waybar sddm-git wlogout wl-clipboard mako
+	ffmpeg viewnior kitty alacritty foot dunst rofi exa ranger starship lsd imv
 	polkit-gnome nwg-look-bin qt5ct htop btop ffmpegthumbs papirus-icon-theme catppuccin-gtk-theme-mocha
 	zsh exa ripgrep lazygit fd thunar vim bat neofetch cmatrix imagemagick pywal firefox
 	ttf-nerd-fonts-symbols-common otf-firamono-nerd inter-font otf-sora ttf-fantasque-nerd noto-fonts noto-fonts-emoji ttf-comfortaa
