@@ -26,32 +26,46 @@ logo() {
 }
 
 ########## ---------- You must not run this as root ---------- ##########
-logo "Symlink?"
+logo "I'm going to break it... "
 
 while true; do
-	read -n1 -rep "Would you like to install the packages? (y,n)" yn
+	read -n1 -rep "Would you like to break everything? (y,n)" yn
 	case $yn in
 	[Yy]*) break ;;
 	[Nn]*) exit ;;
 	*) printf " Error: just write 'y' or 'n'\n\n" ;;
 	esac
 done
-clear
 
-dependencias=(git base-devel base-devel cmake unzip ninja curl unrar jq pacman-contrib rustup nodejs npm luarocks go python-pip
-	xdg-user-dirs hyprland sway waybar sddm-git wlogout wl-clipboard
-	ffmpeg neovim viewnior kitty alacritty foot dunst rofi exa ranger starship
-	polkit-gnome nwg-look-bin qt5ct htop btop ffmpegthumbs papirus-icon-theme catppuccin-gtk-theme-mocha
-	zsh exa ripgrep lazygit fd thunar vim bat neofetch cmatrix imagemagick pywal
-	ttf-nerd-fonts-symbols-common otf-firamono-nerd inter-font otf-sora ttf-fantasque-nerd noto-fonts noto-fonts-emoji ttf-comfortaa
-	ttf-jetbrains-mono ttf-jetbrains-mono-nerd ttf-terminus-nerd ttf-inconsolata ttf-joypixels)
+sudo pacman -Syyuu --noconfirm
+
+dependencias=(git base-devel base-devel cmake unzip ninja curl unrar jq pacman-contrib rustup nodejs npm luarocks go python-pip \
+	xdg-user-dirs hyprland sway waybar sddm-git wlogout wl-clipboard \
+	ffmpeg viewnior kitty alacritty foot dunst rofi exa ranger starship lsd \
+	polkit-gnome nwg-look-bin qt5ct htop btop ffmpegthumbs papirus-icon-theme catppuccin-gtk-theme-mocha \
+	zsh exa ripgrep lazygit fd thunar vim bat neofetch cmatrix imagemagick pywal firefox \
+	ttf-nerd-fonts-symbols-common otf-firamono-nerd inter-font otf-sora ttf-fantasque-nerd noto-fonts noto-fonts-emoji ttf-comfortaa \
+  ttf-jetbrains-mono ttf-jetbrains-mono-nerd ttf-terminus-nerd ttf-inconsolata ttf-joypixels)
 
 is_installed() {
 	pacman -Qi "$1" &>/dev/null
 	return $?
 }
-	clear
-	logo "Deleting symlinks.\n"
+
+printf "%s%sChecking for required packages...%s\n" "${BLD}" "${CBL}" "${CNC}"
+for pkgs in "${dependencias[@]}"; do
+	if ! is_installed "$pkgs"; then
+		paru -S "$pkgs" --noconfirm
+		printf "\n"
+	else
+		printf '%s%s is already installed on your system!%s\n' "${CGR}" "$pkgs" "${CNC}"
+	fi
+done
+
+dotdir=~/dotfiles
+confdir=~/.config
+
+	echo "Deleting symlinks."
 	rm -rfv "$HOME/.config/alacritty"
 	rm -rfv "$HOME/.config/bat"
 	rm -rfv "$HOME/.config/btop"
@@ -70,6 +84,7 @@ is_installed() {
 	rm -rfv "$HOME/.config/waybar"
 	rm -rfv "$HOME/.config/wlogout"
 	rm -rfv "$HOME/.config/zsh"
+	rm -rfv "$HOME/.gitconfig"
 	rm -rfv "$HOME/.nanorc"
 	rm -rfv "$HOME/.scripts"
 	rm -rfv "$HOME/.vimrc"
@@ -78,16 +93,17 @@ is_installed() {
 	rm -rfv "$HOME/.zshenv"
 	rm -rfv "$HOME/.zshrc"
 
-	ln -fsv "$dotdir/config/alacritty" "$HOME/.config/alacritty"
-	ln -fsv "$dotdir/config/bat" "$HOME/.config/bat"
-	ln -fsv "$dotdir/config/dunst" "$HOME/.config/dunst"
-	ln -fsv "$dotdir/config/htop" "$HOME/.config/htop"
-	ln -fsv "$dotdir/config/kitty" "$HOME/.config/kitty"
-	ln -fsv "$dotdir/config/hypr" "$HOME/.config/hypr"
-	ln -fsv "$dotdir/config/lazygit" "$HOME/.config/lazygit"
-	ln -fsv "$dotdir/config/nvim" "$HOME/.config/nvim"
-	ln -fsv "$dotdir/config/paru" "$HOME/.config/paru"
-	ln -fsv "$dotdir/config/ranger" "$HOME/.config/ranger"
+  echo "Creating symlinks."
+	ln -fsv "$dotdir/config/alacritty" "$HOME/.config/"
+	ln -fsv "$dotdir/config/bat" "$HOME/.config/"
+	ln -fsv "$dotdir/config/dunst" "$HOME/.config/"
+	ln -fsv "$dotdir/config/htop" "$HOME/.config/"
+	ln -fsv "$dotdir/config/kitty" "$HOME/.config/"
+	ln -fsv "$dotdir/config/hypr" "$HOME/.config/"
+	ln -fsv "$dotdir/config/lazygit" "$HOME/.config/"
+	ln -fsv "$dotdir/config/nvim" "$HOME/.config/"
+	ln -fsv "$dotdir/config/paru" "$HOME/.config/"
+	ln -fsv "$dotdir/config/ranger" "$HOME/.config/"
 	ln -fsv "$dotdir/config/rofi" "$HOME/.config/rofi"
 	ln -fsv "$dotdir/config/starship" "$HOME/.config/starship"
 	ln -fsv "$dotdir/config/sway" "$HOME/.config/sway"
@@ -99,15 +115,11 @@ is_installed() {
 	ln -fsv "$dotdir/home/.nanorc" "$HOME/.nanorc"
 	ln -fsv "$dotdir/home/.vimrc" "$HOME/.vimrc"
 	ln -fsv "$dotdir/home/.zshenv" "$HOME/.zshenv"
-	ln -fsv "$dotdir/.scripts/*" "$HOME/.scripts/*"
+	ln -fsv "$dotdir/.scripts" "$HOME/.scripts"
 	ln -fsv "$dotdir/.wallpapers" "$HOME/.wallpapers"
 
-	sudo chmod +x ~/dotfiles/scripts/do75
-	sudo chmod +x ~/dotfiles/config/hypr/xdg-portal-hyprland
-	sudo chmod +x ~/dotfiles/config/waybar/scripts/waybar-wttr.py
-	sudo chmod +x ~/dotfiles/config/ranger/scope.sh
+	chmod +x ~/dotfiles/scripts/do75
+	chmod +x ~/dotfiles/config/hypr/xdg-portal-hyprland
+	chmod +x ~/dotfiles/config/waybar/scripts/waybar-wttr.py
+	chmod +x ~/dotfiles/config/ranger/scope.sh
 fi
-sleep 1
-clear
-
-
