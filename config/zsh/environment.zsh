@@ -40,7 +40,7 @@ export XDG_MUSIC_DIR="$HOME/Music"
 export XDG_PICTURES_DIR="$HOME/Pictures"
 export XDG_VIDEOS_DIR="$HOME/Videos"
 
-export MANPAGER='nvim +Man! +"set nocul" +"set noshowcmd" +"set noruler" +"set noshowmode" +"set laststatus=0" +"set showtabline=0" +"set nonumber"'
+export MANPAGER='nvim +Man!'
 
 export BAT_CONFIG_PATH="$HOME/.config/bat/bat.conf"
 export BAT_THEME='Catppuccin-mocha'

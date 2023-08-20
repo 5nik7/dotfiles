@@ -14,7 +14,7 @@ gaps inner 5
 gaps outer 5
 
 output * {
-  bg ~/.wallpapers/5.jpg fill
+  bg ~/.wallpapers/c1.png fill
   mode 2560x1410@170Hz scale 1
   pos 0 0
 }
@@ -86,7 +86,7 @@ set $filemanager thunar
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu killall rofi || rofi -show drun -theme ~/.config/rofi/config.rasi
+set $menu rofi -show drun
 
 set $powermenu wlogout
 
@@ -128,19 +128,6 @@ set $powermenu wlogout
     # Launcher
     bindsym $alt+Shift+d exec $launcher
 
-    # Activities
-    # Activities
-    # Activities
-    bindsym $alt+p exec swayr switch-window
-
-    # Activities and workspaces
-    bindsym $alt+Shift+p exec swayr switch-workspace-or-window
-
-    # Switch to the last recently used window
-    bindsym $alt+Tab exec swayr switch-to-urgent-or-lru-window
-
-    # Cheatsheet
-    # bindsym $alt+Shift+i exec $cheat
 
     # Drag floating windows by holding down $alt and left mouse button.
     # Resize them with right mouse button + $alt.

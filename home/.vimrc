@@ -8,11 +8,15 @@ Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 
 Plug 'itchyny/lightline.vim'
 
+Plug 'dylanaraps/wal'
+
+
 call plug#end()
 
 set termguicolors
 set number
 syntax enable
 filetype detect
-let g:lightline = {'colorscheme': 'catppuccin_mocha'}
-colorscheme catppuccin_mocha
+" let g:lightline = {'colorscheme': 'catppuccin_mocha'}
+" colorscheme catppuccin_mocha
+colorscheme wal
