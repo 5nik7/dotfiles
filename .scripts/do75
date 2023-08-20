@@ -229,15 +229,9 @@ if [[ $CFG =~ ^[Yy]$ ]]; then
 	rm -rfv "$HOME/.nanorc"
 	rm -rfv "$HOME/.scripts"
 	rm -rfv "$HOME/.vimrc"
-	rm -rfv "$HOME/.xresources"
 	rm -rfv "$HOME/.zprofile"
 	rm -rfv "$HOME/.zshenv"
 	rm -rfv "$HOME/.zshrc"
-
-	sudo chmod +x ~/dotfiles/scripts/do75
-	sudo chmod +x ~/dotfiles/config/hypr/xdg-portal-hyprland
-	sudo chmod +x ~/dotfiles/config/waybar/scripts/waybar-wttr.py
-	sudo chmod +x ~/dotfiles/config/ranger/scope.sh
 
 	ln -fsv "$dotdir/config/alacritty" "$HOME/.config/alacritty"
 	ln -fsv "$dotdir/config/bat" "$HOME/.config/bat"
@@ -260,9 +254,13 @@ if [[ $CFG =~ ^[Yy]$ ]]; then
 	ln -fsv "$dotdir/home/.nanorc" "$HOME/.nanorc"
 	ln -fsv "$dotdir/home/.vimrc" "$HOME/.vimrc"
 	ln -fsv "$dotdir/home/.zshenv" "$HOME/.zshenv"
-	ln -fsv "$dotdir/scripts/*" "$HOME/.scripts/*"
-	ln -fsv "$dotdir/wallpapers/*" "$HOME/.wallpapers/*"
+	ln -fsv "$dotdir/.scripts/*" "$HOME/.scripts/*"
+	ln -fsv "$dotdir/.wallpapers" "$HOME/.wallpapers"
 
+	sudo chmod +x ~/dotfiles/scripts/do75
+	sudo chmod +x ~/dotfiles/config/hypr/xdg-portal-hyprland
+	sudo chmod +x ~/dotfiles/config/waybar/scripts/waybar-wttr.py
+	sudo chmod +x ~/dotfiles/config/ranger/scope.sh
 fi
 sleep 1
 clear

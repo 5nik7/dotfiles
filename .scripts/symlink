@@ -1,128 +1,113 @@
 #!/bin/bash
 
+CRE=$(tput setaf 1)
+CYE=$(tput setaf 3)
+CGR=$(tput setaf 2)
+CBL=$(tput setaf 4)
+BLD=$(tput bold)
+CNC=$(tput sgr0)
 
-DOTFILES="$HOME/.dotfiles"
+dotdir=~/dotfiles
 
-main() {
-  deleteSymLinks
-  createSymLinks
+clear
+logo() {
+
+	local text="${1:?}"
+	echo -en "\n
+    ██████████      ███████    ██████████ ██████████
+   ░░███░░░░███   ███░░░░░███ ░███░░░░███░███░░░░░░█
+    ░███   ░░███ ███     ░░███░░░    ███ ░███     ░
+    ░███    ░███░███      ░███      ███  ░█████████
+    ░███    ░███░███      ░███     ███   ░░░░░░░░███
+    ░███    ███ ░░███     ███     ███     ███   ░███
+    ██████████   ░░░███████░     ███     ░░████████
+   ░░░░░░░░░░      ░░░░░░░      ░░░       ░░░░░░░░\n\n"
+	printf ' %s [%s%s %s%s %s]%s\n\n' "${CRE}" "${CNC}" "${CYE}" "${text}" "${CNC}" "${CRE}" "${CNC}"
 }
 
-deleteSymLinks() {
-  echo "Deleting symlinks."
-  rm -rfv "$HOME/.config/alacritty"
-  rm -rfv "$HOME/.config/bat"
-  rm -rfv "$HOME/.config/btop"
-  rm -rfv "$HOME/.config/foot"
-  rm -rfv "$HOME/.config/gtk-2.0"
-  rm -rfv "$HOME/.config/gtk-3.0"
-  rm -rfv "$HOME/.config/htop"
-  rm -rfv "$HOME/.config/kitty"
-  rm -rfv "$HOME/.config/lazygit"
-  rm -rfv "$HOME/.config/nvim"
-  rm -rfv "$HOME/.config/qt5ct"
-  rm -rfv "$HOME/.config/ranger"
-  rm -rfv "$HOME/.config/starship"
-  rm -rfv "$HOME/.config/sway"
-  rm -rfv "$HOME/.config/swayr"
-  rm -rfv "$HOME/.config/Thunar"
-  rm -rfv "$HOME/.config/wallpapers"
-  rm -rfv "$HOME/.config/waybar"
-  rm -rfv "$HOME/.config/wezterm"
-  rm -rfv "$HOME/.config/zsh"
-  rm -rfv "$HOME/.config/picom.conf"
-  rm -rfv "$HOME/.config/user-dirs.dirs"
-  rm -rfv "$HOME/.bash_aliases"
-  rm -rfv "$HOME/.bashrc"
-  rm -rfv "$HOME/.gitconfig"
-  rm -rfv "$HOME/.nanorc"
-  rm -rfv "$HOME/.xinitrc"
-  rm -rfv "$HOME/.xresources"
-  rm -rfv "$HOME/.zprofile"
-  rm -rfv "$HOME/.profile"
-  rm -rfv "$HOME/.zshrc"
-  rm -rfv "$HOME/.vimrc"
-  rm -rfv "$HOME/.gtkrc-2.0"
-  rm -rfv "$HOME/.scripts"
-  rm -rfv "$HOME/.icons"
-  rm -rfv "$HOME/.config/alacritty"
-  rm -rfv "$HOME/.config/awesome"
-  rm -rfv "$HOME/.config/fsh"
-  rm -rfv "$HOME/.config/nnn"
-  rm -rfv "$HOME/.config/neofetch"
-  rm -rfv "$HOME/.config/nwg-bar"
-  rm -rfv "$HOME/.config/oguri"
-  rm -rfv "$HOME/.config/systemd"
-  rm -rfv "$HOME/.config/workstyle"
-  rm -rfv "$HOME/.config/xfce4"
-  rm -rfv "$HOME/.config/azote"
-  rm -rfv "$HOME/.config/cava"
-  rm -rfv "$HOME/.config/chromium"
-  rm -rfv "$HOME/.config/fish"
-  rm -rfv "$HOME/.config/qt6ct"
-  rm -rfv "$HOME/.config/rofi"
-  rm -rfv "$HOME/.config/xsettingsd"
-  rm -rfv "$HOME/.config/viewnior"
-  rm -rfv "$HOME/.config/user-dirs.locale"
-}
+########## ---------- You must not run this as root ---------- ##########
+logo "Symlink?"
 
-createSymLinks() {
-  echo "Creating symlinks."
-  ln -fsv "$DOTFILES/alacritty" "$HOME/.config/alacritty"
-  ln -fsv "$DOTFILES/awesome" "$HOME/.config/awesome"
-  ln -fsv "$DOTFILES/mako" "$HOME/.config/mako"
-  ln -fsv "$DOTFILES/bat" "$HOME/.config/bat"
-  ln -fsv "$DOTFILES/btop" "$HOME/.config/btop"
-  ln -fsv "$DOTFILES/foot" "$HOME/.config/foot"
-  ln -fsv "$DOTFILES/gtk-2.0" "$HOME/.config/gtk-2.0"
-  ln -fsv "$DOTFILES/gtk-3.0" "$HOME/.config/gtk-3.0"
-  ln -fsv "$DOTFILES/htop" "$HOME/.config/htop"
-  ln -fsv "$DOTFILES/kitty" "$HOME/.config/kitty"
-  ln -fsv "$DOTFILES/lazygit" "$HOME/.config/lazygit"
-  ln -fsv "$DOTFILES/nvim" "$HOME/.config/nvim"
-  ln -fsv "$DOTFILES/qt5ct" "$HOME/.config/qt5ct"
-  ln -fsv "$DOTFILES/ranger" "$HOME/.config/ranger"
-  ln -fsv "$DOTFILES/starship" "$HOME/.config/starship"
-  ln -fsv "$DOTFILES/sway" "$HOME/.config/sway"
-  ln -fsv "$DOTFILES/swayr" "$HOME/.config/swayr"
-  ln -fsv "$DOTFILES/Thunar" "$HOME/.config/Thunar"
-  ln -fsv "$DOTFILES/wallpapers" "$HOME/.config/wallpapers"
-  ln -fsv "$DOTFILES/waybar" "$HOME/.config/waybar"
-  ln -fsv "$DOTFILES/wezterm" "$HOME/.config/wezterm"
-  ln -fsv "$DOTFILES/zsh" "$HOME/.config/zsh"
-  ln -fsv "$DOTFILES/picom.conf" "$HOME/.config/picom.conf"
-  ln -fsv "$DOTFILES/user-dirs.dirs" "$HOME/.config/user-dirs.dirs"
-  ln -fsv "$DOTFILES/bash_aliases" "$HOME/.bash_aliases"
-  ln -fsv "$DOTFILES/bashrc" "$HOME/.bashrc"
-  ln -fsv "$DOTFILES/gitconfig" "$HOME/.gitconfig"
-  ln -fsv "$DOTFILES/nanorc" "$HOME/.nanorc"
-  ln -fsv "$DOTFILES/xinitrc" "$HOME/.xinitrc"
-  ln -fsv "$DOTFILES/xresources" "$HOME/.xresources"
-  ln -fsv "$DOTFILES/zprofile" "$HOME/.zprofile"
-  ln -fsv "$DOTFILES/profile" "$HOME/.profile"
-  ln -fsv "$DOTFILES/zshrc" "$HOME/.zshrc"
-  ln -fsv "$DOTFILES/vimrc" "$HOME/.vimrc"
-  ln -fsv "$DOTFILES/gtkrc-2.0" "$HOME/.gtkrc-2.0"
-  ln -fsv "$DOTFILES/scripts" "$HOME/.scripts"
-  ln -fsv "$DOTFILES/fsh" "$HOME/.config/fsh"
-  ln -fsv "$DOTFILES/neofetch" "$HOME/.config/neofetch"
-  ln -fsv "$DOTFILES/nwg-bar" "$HOME/.config/nwg-bar"
-  ln -fsv "$DOTFILES/oguri" "$HOME/.config/oguri"
-  ln -fsv "$DOTFILES/systemd" "$HOME/.config/systemd"
-  ln -fsv "$DOTFILES/workstyle" "$HOME/.config/workstyle"
-  ln -fsv "$DOTFILES/xfce4" "$HOME/.config/xfce4"
-  ln -fsv "$DOTFILES/icons" "$HOME/.icons"
-  ln -fsv "$DOTFILES/azote" "$HOME/.config/azote"
-  ln -fsv "$DOTFILES/cava" "$HOME/.config/cava"
-  ln -fsv "$DOTFILES/chromium" "$HOME/.config/chromium"
-  ln -fsv "$DOTFILES/fish" "$HOME/.config/fish"
-  ln -fsv "$DOTFILES/nnn" "$HOME/.config/nnn"
-  ln -fsv "$DOTFILES/qt6ct" "$HOME/.config/qt6ct"
-  ln -fsv "$DOTFILES/rofi" "$HOME/.config/rofi"
-  ln -fsv "$DOTFILES/viewnior" "$HOME/.config/viewnior"
-  ln -fsv "$DOTFILES/xsettingsd" "$HOME/.config/xsettingsd"
-  ln -fsv "$DOTFILES/user-dirs.locale" "$HOME/.config/user-dirs.locale"
-}
+while true; do
+	read -n1 -rep "Would you like to install the packages? (y,n)" yn
+	case $yn in
+	[Yy]*) break ;;
+	[Nn]*) exit ;;
+	*) printf " Error: just write 'y' or 'n'\n\n" ;;
+	esac
+done
+clear
 
-tr -d '\r' < original_script.sh > modified_script.sh
-main "$@"
+dependencias=(git base-devel base-devel cmake unzip ninja curl unrar jq pacman-contrib rustup nodejs npm luarocks go python-pip
+	xdg-user-dirs hyprland sway waybar sddm-git wlogout wl-clipboard
+	ffmpeg neovim viewnior kitty alacritty foot dunst rofi exa ranger starship
+	polkit-gnome nwg-look-bin qt5ct htop btop ffmpegthumbs papirus-icon-theme catppuccin-gtk-theme-mocha
+	zsh exa ripgrep lazygit fd thunar vim bat neofetch cmatrix imagemagick pywal
+	ttf-nerd-fonts-symbols-common otf-firamono-nerd inter-font otf-sora ttf-fantasque-nerd noto-fonts noto-fonts-emoji ttf-comfortaa
+	ttf-jetbrains-mono ttf-jetbrains-mono-nerd ttf-terminus-nerd ttf-inconsolata ttf-joypixels)
+
+is_installed() {
+	pacman -Qi "$1" &>/dev/null
+	return $?
+}
+	clear
+	logo "Deleting symlinks.\n"
+	rm -rfv "$HOME/.config/alacritty"
+	rm -rfv "$HOME/.config/bat"
+	rm -rfv "$HOME/.config/btop"
+	rm -rfv "$HOME/.config/dunst"
+	rm -rfv "$HOME/.config/htop"
+	rm -rfv "$HOME/.config/hypr"
+	rm -rfv "$HOME/.config/kitty"
+	rm -rfv "$HOME/.config/lazygit"
+	rm -rfv "$HOME/.config/nvim"
+	rm -rfv "$HOME/.config/paru"
+	rm -rfv "$HOME/.config/ranger"
+	rm -rfv "$HOME/.config/rofi"
+	rm -rfv "$HOME/.config/starship"
+	rm -rfv "$HOME/.config/sway"
+	rm -rfv "$HOME/.config/swaylock"
+	rm -rfv "$HOME/.config/waybar"
+	rm -rfv "$HOME/.config/wlogout"
+	rm -rfv "$HOME/.config/zsh"
+	rm -rfv "$HOME/.nanorc"
+	rm -rfv "$HOME/.scripts"
+	rm -rfv "$HOME/.vimrc"
+	rm -rfv "$HOME/.wallpapers"
+	rm -rfv "$HOME/.zprofile"
+	rm -rfv "$HOME/.zshenv"
+	rm -rfv "$HOME/.zshrc"
+
+	ln -fsv "$dotdir/config/alacritty" "$HOME/.config/alacritty"
+	ln -fsv "$dotdir/config/bat" "$HOME/.config/bat"
+	ln -fsv "$dotdir/config/dunst" "$HOME/.config/dunst"
+	ln -fsv "$dotdir/config/htop" "$HOME/.config/htop"
+	ln -fsv "$dotdir/config/kitty" "$HOME/.config/kitty"
+	ln -fsv "$dotdir/config/hypr" "$HOME/.config/hypr"
+	ln -fsv "$dotdir/config/lazygit" "$HOME/.config/lazygit"
+	ln -fsv "$dotdir/config/nvim" "$HOME/.config/nvim"
+	ln -fsv "$dotdir/config/paru" "$HOME/.config/paru"
+	ln -fsv "$dotdir/config/ranger" "$HOME/.config/ranger"
+	ln -fsv "$dotdir/config/rofi" "$HOME/.config/rofi"
+	ln -fsv "$dotdir/config/starship" "$HOME/.config/starship"
+	ln -fsv "$dotdir/config/sway" "$HOME/.config/sway"
+	ln -fsv "$dotdir/config/swaylock" "$HOME/.config/swaylock"
+	ln -fsv "$dotdir/config/waybar" "$HOME/.config/waybar"
+	ln -fsv "$dotdir/config/wlogout" "$HOME/.config/wlogout"
+	ln -fsv "$dotdir/config/zsh" "$HOME/.config/zsh"
+	ln -fsv "$dotdir/home/.gitconfig" "$HOME/.gitconfig"
+	ln -fsv "$dotdir/home/.nanorc" "$HOME/.nanorc"
+	ln -fsv "$dotdir/home/.vimrc" "$HOME/.vimrc"
+	ln -fsv "$dotdir/home/.zshenv" "$HOME/.zshenv"
+	ln -fsv "$dotdir/.scripts/*" "$HOME/.scripts/*"
+	ln -fsv "$dotdir/.wallpapers" "$HOME/.wallpapers"
+
+	sudo chmod +x ~/dotfiles/scripts/do75
+	sudo chmod +x ~/dotfiles/config/hypr/xdg-portal-hyprland
+	sudo chmod +x ~/dotfiles/config/waybar/scripts/waybar-wttr.py
+	sudo chmod +x ~/dotfiles/config/ranger/scope.sh
+fi
+sleep 1
+clear
+
+
