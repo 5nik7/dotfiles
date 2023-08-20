@@ -1,0 +1,127 @@
+#!/bin/bash
+
+CRE=$(tput setaf 1)
+CYE=$(tput setaf 3)
+CGR=$(tput setaf 2)
+CBL=$(tput setaf 4)
+BLD=$(tput bold)
+CNC=$(tput sgr0)
+
+clear
+logo() {
+
+	local text="${1:?}"
+	echo -en "\n
+    ██████████      ███████    ██████████ ██████████
+   ░░███░░░░███   ███░░░░░███ ░███░░░░███░███░░░░░░█
+    ░███   ░░███ ███     ░░███░░░    ███ ░███     ░
+    ░███    ░███░███      ░███      ███  ░█████████
+    ░███    ░███░███      ░███     ███   ░░░░░░░░███
+    ░███    ███ ░░███     ███     ███     ███   ░███
+    ██████████   ░░░███████░     ███     ░░████████
+   ░░░░░░░░░░      ░░░░░░░      ░░░       ░░░░░░░░\n\n"
+	printf ' %s [%s%s %s%s %s]%s\n\n' "${CRE}" "${CNC}" "${CYE}" "${text}" "${CNC}" "${CRE}" "${CNC}"
+}
+
+########## ---------- You must not run this as root ---------- ##########
+logo "I'm going to break it... "
+
+while true; do
+	read -n1 -rep "Would you like to break everything? (y,n)" yn
+	case $yn in
+	[Yy]*) break ;;
+	[Nn]*) exit ;;
+	*) printf " Error: just write 'y' or 'n'\n\n" ;;
+	esac
+done
+
+sudo pacman -Syyuu --noconfirm
+
+dependencias=(git base-devel base-devel cmake unzip ninja curl unrar jq pacman-contrib rustup nodejs npm luarocks go python-pip
+	xdg-user-dirs hyprland sway waybar sddm-git wlogout wl-clipboard
+	ffmpeg viewnior kitty alacritty foot dunst rofi exa ranger starship lsd
+	polkit-gnome nwg-look-bin qt5ct htop btop ffmpegthumbs papirus-icon-theme catppuccin-gtk-theme-mocha
+	zsh exa ripgrep lazygit fd thunar vim bat neofetch cmatrix imagemagick pywal firefox
+	ttf-nerd-fonts-symbols-common otf-firamono-nerd inter-font otf-sora ttf-fantasque-nerd noto-fonts noto-fonts-emoji ttf-comfortaa
+	ttf-jetbrains-mono ttf-jetbrains-mono-nerd ttf-terminus-nerd ttf-inconsolata ttf-joypixels)
+
+is_installed() {
+	pacman -Qi "$1" &>/dev/null
+	return $?
+}
+
+printf "%s%sChecking for required packages...%s\n" "${BLD}" "${CBL}" "${CNC}"
+for pkgs in "${dependencias[@]}"; do
+	if ! is_installed "$pkgs"; then
+		paru -S "$pkgs" --noconfirm
+		printf "\n"
+	else
+		printf '%s%s is already installed on your system!%s\n' "${CGR}" "$pkgs" "${CNC}"
+	fi
+done
+
+dotdir=$HOME/dotfiles
+confdir=$HOME/.config
+
+symdot() {
+	echo "Deleting symlinks."
+	rm -rfv "$confdir/alacritty"
+	rm -rfv "$confdir/bat"
+	rm -rfv "$confdir/btop"
+	rm -rfv "$confdir/dunst"
+	rm -rfv "$confdir/htop"
+	rm -rfv "$confdir/hypr"
+	rm -rfv "$confdir/kitty"
+	rm -rfv "$confdir/lazygit"
+	rm -rfv "$confdir/nvim"
+	rm -rfv "$confdir/paru"
+	rm -rfv "$confdir/ranger"
+	rm -rfv "$confdir/rofi"
+	rm -rfv "$confdir/starship"
+	rm -rfv "$confdir/sway"
+	rm -rfv "$confdir/swaylock"
+	rm -rfv "$confdir/waybar"
+	rm -rfv "$confdir/wlogout"
+	rm -rfv "$confdir/zsh"
+	rm -rfv "$HOME/.gitconfig"
+	rm -rfv "$HOME/.nanorc"
+	rm -rfv "$HOME/.scripts"
+	rm -rfv "$HOME/.vimrc"
+	rm -rfv "$HOME/.wallpapers"
+	rm -rfv "$HOME/.zprofile"
+	rm -rfv "$HOME/.zshenv"
+	rm -rfv "$HOME/.zshrc"
+
+	echo "Creating symlinks."
+	ln -fsv "$dotdir/alacritty" "$confdir/alacritty"
+	ln -fsv "$dotdir/bat" "$confdir/bat"
+	ln -fsv "$dotdir/dunst" "$confdir/dunst"
+	ln -fsv "$dotdir/htop" "$confdir/htop"
+	ln -fsv "$dotdir/kitty" "$confdir/kitt"
+	ln -fsv "$dotdir/hypr" "$confdir/hypr"
+	ln -fsv "$dotdir/lazygit" "$confdir/lazygit"
+	ln -fsv "$dotdir/nvim" "$confdir/nvim"
+	ln -fsv "$dotdir/paru" "$confdir/paru"
+	ln -fsv "$dotdir/rofi" "$confdir/rofi"
+	ln -fsv "$dotdir/ranger" "$confdir/ranger"
+	ln -fsv "$dotdir/starship" "$confdir/starship"
+	ln -fsv "$dotdir/sway" "$confdir/sway"
+	ln -fsv "$dotdir/swaylock" "$confdir/swaylock"
+	ln -fsv "$dotdir/waybar" "$confdir/waybar"
+	ln -fsv "$dotdir/wlogout" "$confdir/wlogout"
+	ln -fsv "$dotdir/zsh" "$confdir/zsh"
+	ln -fsv "$dotdir/.gitconfig" "$HOME/.gitconfig"
+	ln -fsv "$dotdir/.nanorc" "$HOME/.nanorc"
+	ln -fsv "$dotdir/.vimrc" "$HOME/.vimrc"
+	ln -fsv "$dotdir/.zshenv" "$HOME/.zshenv"
+	ln -fsv "$dotdir/.scripts" "$HOME/.scripts"
+	ln -fsv "$dotdir/.wallpapers" "$HOME/.wallpapers"
+
+	chmod +x $HOME/.scripts/do75
+	chmod +x $HOME/.scripts/symdots
+	chmod +x $cofdir/hypr/xdg-portal-hyprland
+	chmod +x $cofdir/waybar/scripts/waybar-wttr.py
+	chmod +x $cofdir/ranger/scope.sh
+}
+
+symdot
