@@ -26,7 +26,6 @@
 
     smart_borders on
 
-
     for_window [app_id="pop-up"]                     floating enable
     for_window [app_id="bubble"]                     floating enable 
     for_window [app_id="task_dialog"]                floating enable
@@ -49,26 +48,18 @@
     for_window [app_id="Nautilus"]                   resize set height 540
     for_window [app_id="Nautilus"]                   resize set width 960
 
-#-------------------------------------------------------#
-# Sticky floating windows(sticky enable|disable|toggle) #
-#-------------------------------------------------------#
+
     for_window [app_id="danmufloat"]                  floating enable
     for_window [app_id="danmufloat"]                  sticky enable 
     for_window [app_id="danmufloat"]                  resize set height 540
     for_window [app_id="danmufloat"]                  resize set width 960
 
-#-----------------#
-# Program Opacity #
-#-----------------#
+
     for_window [app_id="telegram"]                    opacity 0.95
     for_window [app_id="danmufloat"]                    opacity 0.80
     for_window [app_id="icalingua"]                   opacity 0.95
     for_window [class="netease-cloud-music"]          opacity 0.90
 
-#------------------------------------------#
-# Placing software in a specific workspace #
-#------------------------------------------#
-    #assign [app_id="telegram"]: workspace num  ber 10
     for_window [app_id="icalingua"] move --no-auto-back-and-forth container to workspace QQ
     for_window [app_id="icalingua"] focus
     for_window [app_id="telegram"] move --no-auto-back-and-forth container to workspace TG
@@ -153,33 +144,27 @@
     bindsym $alt+Shift+r reload
 
 #
-# Moving around:
 #
-    # Move your focus around
     bindsym $alt+$left focus left
     bindsym $alt+$down focus down
     bindsym $alt+$up focus up
     bindsym $alt+$right focus right
-    # Or use $alt+[up|down|left|right]
+ 
     bindsym $alt+Left focus left
     bindsym $alt+Down focus down
     bindsym $alt+Up focus up
     bindsym $alt+Right focus right
 
-    # Move the focused window with the same, but add Shift
     bindsym $alt+Shift+$left move left
     bindsym $alt+Shift+$down move down
     bindsym $alt+Shift+$up move up
     bindsym $alt+Shift+$right move right
-    # Ditto, with arrow keys
+    
     bindsym $alt+Shift+Left move left
     bindsym $alt+Shift+Down move down
     bindsym $alt+Shift+Up move up
     bindsym $alt+Shift+Right move right
-#
-# Workspaces:
-#
-    # Switch to workspace
+
     bindsym $alt+1 workspace number 1
     bindsym $alt+2 workspace number 2
     bindsym $alt+3 workspace number 3
@@ -190,7 +175,7 @@
     bindsym $alt+8 workspace number 8
     bindsym $alt+9 workspace number 9
     bindsym $alt+0 workspace number 10
-    # Move focused container to workspace
+   
     bindsym $alt+Shift+1 move container to workspace number 1
     bindsym $alt+Shift+2 move container to workspace number 2
     bindsym $alt+Shift+3 move container to workspace number 3
@@ -202,15 +187,9 @@
     bindsym $alt+Shift+9 move container to workspace number 9
     bindsym $alt+Shift+0 move container to workspace number 10
 #
-# Layout stuff:
-#
-    # You can "split" the current object of your focus with
-    # $alt+b or $alt+v, for horizontal and vertical splits
-    # respectively.
     bindsym $alt+b splith
     bindsym $alt+v splitv
 
-    # Switch the current container between different layout styles
     bindsym $alt+s layout stacking
     bindsym $alt+t exec autotiling
     bindsym $alt+Shift+w layout tabbed
@@ -232,13 +211,11 @@ mode "resize" {
     bindsym $up resize shrink height 10px
     bindsym $right resize grow width 10px
 
-    # Ditto, with arrow keys
     bindsym Left resize shrink width 10px
     bindsym Down resize grow height 10px
     bindsym Up resize shrink height 10px
     bindsym Right resize grow width 10px
 
-    # Return to default mode
     bindsym Return mode "default"
     bindsym Escape mode "default"
     bindsym $alt+r mode "default"
@@ -248,6 +225,5 @@ bindsym $alt+r mode "resize"
 for_window [app_id="firefox" title="Firefox — Sharing Indicator"] border none, floating enable, nofocus
 for_window [app_id="firefox" title="^Picture-in-Picture$"] \
     floating enable, move position 877 450, sticky enable, border none
-# }}}
 
 include /etc/sway/config.d/*
