@@ -1,14 +1,18 @@
-    # Logo key. Use Mod1 for Alt.
-    set $alt Mod1
-
-    bindsym $alt+o exec killall -SIGUSR1 waybar
-
-    output * { mode 2560x1410@170Hz scale 1 pos 0 0 }
+# Sway config
 
     exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
     exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
     exec hash dbus-update-activation-environment 2>/dev/null && \
         dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+    exec ~/.config/sway/scripts/xdpk
+
+    exec_always --no-startup-id ~/.config/sway/dynamic_wallpaper.sh $
+
+    set $alt Mod1
+
+    bindsym $alt+o exec killall -SIGUSR1 waybar
+
+    output * mode 2560x1410@170Hz scale 1 pos 0 0
 
     xwayland enable
     font pango:JetBrainsMono Nerd Font 8
@@ -142,7 +146,6 @@
     bindsym $alt+Return exec $term
     bindsym $alt+e exec $filemanager
     bindsym $alt+Shift+Return exec $term-float
-    bindsym $alt+Shift+x exec $powermenu
     bindsym $alt+q kill
 
     floating_modifier $alt normal
