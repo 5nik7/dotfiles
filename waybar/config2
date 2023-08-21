@@ -21,7 +21,7 @@
     "tray"
   ],
   "custom/launcher": {
-    "format": " ",
+    "format": " ",
     "on-click": "~/.config/rofi/launcher.sh",
     "tooltip": false
   },
@@ -118,7 +118,7 @@
     "tooltip": false
   },
   "temperature": {
-    "hwmon-path": "/sys/class/hwmon/hwmon6/temp2_input",
+    "hwmon-path": "",
     //"critical-threshold": 80,
     "tooltip": false,
     "format": " {temperatureC}°C"
