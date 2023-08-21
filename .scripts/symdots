@@ -24,7 +24,7 @@ logo() {
 }
 
 ########## ---------- You must not run this as root ---------- ##########
-logo "I'm going to break it... "
+logo "I am going to break it... "
 
 while true; do
 	read -n1 -rep "Would you like to break everything? (y,n)" yn
@@ -60,12 +60,18 @@ for pkgs in "${dependencias[@]}"; do
 	fi
 done
 
+folders=(alcritty bat dunst exa fd-find foot git hypr imv jq kitty lazygit lsd mako neofetch nodejs npm
+	nwg-look papirus-icon-theme paru ranger ripgrep rofi starship sway swaybg swaylock thunar vim waybar wlogout zsh)
 
+for folders in "${folders[@]}"; do
+	if [ -d "$" ]; then
+
+
+done
 symdot() {
 	echo "Deleting symlinks."
 	rm -rfv "$XDG_CONFIG_HOME/alacritty"
 	rm -rfv "$XDG_CONFIG_HOME/bat"
-	rm -rfv "$XDG_CONFIG_HOME/hypr"
 	rm -rfv "$XDG_CONFIG_HOME/kitty"
 	rm -rfv "$XDG_CONFIG_HOME/lazygit"
 	rm -rfv "$XDG_CONFIG_HOME/nvim"
@@ -96,7 +102,6 @@ symdot() {
 	ln -fsv "$DOTFILES/bat" "$XDG_CONFIG_HOME/bat"
 	ln -fsv "$DOTFILES/dunst" "$XDG_CONFIG_HOME/dunst"
 	ln -fsv "$DOTFILES/kitty" "$XDG_CONFIG_HOME/kitty"
-	ln -fsv "$DOTFILES/hypr" "$XDG_CONFIG_HOME/hypr"
 	ln -fsv "$DOTFILES/lazygit" "$XDG_CONFIG_HOME/lazygit"
 	ln -fsv "$DOTFILES/nvim" "$XDG_CONFIG_HOME/nvim"
 	ln -fsv "$DOTFILES/paru" "$XDG_CONFIG_HOME/paru"
