@@ -7,9 +7,9 @@ export PULSE_SERVER=tcp:$(cat /etc/resolv.conf | grep nameserver | awk '{print $
 
 QT_QPA_PLATFORMTHEME=gtk2
 MOZ_ENABLE_WAYLAND=1
-GTK_IM_MODULE=fcitx5
-QT_IM_MODULE=fcitx5
-XMODIFIERS=@im=fcitx5
+GTK_IM_MODULE=gtk3
+QT_IM_MODULE=gtk3
+XMODIFIERS=@im=gtk3
 SDL_VIDEODRIVER=wayland
 _JAVA_AWT_WM_NONREPARENTING=1
 QT_QPA_PLATFORM=wayland

@@ -1,22 +1,44 @@
 # Sway config
-#
-    exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-    exec --no-startup-id /usr/libexec/polkit-gnome-authentication-agent-1
+    xwayland enable
 
+    exec ~/.config/sway/scripts/xdpk
     exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
     exec hash dbus-update-activation-environment 2>/dev/null && \
         dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
     exec ~/.config/sway/scripts/xdpk
-
-    exec_always --no-startup-id ~/.config/sway/dynamic_wallpaper.sh $
-
+    
     set $alt Mod1
+
+    exec_always --no-startup-id ~/.config/sway/dynamic_wallpaper.sh &
+
+    exec dbus-daemon --session --address=unix:path=$XDG_RUNTIME_DIR/bus &
+    exec mako &
+    exec_always  --no-startup-id  nm-applet --indicator &
+    exec_always  --no-startup-id  utotiling-rs &
+    exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+    exec --no-startup-id nm-applet &
+    # exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+    exec gnome-keyring-daemon &
+    exec_always  --no-startup-id  ~/.config/waybar/launch_waybar.sh &
+    
+    set $gnome-schema org.gnome.desktop.interface
+    exec_always {
+        gsettings set $gnome-schema gtk-theme 'Catppuccin'
+        gsettings set $gnome-schema icon-theme 'Papirus-Dark'
+        gsettings set $gnome-schema cursor-theme 'Catppuccin-cursor'
+        gsettings set $gnome-schema font-name 'jetbrains mono nerd font 12'
+        }
+
 
     bindsym $alt+o exec killall -SIGUSR1 waybar
 
     output * mode 2560x1410@170Hz scale 1 pos 0 0
+    
+    input "type:keyboard" {           
+        xkb_layout us
+        xkb_options caps:escape
+    }
 
-    xwayland enable
     font pango:JetBrainsMono Nerd Font 8
     default_border pixel 1
     default_floating_border pixel 1
@@ -118,19 +140,6 @@
     bindsym XF86AudioNext exec playerctl next
     bindsym XF86AudioPrev exec playerctl previous
 
-    exec_always  --no-startup-id  autotiling &
-    exec_always  --no-startup-id  mako &
-    exec_always  --no-startup-id  fcitx5 &
-    exec_always  --no-startup-id  nm-applet --indicator &
-    exec_always  --no-startup-id  ~/.config/waybar/launch_waybar.sh &
-
-    set $gnome-schema org.gnome.desktop.interface
-    exec_always {
-        gsettings set $gnome-schema gtk-theme 'Catppuccin'
-        gsettings set $gnome-schema icon-theme 'Papirus-Dark'
-        gsettings set $gnome-schema cursor-theme 'Catppuccin-cursor'
-        gsettings set $gnome-schema font-name 'jetbrains mono nerd font 12'
-        }
 
     set $left h
     set $down j
