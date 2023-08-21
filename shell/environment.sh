@@ -1,4 +1,5 @@
 export GOPATH="$HOME/go"
+
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
@@ -18,14 +19,24 @@ _extend_path "$HOME/node_modules/.bin"
 _extend_path "$HOME/.local/share/gem/ruby/3.0.0/bin"
 _extend_path "$GOPATH/bin"
 
+export LIBGL_ALWAYS_INDIRECT=1
+export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
+export PULSE_SERVER=tcp:$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}')
+
+QT_QPA_PLATFORMTHEME=gtk2
+MOZ_ENABLE_WAYLAND=1
+GTK_IM_MODULE=gtk3
+QT_IM_MODULE=gtk3
+XMODIFIERS=@im=gtk3
+SDL_VIDEODRIVER=wayland
+_JAVA_AWT_WM_NONREPARENTING=1
+QT_QPA_PLATFORM=wayland
+QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+XDG_CURRENT_DESKTOP=sway
+XDG_SESSION_DESKTOP=sway
+
 export TERM='xterm-256color'
-export CMAKE_EXPORT_COMPILE_COMMANDS=ON
 
-export RUSTC_WRAPPER=sccache
-
-export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
-
-# Locale
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
@@ -37,7 +48,6 @@ export VISUAL="nvim"
 export EDITOR="nvim"
 export BROWSER="firefox"
 export CHROME_EXECUTABLE=/usr/bin/chromium
-
 
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
@@ -90,4 +100,4 @@ export FZF_DEFAULT_OPTS="
 --preview-window='60%'
 --preview-window='border-thinblock'"
 
-# vim:ft=zsh:nowrap
+# vim:ft=sh:nowrap
