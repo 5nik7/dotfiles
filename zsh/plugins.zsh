@@ -1,6 +1,17 @@
 # Configure and load plugins using Zinit's
 ZINIT_HOME="${ZINIT_HOME:-${XDG_DATA_HOME:-${HOME}/.local/share}/zinit}"
 
+# compinstall
+zstyle :compinstall filename ${ZDOTDIR:-~}/.zshrc
+autoload -Uz compinit
+
+## Generate zcompdump once a day
+for dump in ${ZDOTDIR:-~}/zcompdump(N.mh+24); do
+  compinit
+done
+compinit -C
+
+
 # Added by Zinit's installer
 if [[ ! -f ${ZINIT_HOME}/zinit.git/zinit.zsh ]]; then
     print -P "%F{14}▓▒░ Installing Flexible and fast ZSH plugin manager %F{13}(zinit)%f"
@@ -15,8 +26,16 @@ source "${ZINIT_HOME}/zinit.git/zinit.zsh"
 zinit ice blockf atpull'zinit creinstall -q .'
 zinit light zsh-users/zsh-completions
 
-autoload -U compinit
-compinit -i
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+
+function osc7 {
+    setopt localoptions extendedglob
+    input=( ${(s::)PWD} )
+    uri=${(j::)input/(#b)([^A-Za-z0-9_.\!~*\'\(\)-\/])/%${(l:2::0:)$(([##16]#match))}}
+    print -n "\e]7;file://${HOSTNAME}${uri}\e\\"
+}
+add-zsh-hook -Uz chpwd osc7
 
 zinit light-mode for \
     hlissner/zsh-autopair \
@@ -61,4 +80,5 @@ zinit ice as'command' from'gh-r' \
   atpull'%atclone' src'init.zsh'
 zinit light starship/starship
 
+[[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
 # vim:ft=zsh

@@ -1,5 +1,5 @@
 function cd() {
-    builtin cd "$@" && exa -HF --all --long --no-filesize --no-user --no-time --group-directories-first --icons
+    builtin cd "$@" && clear && lsd -la --group-directories-first --blocks permission,name
 }
 
 alias c="clear"
@@ -21,9 +21,9 @@ alias cleanpac='sudo pacman -Rns $(pacman -Qtdq); paru -c'
 alias installed="grep -i installed /var/log/pacman.log"
 
 # use exa if available
-if [[ -x "$(command -v exa)" ]]; then
-  alias ll="exa -HhgnSF --all --long --group-directories-first --icons --no-time"
-  alias l="exa -HF --all --long --no-filesize --no-user --no-time --group-directories-first --icons"
+if [[ -x "$(command -v lsd)" ]]; then
+  alias ll="lsd -al --group-directories-first"
+  alias l="lsd -la --group-directories-first --blocks permission,name"
 else
   alias l="ls -lah ${colorflag}"
   alias ll="ls -lFh ${colorflag}"
@@ -38,7 +38,7 @@ alias ln='ln -sfv'
 alias mkdir='mkdir -pv'
 alias path='echo $PATH | tr ":" "\n"'
 alias cat='bat'
-alias grep='grep --color=auto'
+alias grep='rg -i -l -L --hidden'
 alias mv='mv -v'
 alias cp='cp -vr'
 alias rm='rm -vrf'
