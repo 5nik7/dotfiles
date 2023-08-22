@@ -43,7 +43,8 @@ dependencias=(git base-devel base-devel cmake unzip ninja curl unrar jq pacman-c
 	polkit-gnome nwg-look-bin qt5ct htop btop ffmpegthumbs papirus-icon-theme catppuccin-gtk-theme-mocha
 	zsh exa ripgrep lazygit fd thunar vim bat neofetch cmatrix imagemagick pywal firefox
 	ttf-nerd-fonts-symbols-common otf-firamono-nerd inter-font otf-sora ttf-fantasque-nerd noto-fonts noto-fonts-emoji ttf-comfortaa
-	ttf-jetbrains-mono ttf-jetbrains-mono-nerd ttf-terminus-nerd ttf-inconsolata ttf-joypixels)
+	ttf-jetbrains-mono ttf-jetbrains-mono-nerd ttf-terminus-nerd ttf-inconsolata ttf-joypixelsq
+	)
 
 is_installed() {
 	pacman -Qi "$1" &>/dev/null
@@ -60,13 +61,23 @@ for pkgs in "${dependencias[@]}"; do
 	fi
 done
 
-folders=(alcritty bat dunst exa fd-find foot git hypr imv jq kitty lazygit lsd mako neofetch nodejs npm
-	nwg-look papirus-icon-theme paru ranger ripgrep rofi starship sway swaybg swaylock thunar vim waybar wlogout zsh)
+configs=(alcritty bat dunst exa fd-find foot git hypr imv jq kitty lazygit lsd mako neofetch nodejs npm
+	nwg-look paru ranger rofi starship sway swaylock thunar waybar wlogout zsh)
 
-for folders in "${folders[@]}"; do
-	if [ -d "$" ]; then
+has_config() {
+	[ -d "$DOTFILES/$1" ]
+	return $?
+}
 
 
+for folders in "$XCG_CONFIG_HOME/${configs[@]}"; do
+	if has_config "$foleders" ]; then
+		if [ -d "$XDG_CONFIG_HOME/$folders" ]; then
+			rm -rfv "$XDG_CONFIG_HOME/$folders"
+		fi
+	else
+		printf '%s%s is already installed on your system!%s\n' "${CGR}" "$pkgs" "${CNC}"
+	fi
 done
 symdot() {
 	echo "Deleting symlinks."
