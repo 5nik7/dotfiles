@@ -60,7 +60,6 @@ has_config() {
 	return $?
 }
 
-
 for folders in "$XCG_CONFIG_HOME/${configs[@]}"; do
 	if has_config "$foleders" ]; then
 		if [ -d "$XDG_CONFIG_HOME/$folders" ]; then
@@ -126,3 +125,5 @@ symdot() {
 }
 
 symdot
+
+# vim:ft=sh:nowrap

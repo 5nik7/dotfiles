@@ -257,25 +257,6 @@ if [[ $CFG =~ ^[Yy]$ ]]; then
 	ln -fsv "$dotdir/.scripts/*" "$HOME/.scripts/*"
 	ln -fsv "$dotdir/.wallpapers" "$HOME/.wallpapers"
 
-	sudo chmod +x ~/dotfiles/scripts/do75
-	sudo chmod +x ~/dotfiles/config/hypr/xdg-portal-hyprland
-	sudo chmod +x ~/dotfiles/config/waybar/scripts/waybar-wttr.py
-	sudo chmod +x ~/dotfiles/config/ranger/scope.sh
-fi
-sleep 1
-clear
-
-logo "Autologin..."
-### Enable SDDM Autologin ###
-read -n1 -rep 'Would you like to enable SDDM autologin? (y,n)' SDDM
-if [[ $SDDM == "Y" || $SDDM == "y" ]]; then
-	LOC="/etc/sddm.conf"
-	echo -e "The following has been added to $LOC.\n"
-	echo -e "[Autologin]\nUser = $(whoami)\nSession=hyprland" | sudo tee -a $LOC
-	echo -e "\n"
-	echo -e "Enabling SDDM service...\n"
-	sudo systemctl enable sddm
-	sleep 3
 fi
 sleep 1
 clear
