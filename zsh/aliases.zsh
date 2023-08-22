@@ -31,8 +31,6 @@ fi
 
 alias la="ls -AF ${colorflag}"
 alias lld="ls -l | grep ^d"
-alias cp='cp -rv'
-alias mv='mv -v'
 alias srm='sudo rm -rfv'
 alias ln='ln -sfv'
 alias mkdir='mkdir -pv'
