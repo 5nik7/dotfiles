@@ -23,7 +23,7 @@ logo() {
 	printf ' %s [%s%s %s%s %s]%s\n\n' "${CRE}" "${CNC}" "${CYE}" "${text}" "${CNC}" "${CRE}" "${CNC}"
 }
 
-logo "I am going to break it... "
+logo "This will probably break all the things..."
 
 while true; do
 	read -n1 -rep "Would you like to break everything? (y,n)" yn
