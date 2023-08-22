@@ -58,7 +58,7 @@ export BAT_CONFIG_PATH="$HOME/.config/bat/bat.conf"
 export BAT_THEME='Catppuccin-mocha'
 
 # FZF bases
-export RG_DEFAULT_COMMAND="rg -i -l --hidden"
+export RG_DEFAULT_COMMAND="rg -i -l --hidden {}"
 
 export FZF_DEFAULT_OPTS="
 --color fg:#cdd6f4
@@ -83,11 +83,11 @@ export FZF_DEFAULT_OPTS="
 --no-scrollbar
 --info=inline
 --border=thinblock
---margin='2%,2%,2%,2%'
+--margin='1%,1%,1%,1%'
 --height='95%'
---preview='bat -n --style=plain --color=always {}'
+--preview='bat --style=grid --color=always {}'
 --preview-window='right'
---preview-window='60%'
+--preview-window='50%'
 --preview-window='border-thinblock'"
 
 # vim:ft=zsh:nowrap
