@@ -21,6 +21,8 @@ _extend_path "$HOME/node_modules/.bin"
 _extend_path "$HOME/.local/share/gem/ruby/3.0.0/bin"
 _extend_path "$GOPATH/bin"
 
+export RUSTFLAGS="--remap-path-prefix $HOME=~"
+
 source /opt/anaconda/bin/activate root
 
 # Locale
