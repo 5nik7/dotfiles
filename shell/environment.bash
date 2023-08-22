@@ -1,15 +1,14 @@
 export GOPATH="$HOME/go"
-
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 _extend_path() {
-	[[ -d "$1" ]] || return
+  [[ -d "$1" ]] || return
 
-	if ! $(echo "$PATH" | tr ":" "\n" | grep -qx "$1"); then
-		export PATH="$1:$PATH"
-	fi
+  if ! $( echo "$PATH" | tr ":" "\n" | grep -qx "$1" ) ; then
+    export PATH="$1:$PATH"
+  fi
 }
 
 _extend_path "$HOME/.scripts"
@@ -21,12 +20,11 @@ _extend_path "$HOME/node_modules/.bin"
 _extend_path "$HOME/.local/share/gem/ruby/3.0.0/bin"
 _extend_path "$GOPATH/bin"
 
+export RUSTFLAGS="--remap-path-prefix $HOME=~"
+
 source /opt/anaconda/bin/activate root
 
-export LIBGL_ALWAYS_INDIRECT=1
-export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
-export PULSE_SERVER=tcp:$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}')
-
+# Locale
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
@@ -38,6 +36,7 @@ export VISUAL="nvim"
 export EDITOR="nvim"
 export BROWSER="firefox"
 export CHROME_EXECUTABLE=/usr/bin/chromium
+
 
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
@@ -58,7 +57,7 @@ export BAT_CONFIG_PATH="$HOME/.config/bat/bat.conf"
 export BAT_THEME='Catppuccin-mocha'
 
 # FZF bases
-export RG_DEFAULT_COMMAND="rg -i -l --hidden"
+export RG_DEFAULT_COMMAND="rg -i -l --hidden {}"
 
 export FZF_DEFAULT_OPTS="
 --color fg:#cdd6f4
@@ -83,11 +82,11 @@ export FZF_DEFAULT_OPTS="
 --no-scrollbar
 --info=inline
 --border=thinblock
---margin='2%,2%,2%,2%'
+--margin='1%,1%,1%,1%'
 --height='95%'
---preview='bat -n --style=plain --color=always {}'
+--preview='bat --style=grid --color=always {}'
 --preview-window='right'
---preview-window='60%'
+--preview-window='50%'
 --preview-window='border-thinblock'"
 
 export QT_QPA_PLATFORMTHEME=gtk2
