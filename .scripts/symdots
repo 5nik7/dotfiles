@@ -53,7 +53,7 @@ for pkgs in "${dependencias[@]}"; do
 	fi
 done
 
-configs=(alcritty bat dunst exa fd-find foot git hypr imv jq kitty lazygit lsd mako neofetch nodejs npm nwg-look paru ranger rofi starship sway swaylock thunar waybar wlogout zsh)
+configs=(alcritty bat dunst foot git kitty lazygit lsd mako neofetch nwg-look paru ranger rofi starship sway swaylock thunar waybar wlogout zsh)
 
 has_config() {
 	[ -d "$DOTFILES/$1" ]
