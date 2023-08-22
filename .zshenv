@@ -1,4 +1,4 @@
 export ZDOTDIR="$HOME/.config/zsh"
-export SHDIR="$HOME/.config/shell"
+export SHELLDIR="$HOME/.config/shell"
 
 # vim:ft=zsh:nowrap

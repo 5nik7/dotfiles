@@ -5,11 +5,10 @@
     exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
     exec hash dbus-update-activation-environment 2>/dev/null && \
         dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
-    exec ~/.config/sway/scripts/xdpk
     
     set $alt Mod1
 
-    exec_always --no-startup-id ~/.config/sway/dynamic_wallpaper.sh &
+    # exec_always --no-startup-id ~/.config/sway/dynamic_wallpaper.sh &
 
     exec dbus-daemon --session --address=unix:path=$XDG_RUNTIME_DIR/bus &
     exec mako &
@@ -17,7 +16,7 @@
     exec_always  --no-startup-id  utotiling-rs &
     exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
     exec --no-startup-id nm-applet &
-    # exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+    exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
     exec gnome-keyring-daemon &
     exec_always  --no-startup-id  ~/.config/waybar/launch_waybar.sh &
     
@@ -26,13 +25,14 @@
         gsettings set $gnome-schema gtk-theme 'Catppuccin'
         gsettings set $gnome-schema icon-theme 'Papirus-Dark'
         gsettings set $gnome-schema cursor-theme 'Catppuccin-cursor'
-        gsettings set $gnome-schema font-name 'jetbrains mono nerd font 12'
+        gsettings set $gnome-schema font-name 'jetbrains mono nerd font 10'
         }
 
 
     bindsym $alt+o exec killall -SIGUSR1 waybar
 
     output * mode 2560x1410@170Hz scale 1 pos 0 0
+
     
     input "type:keyboard" {           
         xkb_layout us
@@ -130,17 +130,6 @@
 
     focus_follows_mouse no
   
-    bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
-    bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
-    bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
-    bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
-    bindsym XF86MonBrightnessUp exec light -A 5
-    bindsym XF86MonBrightnessDown exec light -U 5
-    bindsym XF86AudioPlay exec playerctl play-pause
-    bindsym XF86AudioNext exec playerctl next
-    bindsym XF86AudioPrev exec playerctl previous
-
-
     set $left h
     set $down j
     set $up k
@@ -151,11 +140,12 @@
 
      set $filemanager thunar
 
-    exec_always --no-startup-id ~/.config/sway/dynamic_wallpaper.sh $
-
     bindsym $alt+w exec --no-startup-id  firefox
     bindsym $alt+d exec ~/.config/rofi/launcher.sh
     bindsym $alt+shift+x exec ~/.config/rofi/powermenu.sh
+
+    bindsym $alt+ctrl+c wl-copy
+    bindsym $alt+ctrl+v wl-paste
 
     bindsym $alt+Return exec $term
     bindsym $alt+e exec $filemanager

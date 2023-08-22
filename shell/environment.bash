@@ -5,35 +5,27 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 _extend_path() {
-  [[ -d "$1" ]] || return
+	[[ -d "$1" ]] || return
 
-  if ! $( echo "$PATH" | tr ":" "\n" | grep -qx "$1" ) ; then
-    export PATH="$1:$PATH"
-  fi
+	if ! $(echo "$PATH" | tr ":" "\n" | grep -qx "$1"); then
+		export PATH="$1:$PATH"
+	fi
 }
 
 _extend_path "$HOME/.scripts"
+_extend_path "/usr/sbin"
+_extend_path "/usr/bin"
 _extend_path "$HOME/.local/bin"
 _extend_path "$HOME/.cargo/bin"
 _extend_path "$HOME/node_modules/.bin"
 _extend_path "$HOME/.local/share/gem/ruby/3.0.0/bin"
 _extend_path "$GOPATH/bin"
 
+source /opt/anaconda/bin/activate root
+
 export LIBGL_ALWAYS_INDIRECT=1
 export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
 export PULSE_SERVER=tcp:$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}')
-
-QT_QPA_PLATFORMTHEME=gtk2
-MOZ_ENABLE_WAYLAND=1
-GTK_IM_MODULE=gtk3
-QT_IM_MODULE=gtk3
-XMODIFIERS=@im=gtk3
-SDL_VIDEODRIVER=wayland
-_JAVA_AWT_WM_NONREPARENTING=1
-QT_QPA_PLATFORM=wayland
-QT_WAYLAND_DISABLE_WINDOWDECORATION=1
-XDG_CURRENT_DESKTOP=sway
-XDG_SESSION_DESKTOP=sway
 
 export TERM='xterm-256color'
 
@@ -99,5 +91,16 @@ export FZF_DEFAULT_OPTS="
 --preview-window='right'
 --preview-window='60%'
 --preview-window='border-thinblock'"
+
+export QT_QPA_PLATFORMTHEME=gtk2
+export MOZ_ENABLE_WAYLAND=1
+export GTK_IM_MODULE=gtk3
+export QT_IM_MODULE=gtk3
+export SDL_VIDEODRIVER=wayland
+export _JAVA_AWT_WM_NONREPARENTING=1
+export QT_QPA_PLATFORM=wayland
+export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+export XDG_CURRENT_DESKTOP=sway
+export XDG_SESSION_DESKTOP=sway
 
 # vim:ft=sh:nowrap

@@ -12,11 +12,16 @@ _extend_path() {
 }
 
 _extend_path "$HOME/.scripts"
+_extend_path "/usr/sbin"
+_extend_path "/usr/bin"
+_extend_path "$HOME/.local/bin"
 _extend_path "$HOME/.local/bin"
 _extend_path "$HOME/.cargo/bin"
 _extend_path "$HOME/node_modules/.bin"
 _extend_path "$HOME/.local/share/gem/ruby/3.0.0/bin"
 _extend_path "$GOPATH/bin"
+
+source /opt/anaconda/bin/activate root
 
 export TERM='xterm-256color'
 export CMAKE_EXPORT_COMPILE_COMMANDS=ON

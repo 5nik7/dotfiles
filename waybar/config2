@@ -56,6 +56,7 @@
     "spacing": 10
   },
   "clock": {
+    "on-click": "~/.config/waybar/switch_style1.sh &",
     "format": "{: %R   %d/%m}",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
   },
