@@ -123,11 +123,6 @@ symdot() {
 	ln -fsv "$DOTFILES/.bashrc" "$HOME/.bashrc"
 	ln -fsv "$DOTFILES/.bash_profile" "$HOME/.bash_profile"
 
-	chmod +x $HOME/.scripts/do75
-	chmod +x $HOME/.scripts/symdots
-	chmod +x $cofdir/hypr/xdg-portal-hyprland
-	chmod +x $cofdir/waybar/scripts/waybar-wttr.py
-	chmod +x $cofdir/ranger/scope.sh
 }
 
 symdot
