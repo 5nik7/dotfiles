@@ -23,13 +23,6 @@ _extend_path "$GOPATH/bin"
 
 source /opt/anaconda/bin/activate root
 
-export TERM='xterm-256color'
-export CMAKE_EXPORT_COMPILE_COMMANDS=ON
-
-export RUSTC_WRAPPER=sccache
-
-export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
-
 # Locale
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8

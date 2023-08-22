@@ -1,5 +1,5 @@
 function cd() {
-    builtin cd "$@" && clear && lsd -la --group-directories-first --blocks permission,name
+    builtin cd "$@" && lsd -la --group-directories-first --blocks permission,name
 }
 
 alias c="clear"
@@ -38,10 +38,10 @@ alias ln='ln -sfv'
 alias mkdir='mkdir -pv'
 alias path='echo $PATH | tr ":" "\n"'
 alias cat='bat'
-alias grep='rg -i -l -L --hidden'
 alias mv='mv -v'
 alias cp='cp -vr'
 alias rm='rm -vrf'
+alias e="$EDITOR"
 alias v="$EDITOR"
 alias vi="$EDITOR"
 alias d='ranger'
