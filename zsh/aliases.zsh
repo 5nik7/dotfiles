@@ -32,7 +32,6 @@ fi
 alias la="ls -AF ${colorflag}"
 alias lld="ls -l | grep ^d"
 alias srm='sudo rm -rfv'
-alias ln='ln -sfv'
 alias mkdir='mkdir -pv'
 alias path='echo $PATH | tr ":" "\n"'
 alias cat='bat'
