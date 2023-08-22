@@ -1,0 +1,4 @@
+
+    packages=(
+        "git" "base-devel" "base-devel" "cmake" "unzip" "ninja" "curl" "unrar" "jq" "rustup" "luarocks" "go" "python-pip" "xdg-user-dirs" "sway" "swaybg" "swww" "waybar" "wlogout" "wl-clipboard" "mako" "ffmpeg" "viewnior" "kitty" "dunst" "rofi" "ranger" "starship" "bat" "lsd" "imv" "polkit-gnome" "nwg-look-bin" "qt5ct" "htop" "ffmpegthumbs" "papirus-icon-theme" "catppuccino-gtk-theme-mocha" "zsh" "ripgrep" "lazygit" "fd" "thunar" "vim" "bat" "neofetch" "cmatrix" "imagemagick" "pywal" "firefox" "ttf-nerd-fonts-symbols-common" "otf-firamono-nerd" "inter-font" "otf-sora" "ttf-fantasque-nerd" "noto-fonts" "noto-fonts-emoji" "ttf-comfortaa" "ttf-jetbrains-mono" "ttf-jetbrains-mono-nerd" "ttf-terminus-nerd" "ttf-inconsolata" "ttf-joypixels"
+    )
