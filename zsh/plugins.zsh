@@ -57,11 +57,8 @@ export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=$base04,italic"
 ##
 
 # Load starship
-zinit ice as'command' from'gh-r' \
-  atload'export STARSHIP_CONFIG=$XDG_CONFIG_HOME/starship/starship.toml; eval $(starship init zsh)' \
-  atclone'./starship init zsh > init.zsh; ./starship completions zsh > _starship' \
-  atpull'%atclone' src'init.zsh'
-zinit light starship/starship
+export STARSHIP_CONFIG=~/.config/starship/starship.toml
+eval $(starship init zsh)
 
 [[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
 # vim:ft=zsh

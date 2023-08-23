@@ -7,6 +7,9 @@ CBL=$(tput setaf 4)
 BLD=$(tput bold)
 CNC=$(tput sgr0)
 
+DOTFILES=~/dotfiles
+XDG_CONFIG_HOME=~/.config
+
 clear
 logo() {
 
@@ -37,17 +40,17 @@ done
 sourceFiles() {
   missingFile=0
 
-  files=(repos pkgs)
-  for f in ${files[@]}
+  files=(repos pkgs dots)
+	for files in "${files[@]}"
   do
-    source $f
+	source $files
   done
 
-  [[ $missingFile == 1 ]] && say 'Missing file(s) program exiting.' && exit
+  [[ $missingFile == 1 ]] && printf "Missing file(s) program exiting." && exit
 
 }
 
-sudo pacman -Syyuu --noconfirm
+sudo pacman -Syyu --noconfirm
 
 is_installed() {
 	pacman -Qi "$1" &>/dev/null
@@ -64,17 +67,15 @@ for pkgs in "${packages[@]}"; do
 	fi
 done
 
-configs=(alcritty bat dunst foot git kitty lazygit lsd mako neofetch nwg-look paru ranger rofi starship sway swaylock thunar waybar wlogout zsh)
-
 has_config() {
 	[ -d "$DOTFILES/$1" ]
 	return $?
 }
 
-for folders in "$XCG_CONFIG_HOME/${configs[@]}"; do
-	if has_config "$foleders" ]; then
-		if [ -d "$XDG_CONFIG_HOME/$folders" ]; then
-			rm -rfv "$XDG_CONFIG_HOME/$folders"
+for dirs in "$XDG_CONFIG_HOME/${configs[@]}"; do
+	if has_config "$dirs" ]; then
+		if [ -d "${XDG_CONFIG_HOME:?}/$dirs" ]; then
+			rm -rfv "${XDG_CONFIG_HOME:?}/$dirs"
 		fi
 	else
 		printf '%s%s is already installed on your system!%s\n' "${CGR}" "$pkgs" "${CNC}"

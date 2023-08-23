@@ -1,0 +1,3 @@
+configs=(
+    alcritty bat dunst foot git kitty lazygit lsd mako neofetch nwg-look paru ranger rofi starship sway swaylock thunar waybar wlogout zsh
+    )

@@ -1,3 +1,7 @@
+if [[ -f "$HOME/.aliases" ]]; then
+  source "$HOME/.aliases"
+fi
+
 while read file
 do
   source "$ZDOTDIR/$file.zsh"
