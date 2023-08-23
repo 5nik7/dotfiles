@@ -27,8 +27,6 @@ zinit light-mode for \
     ael-code/zsh-colored-man-pages \
     tj/git-extras
 
-zinit ice wait="0" lucid from="gh-r" as="program" pick="zoxide-*/zoxide -> zoxide" cp="zoxide-*/completions/_zoxide -> _zoxide" atclone="./zoxide init zsh > init.zsh" atpull="%atclone" src="init.zsh"
-zinit light ajeetdsouza/zoxide
 
 zinit ice wait'3' lucid
 zinit light zsh-users/zsh-history-substring-search
@@ -52,7 +50,7 @@ export ZSH_AUTOSUGGEST_COMPLETION_IGNORE="git *"
 export ZSH_AUTOSUGGEST_USE_ASYNC="true"
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor regexp root line)
 export ZSH_HIGHLIGHT_MAXLENGTH=512
-export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=$color8,bold,italic"
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=$base04,italic"
 
 ##
 ## Prompt
