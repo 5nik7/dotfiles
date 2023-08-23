@@ -29,14 +29,6 @@ zinit light zsh-users/zsh-completions
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
-function osc7 {
-    setopt localoptions extendedglob
-    input=( ${(s::)PWD} )
-    uri=${(j::)input/(#b)([^A-Za-z0-9_.\!~*\'\(\)-\/])/%${(l:2::0:)$(([##16]#match))}}
-    print -n "\e]7;file://${HOSTNAME}${uri}\e\\"
-}
-add-zsh-hook -Uz chpwd osc7
-
 zinit light-mode for \
     hlissner/zsh-autopair \
     zdharma-continuum/fast-syntax-highlighting \
@@ -69,6 +61,7 @@ export ZSH_AUTOSUGGEST_USE_ASYNC="true"
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor regexp root line)
 export ZSH_HIGHLIGHT_MAXLENGTH=512
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=$color8,bold,italic"
+
 ##
 ## Prompt
 ##
