@@ -9,6 +9,7 @@ export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
 export XDG_CURRENT_DESKTOP=sway
 export XDG_SESSION_DESKTOP=sway
 
-export ZDOTDIR="$HOME/.config/zsh"
+ZDOTDIR="$HOME/.config/zsh"
+export ZDOTDIR
 
 # vim:ft=zsh:nowrap
