@@ -1,17 +1,6 @@
 # Configure and load plugins using Zinit's
 ZINIT_HOME="${ZINIT_HOME:-${XDG_DATA_HOME:-${HOME}/.local/share}/zinit}"
 
-# compinstall
-zstyle :compinstall filename ${ZDOTDIR:-~}/.zshrc
-autoload -Uz compinit
-
-## Generate zcompdump once a day
-for dump in ${ZDOTDIR:-~}/zcompdump(N.mh+24); do
-  compinit
-done
-compinit -C
-
-
 # Added by Zinit's installer
 if [[ ! -f ${ZINIT_HOME}/zinit.git/zinit.zsh ]]; then
     print -P "%F{14}▓▒░ Installing Flexible and fast ZSH plugin manager %F{13}(zinit)%f"
@@ -37,6 +26,9 @@ zinit light-mode for \
     Aloxaf/fzf-tab \
     ael-code/zsh-colored-man-pages \
     tj/git-extras
+
+zinit ice wait="0" lucid from="gh-r" as="program" pick="zoxide-*/zoxide -> zoxide" cp="zoxide-*/completions/_zoxide -> _zoxide" atclone="./zoxide init zsh > init.zsh" atpull="%atclone" src="init.zsh"
+zinit light ajeetdsouza/zoxide
 
 zinit ice wait'3' lucid
 zinit light zsh-users/zsh-history-substring-search
