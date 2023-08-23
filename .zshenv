@@ -29,7 +29,6 @@ _extend_path() {
 }
 
 _extend_path "$HOME/.scripts"
-_extend_path "/usr/sbin"
 _extend_path "/usr/bin"
 _extend_path "$HOME/.local/bin"
 _extend_path "$HOME/.cargo/bin"
@@ -85,10 +84,9 @@ export XDG_MUSIC_DIR="$HOME/Music"
 export XDG_PICTURES_DIR="$HOME/Pictures"
 export XDG_VIDEOS_DIR="$HOME/Videos"
 
-export MANPAGER='nvim +Man!'
+export MANPAGER="bat"
 
 export BAT_CONFIG_PATH="$HOME/.config/bat/bat.conf"
-export BAT_THEME='Catppuccin-mocha'
 
 export FZF_DEFAULT_OPTS="
 --color preview-bg:$base00
@@ -115,7 +113,7 @@ export FZF_DEFAULT_OPTS="
 --border=thinblock
 --margin='2%,2%,2%,2%'
 --height='100%'
---preview='bat --style=grid --color=always {}'
+--preview='bat {}'
 --preview-window='right'
 --preview-window='60%'
 --preview-window='border-thinblock'"
