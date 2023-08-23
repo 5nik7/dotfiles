@@ -1,13 +1,13 @@
 [user]
-        email = nickflip86@gmail.com
-        user  = 5nik7
-        name  = 5nik7
+  email = nickflip86@gmail.com
+  user  = 5nik7
+  name  = 5nik7
 [init]
-        defaultBranch = master 
+  defaultBranch = master 
 [push] 
-        autoSetupRemote = true
+  autoSetupRemote = true
 [pull] 
-        rebase = true
+  rebase = true
 [credential "https://github.com"]
 	helper = 
 	helper = !/usr/bin/gh auth git-credential
