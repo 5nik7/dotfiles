@@ -36,9 +36,10 @@ _extend_path "$HOME/.cargo/bin"
 _extend_path "$HOME/node_modules/.bin"
 _extend_path "$HOME/.local/share/gem/ruby/3.0.0/bin"
 _extend_path "$GOPATH/bin"
-export RUSTFLAGS="--remap-path-prefix $HOME=~"
 
 source /opt/anaconda/bin/activate root
+
+export RUSTFLAGS="--remap-path-prefix $HOME=~"
 
 base00="#11111b"
 base01="#181825"
@@ -120,7 +121,7 @@ export FZF_DEFAULT_OPTS="
 --preview-window='border-thinblock'"
 
 if [[ -f "$HOME/.aliases" ]]; then
-  source "$HOME/.aliases"
+	source "$HOME/.aliases"
 fi
 
 export DIRENV_BASH=/bin/bash
