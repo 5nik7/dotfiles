@@ -34,6 +34,15 @@ zinit light zsh-users/zsh-history-substring-search
 zinit ice wait'2' lucid
 zinit light zdharma-continuum/history-search-multi-word
 
+zinit ice as="program" from="gh-r" mv="tree* -> tree-sitter" pick="tree-sitter"
+zinit light tree-sitter/tree-sitter
+
+zinit ice lucid wait="0" nocompile nocompletions
+zinit light microsoft/vscode-node-debug2.git
+
+zinit ice lucid wait"0" as"program" from"gh-r"
+zinit light solidiquis/erdtree
+
 ## zinit plugin config
 zstyle ':completion:*' matcher-list 'r:|?=** m:{a-z\-}={A-Z\_}'
 zstyle ':completion:*' menu select

@@ -29,9 +29,9 @@ deleted = ""
 stashed = ""
 
 [character]
-success_symbol = "[](green)"
-error_symbol = "[](red)"
-vimcmd_symbol = "[](overlay0)"
+success_symbol = "[](green)"
+error_symbol = "[](red)"
+vimcmd_symbol = "[](blue)"
 
 [palettes.catppuccin_mocha]
 rosewater = "#f5e0dc"

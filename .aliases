@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function cd() {
-    builtin cd "$@" && lsd -la --group-directories-first --blocks permission,name
+	builtin cd "$@" && lsd -la --group-directories-first --blocks permission,name
 }
 
 alias c="clear"
@@ -22,11 +22,11 @@ alias installed="grep -i installed /var/log/pacman.log"
 
 # use exa if available
 if [[ -x "$(command -v lsd)" ]]; then
-  alias ll="lsd -al --group-directories-first"
-  alias l="lsd -la --group-directories-first --blocks permission,name"
+	alias ll="lsd -al --group-directories-first"
+	alias l="lsd -la --group-directories-first --blocks permission,name"
 else
-  alias l="ls -lah"
-  alias ll="ls -lFh"
+	alias l="ls -lah"
+	alias ll="ls -lFh"
 fi
 
 alias lld="ls -l | grep ^d"
@@ -47,5 +47,9 @@ alias do75='~/.scripts/do75'
 alias repos='cd /mnt/c/repos'
 
 alias lg="lazygit"
+
+function fixpath() {
+	PATH=$(echo $(sed 's/:/\n/g' <<<$PATH | sort | uniq) | sed -e 's/\s/':'/g')
+}
 
 # vim:ft=sh

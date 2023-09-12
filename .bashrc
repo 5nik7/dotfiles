@@ -12,6 +12,8 @@ export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
 export XDG_CURRENT_DESKTOP=sway
 export XDG_SESSION_DESKTOP=sway
 
+export BUN_INSTALL="$HOME/.bun"
+
 GOPATH="$HOME/go"
 export GOPATH
 
@@ -29,13 +31,19 @@ _extend_path() {
 	fi
 }
 
+_extend_path "$BUN_INSTALL/bin"
 _extend_path "$HOME/.scripts"
-_extend_path "/usr/bin"
-_extend_path "$HOME/.local/bin"
 _extend_path "$HOME/.cargo/bin"
 _extend_path "$HOME/node_modules/.bin"
 _extend_path "$HOME/.local/share/gem/ruby/3.0.0/bin"
 _extend_path "$GOPATH/bin"
+_extend_path "/usr/lib/wsl/lib"
+_extend_path "/usr/lib/jvm/default/bin"
+_extend_path "/usr/bin/site_perl"
+_extend_path "/usr/bin/vendor_perl"
+_extend_path "/usr/bin/core_perl"
+_extend_path "/usr/lib/rustup/bin"
+_extend_path "/home/snikt/.fzf/bin"
 
 source /opt/anaconda/bin/activate root
 
@@ -89,6 +97,7 @@ export XDG_VIDEOS_DIR="$HOME/Videos"
 export MANPAGER="bat"
 
 export BAT_CONFIG_PATH="$HOME/.config/bat/bat.conf"
+export BAT_THEME="Catppuccin-mocha"
 
 export FZF_DEFAULT_OPTS="
 --color preview-bg:$base00
@@ -144,3 +153,5 @@ export STARSHIP_CONFIG=~/.config/starship/starship.toml
 eval "$(starship init bash)"
 
 [[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
+
+PATH=$(echo $(sed 's/:/\n/g' <<<$PATH | sort | uniq) | sed -e 's/\s/':'/g')
