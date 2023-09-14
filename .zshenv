@@ -32,6 +32,7 @@ _extend_path() {
 	fi
 }
 
+_extend_path "$HOME/.local/share/bob/nvim-bin"
 _extend_path "$BUN_INSTALL/bin"
 _extend_path "$HOME/.scripts"
 _extend_path "$HOME/.cargo/bin"
@@ -77,7 +78,7 @@ export SUDO_PROMPT="passwd: "
 export TERMINAL="kitty"
 export EDITOR='nvim'
 export VISUAL=$EDITOR
-export PAGER='less'
+export PAGER='bat'
 export SHELL='/bin/zsh'
 export BROWSER="firefox"
 
@@ -126,7 +127,7 @@ export FZF_DEFAULT_OPTS="
 --height='60%'
 --multi
 --preview-window=cycle
---preview '([[ -f {} ]] && (bat --style=numbers --color=always --line-range :500 {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200'
+--preview '([[ -f {} ]] && (bat --style=plain --color=always --line-range :500 {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200'
 --preview-window='right'
 --preview-window='right:60%'
 --preview-window='border-thinblock'

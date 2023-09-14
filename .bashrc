@@ -31,6 +31,7 @@ _extend_path() {
 	fi
 }
 
+_extend_path "$HOME/.local/share/bob/nvim-bin"
 _extend_path "$BUN_INSTALL/bin"
 _extend_path "$HOME/.scripts"
 _extend_path "$HOME/.cargo/bin"
@@ -123,11 +124,16 @@ export FZF_DEFAULT_OPTS="
 --info=inline
 --border=thinblock
 --margin='2%,2%,2%,2%'
---height='100%'
---preview='bat {}'
+--height='60%'
+--multi
+--preview-window=cycle
+--preview '([[ -f {} ]] && (bat --style=plain --color=always --line-range :500 {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200'
 --preview-window='right'
---preview-window='60%'
---preview-window='border-thinblock'"
+--preview-window='right:60%'
+--preview-window='border-thinblock'
+--bind 'ctrl-e:execute(nvim {} < /dev/tty > /dev/tty 2>&1)' > selected"
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 if [[ -f "$HOME/.aliases" ]]; then
 	source "$HOME/.aliases"
