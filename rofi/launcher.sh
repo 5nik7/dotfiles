@@ -4,10 +4,10 @@ dir="$HOME/.config/rofi"
 
 # catppuccin
 ALPHA="#00000000"
-BG="#24273A"
+BG="#1E1E2Edd"
 FG="#BF616A"
-SELECT="#1E1E2E"
-ACCENT="#24273A"
+SELECT="#24273A"
+ACCENT="#1E1E2Edd"
 
 # nord
 #ALPHA="#00000000"
@@ -17,7 +17,7 @@ ACCENT="#24273A"
 #ACCENT="#3B4252"
 
 # overwrite colors file
-cat > $dir/colors.rasi <<- EOF
+cat >$dir/colors.rasi <<-EOF
 	/* colors */
 
 	* {
@@ -30,4 +30,3 @@ cat > $dir/colors.rasi <<- EOF
 EOF
 
 rofi -no-lazy-grab -show drun -modi drun -theme $dir/"$theme"
-

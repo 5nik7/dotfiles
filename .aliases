@@ -22,7 +22,7 @@ alias installed="grep -i installed /var/log/pacman.log"
 
 # use exa if available
 if [[ -x "$(command -v lsd)" ]]; then
-	alias ll="lsd -al --group-directories-first"
+	alias ll="lsd -al --group-directories-first --header"
 	alias l="lsd -la --group-directories-first --blocks permission,name"
 else
 	alias l="ls -lah"
