@@ -1,5 +1,5 @@
 configuration {
-  font:                           "JetBrains Mono NF 12";
+  font:                           "JetBrains Mono NF 9";
   drun-display-format:            "{name}";
   disable-history:                false;
   sidebar-mode:                   false;
@@ -13,7 +13,7 @@ window {
   text-color:                     @fg;
   border:                         0px;
   border-color:                   @ac;
-  border-radius:                  8px;
+  border-radius:                  0px;
   width:                          18%;
   location:                       center;
   x-offset:                       0;
@@ -25,7 +25,7 @@ prompt {
   padding:                        0.30% 1% 0% -0.5%;
   background-color:               @al;
   text-color:                     #81A1C1;
-  font:                           "Hack Nerd Font 14";
+  font:                           "Hack Nerd Font 9";
 }
 
 entry {

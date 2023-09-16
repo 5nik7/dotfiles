@@ -7,6 +7,9 @@ CBL=$(tput setaf 4)
 BLD=$(tput bold)
 CNC=$(tput sgr0)
 
+DOTFILES=~/dotfiles
+XDG_CONFIG_HOME=~/.config
+
 clear
 logo() {
 
@@ -23,7 +26,7 @@ logo() {
 	printf ' %s [%s%s %s%s %s]%s\n\n' "${CRE}" "${CNC}" "${CYE}" "${text}" "${CNC}" "${CRE}" "${CNC}"
 }
 
-logo "This will probably break all the things..."
+logo "This is going to work... I think..."
 
 while true; do
 	read -n1 -rep "Would you like to break everything? (y,n)" yn
@@ -34,9 +37,20 @@ while true; do
 	esac
 done
 
-sudo pacman -Syyuu --noconfirm
+sourceFiles() {
+  missingFile=0
 
-dependencias=(git base-devel base-devel cmake unzip ninja curl unrar jq rustup luarocks go python-pip xdg-user-dirs sway swaybg swww waybar wlogout wl-clipboard mako ffmpeg viewnior kitty dunst rofi ranger starship bat lsd imv polkit-gnome nwg-look-bin qt5ct htop ffmpegthumbs papirus-icon-theme catppuccin-gtk-theme-mocha zsh ripgrep lazygit fd thunar vim bat neofetch cmatrix imagemagick pywal firefox ttf-nerd-fonts-symbols-common otf-firamono-nerd inter-font otf-sora ttf-fantasque-nerd noto-fonts noto-fonts-emoji ttf-comfortaa ttf-jetbrains-mono ttf-jetbrains-mono-nerd ttf-terminus-nerd ttf-inconsolata ttf-joypixelsq)
+  files=(repos pkgs dots)
+	for files in "${files[@]}"
+  do
+	source $files
+  done
+
+  [[ $missingFile == 1 ]] && printf "Missing file(s) program exiting." && exit
+
+}
+
+sudo pacman -Syyu --noconfirm
 
 is_installed() {
 	pacman -Qi "$1" &>/dev/null
@@ -44,7 +58,7 @@ is_installed() {
 }
 
 printf "%s%sChecking for required packages...%s\n" "${BLD}" "${CBL}" "${CNC}"
-for pkgs in "${dependencias[@]}"; do
+for pkgs in "${packages[@]}"; do
 	if ! is_installed "$pkgs"; then
 		paru -S "$pkgs" --noconfirm
 		printf "\n"
@@ -53,17 +67,15 @@ for pkgs in "${dependencias[@]}"; do
 	fi
 done
 
-configs=(alcritty bat dunst foot git kitty lazygit lsd mako neofetch nwg-look paru ranger rofi starship sway swaylock thunar waybar wlogout zsh)
-
 has_config() {
 	[ -d "$DOTFILES/$1" ]
 	return $?
 }
 
-for folders in "$XCG_CONFIG_HOME/${configs[@]}"; do
-	if has_config "$foleders" ]; then
-		if [ -d "$XDG_CONFIG_HOME/$folders" ]; then
-			rm -rfv "$XDG_CONFIG_HOME/$folders"
+for dirs in "$XDG_CONFIG_HOME/${configs[@]}"; do
+	if has_config "$dirs" ]; then
+		if [ -d "${XDG_CONFIG_HOME:?}/$dirs" ]; then
+			rm -rfv "${XDG_CONFIG_HOME:?}/$dirs"
 		fi
 	else
 		printf '%s%s is already installed on your system!%s\n' "${CGR}" "$pkgs" "${CNC}"

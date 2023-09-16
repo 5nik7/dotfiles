@@ -33,12 +33,25 @@ logo() {
 }
 
 ########## ---------- You must not run this as root ---------- ##########
-logo "This will probably break everything..."
+logo "This is going to work... I think..."
 
 if [ "$(id -u)" = 0 ]; then
 	echo "This script MUST NOT be run as root user."
 	exit 1
 fi
+
+sourceFiles() {
+  missingFile=0
+
+  files=(repos pkgs)
+  for f in ${files[@]}
+  do
+    source $f
+  done
+
+  [[ $missingFile == 1 ]] && say 'Missing file(s) program exiting.' && exit
+
+}
 
 if [ ! -d "$source_folder" ]; then
 	mkdir -p "$source_folder" || exit
@@ -106,14 +119,6 @@ done
 clear
 
 logo "Installing Packages..."
-
-dependencias=(git base-devel base-devel cmake unzip ninja curl unrar jq pacman-contrib rustup nodejs npm luarocks go python-pip
-	xdg-user-dirs hyprland sway waybar sddm-git wlogout wl-clipboard
-	ffmpeg neovim viewnior kitty alacritty foot dunst rofi exa ranger starship
-	polkit-gnome nwg-look-bin qt5ct htop btop ffmpegthumbs papirus-icon-theme catppuccin-gtk-theme-mocha
-	zsh exa ripgrep lazygit fd thunar vim bat neofetch cmatrix imagemagick pywal
-	ttf-nerd-fonts-symbols-common otf-firamono-nerd inter-font otf-sora ttf-fantasque-nerd noto-fonts noto-fonts-emoji ttf-comfortaa
-	ttf-jetbrains-mono ttf-jetbrains-mono-nerd ttf-terminus-nerd ttf-inconsolata ttf-joypixels)
 
 is_installed() {
 	pacman -Qi "$1" &>/dev/null

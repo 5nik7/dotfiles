@@ -1,17 +1,6 @@
 # Configure and load plugins using Zinit's
 ZINIT_HOME="${ZINIT_HOME:-${XDG_DATA_HOME:-${HOME}/.local/share}/zinit}"
 
-# compinstall
-zstyle :compinstall filename ${ZDOTDIR:-~}/.zshrc
-autoload -Uz compinit
-
-## Generate zcompdump once a day
-for dump in ${ZDOTDIR:-~}/zcompdump(N.mh+24); do
-  compinit
-done
-compinit -C
-
-
 # Added by Zinit's installer
 if [[ ! -f ${ZINIT_HOME}/zinit.git/zinit.zsh ]]; then
     print -P "%F{14}▓▒░ Installing Flexible and fast ZSH plugin manager %F{13}(zinit)%f"
@@ -29,14 +18,6 @@ zinit light zsh-users/zsh-completions
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
-function osc7 {
-    setopt localoptions extendedglob
-    input=( ${(s::)PWD} )
-    uri=${(j::)input/(#b)([^A-Za-z0-9_.\!~*\'\(\)-\/])/%${(l:2::0:)$(([##16]#match))}}
-    print -n "\e]7;file://${HOSTNAME}${uri}\e\\"
-}
-add-zsh-hook -Uz chpwd osc7
-
 zinit light-mode for \
     hlissner/zsh-autopair \
     zdharma-continuum/fast-syntax-highlighting \
@@ -46,11 +27,21 @@ zinit light-mode for \
     ael-code/zsh-colored-man-pages \
     tj/git-extras
 
+
 zinit ice wait'3' lucid
 zinit light zsh-users/zsh-history-substring-search
 
 zinit ice wait'2' lucid
 zinit light zdharma-continuum/history-search-multi-word
+
+zinit ice as="program" from="gh-r" mv="tree* -> tree-sitter" pick="tree-sitter"
+zinit light tree-sitter/tree-sitter
+
+zinit ice lucid wait="0" nocompile nocompletions
+zinit light microsoft/vscode-node-debug2.git
+
+zinit ice lucid wait"0" as"program" from"gh-r"
+zinit light solidiquis/erdtree
 
 ## zinit plugin config
 zstyle ':completion:*' matcher-list 'r:|?=** m:{a-z\-}={A-Z\_}'
@@ -68,17 +59,15 @@ export ZSH_AUTOSUGGEST_COMPLETION_IGNORE="git *"
 export ZSH_AUTOSUGGEST_USE_ASYNC="true"
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor regexp root line)
 export ZSH_HIGHLIGHT_MAXLENGTH=512
-export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=$color8,bold,italic"
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=$base04,italic"
+
 ##
 ## Prompt
 ##
 
 # Load starship
-zinit ice as'command' from'gh-r' \
-  atload'export STARSHIP_CONFIG=$XDG_CONFIG_HOME/starship/starship.toml; eval $(starship init zsh)' \
-  atclone'./starship init zsh > init.zsh; ./starship completions zsh > _starship' \
-  atpull'%atclone' src'init.zsh'
-zinit light starship/starship
+export STARSHIP_CONFIG=~/.config/starship/starship.toml
+eval $(starship init zsh)
 
 [[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
 # vim:ft=zsh
