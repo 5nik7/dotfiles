@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 DOTFILES="$(pwd)"
 COLOR_GRAY="\033[1;38;5;243m"
