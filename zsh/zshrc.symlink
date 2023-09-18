@@ -1,0 +1,82 @@
+export ZSH=$DOTFILES/zsh
+
+if [[ -d $DOTFILES/zsh/functions ]]; then
+    for func in $DOTFILES/zsh/functions/*(:t); autoload -U $func
+fi
+
+while read file
+do
+  source "$ZSH/$file.zsh"
+done <<-EOF
+options
+plugins
+aliases
+theme
+EOF
+
+config_files=($DOTFILES/**/*.zsh)
+for file in $config_files[@]; do
+  source "$file"
+done
+
+prepend_path $HOME/.local/share/bob/nvim-bin
+prepend_path $HOME/.cargo/bin
+prepend_path $GOPATH/bin
+prepend_path $HOME/.scripts
+prepend_path $HOME/.cargo/bin
+prepend_path $HOME/node_modules/.bin
+prepend_path $HOME/.local/share/gem/ruby/3.0.0/bin
+prepend_path /usr/lib/wsl/lib
+prepend_path /usr/lib/jvm/default/bin
+prepend_path /usr/bin/site_perl
+prepend_path /usr/bin/vendor_perl
+prepend_path /usr/bin/core_perl
+prepend_path /usr/lib/rustup/bin
+prepend_path /home/snikt/.fzf/bin
+
+if [ -f $HOME/.fzf.zsh ]; then
+  source $HOME/.fzf.zsh
+  export FZF_DEFAULT_OPTS="
+--color preview-bg:$base00
+--color border:$base00
+--color gutter:$base01
+--color bg:$base01
+--color bg+:$base02
+--color fg:$base04
+--color hl:$base07
+--color fg+:$base09
+--color hl+:$base0A
+--color info:$base0E
+--color prompt:$base0E
+--color spinner:$base0F
+--color pointer:$base0C
+--color marker:$base08
+--color header:$base06
+--prompt ' >  '
+--pointer ' ●'
+--ansi
+--layout=reverse
+--no-scrollbar 
+--info=inline
+--border=thinblock
+--margin='2%,2%,2%,2%'
+--height='60%'
+--multi
+--preview-window=cycle
+--preview '([[ -f {} ]] && (bat --style=plain --color=always --line-range :500 {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200'
+--preview-window='right'
+--preview-window='right:60%'
+--preview-window='border-thinblock'
+--bind 'ctrl-e:execute(nvim {} < /dev/tty > /dev/tty 2>&1)' > selected"
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+fi
+
+source /opt/anaconda/bin/activate root
+
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
+# bun completions

@@ -7,8 +7,7 @@ CBL=$(tput setaf 4)
 BLD=$(tput bold)
 CNC=$(tput sgr0)
 
-DOTFILES=~/dotfiles
-XDG_CONFIG_HOME=~/.config
+DOTFILES="$(pwd)"
 
 clear
 logo() {
@@ -37,19 +36,6 @@ while true; do
 	esac
 done
 
-sourceFiles() {
-  missingFile=0
-
-  files=(repos pkgs dots)
-	for files in "${files[@]}"
-  do
-	source $files
-  done
-
-  [[ $missingFile == 1 ]] && printf "Missing file(s) program exiting." && exit
-
-}
-
 sudo pacman -Syyu --noconfirm
 
 is_installed() {
@@ -75,67 +61,64 @@ has_config() {
 for dirs in "$XDG_CONFIG_HOME/${configs[@]}"; do
 	if has_config "$dirs" ]; then
 		if [ -d "${XDG_CONFIG_HOME:?}/$dirs" ]; then
-			rm -rfv "${XDG_CONFIG_HOME:?}/$dirs"
+			rm -rv "${XDG_CONFIG_HOME:?}/$dirs"
 		fi
 	else
-		printf '%s%s is already installed on your system!%s\n' "${CGR}" "$pkgs" "${CNC}"
+
 	fi
 done
-symdot() {
-	echo "Deleting symlinks."
-	rm -rfv "$XDG_CONFIG_HOME/alacritty"
-	rm -rfv "$XDG_CONFIG_HOME/bat"
-	rm -rfv "$XDG_CONFIG_HOME/kitty"
-	rm -rfv "$XDG_CONFIG_HOME/lazygit"
-	rm -rfv "$XDG_CONFIG_HOME/nvim"
-	rm -rfv "$XDG_CONFIG_HOME/paru"
-	rm -rfv "$XDG_CONFIG_HOME/ranger"
-	rm -rfv "$XDG_CONFIG_HOME/rofi"
-	rm -rfv "$XDG_CONFIG_HOME/starship"
-	rm -rfv "$XDG_CONFIG_HOME/sway"
-	rm -rfv "$XDG_CONFIG_HOME/swaylock"
-	rm -rfv "$XDG_CONFIG_HOME/waybar"
-	rm -rfv "$XDG_CONFIG_HOME/wlogout"
-	rm -rfv "$XDG_CONFIG_HOME/zsh"
-	rm -rfv "$HOME/.gitconfig"
-	rm -rfv "$HOME/.nanorc"
-	rm -rfv "$HOME/.scripts"
-	rm -rfv "$HOME/.vimrc"
-	rm -rfv "$HOME/.wallpapers"
-	rm -rfv "$HOME/.zprofile"
-	rm -rfv "$HOME/.zshenv"
-	rm -rfv "$HOME/.zshrc"
-	rm -rfv "$HOME/.bash_profile"
-	rm -rfv "$HOME/.bashrc"
 
-	echo "Creating symlinks."
-	ln -fsv "$DOTFILES/.scripts" "$HOME/.scripts"
-	ln -fsv "$DOTFILES/.wallpapers" "$HOME/.wallpapers"
-	ln -fsv "$DOTFILES/alacritty" "$XDG_CONFIG_HOME/alacritty"
-	ln -fsv "$DOTFILES/bat" "$XDG_CONFIG_HOME/bat"
-	ln -fsv "$DOTFILES/dunst" "$XDG_CONFIG_HOME/dunst"
-	ln -fsv "$DOTFILES/kitty" "$XDG_CONFIG_HOME/kitty"
-	ln -fsv "$DOTFILES/lazygit" "$XDG_CONFIG_HOME/lazygit"
-	ln -fsv "$DOTFILES/nvim" "$XDG_CONFIG_HOME/nvim"
-	ln -fsv "$DOTFILES/paru" "$XDG_CONFIG_HOME/paru"
-	ln -fsv "$DOTFILES/rofi" "$XDG_CONFIG_HOME/rofi"
-	ln -fsv "$DOTFILES/shell" "$XDG_CONFIG_HOME/shell"
-	ln -fsv "$DOTFILES/ranger" "$XDG_CONFIG_HOME/ranger"
-	ln -fsv "$DOTFILES/starship" "$XDG_CONFIG_HOME/starship"
-	ln -fsv "$DOTFILES/sway" "$XDG_CONFIG_HOME/sway"
-	ln -fsv "$DOTFILES/swaylock" "$XDG_CONFIG_HOME/swaylock"
-	ln -fsv "$DOTFILES/waybar" "$XDG_CONFIG_HOME/waybar"
-	ln -fsv "$DOTFILES/wlogout" "$XDG_CONFIG_HOME/wlogout"
-	ln -fsv "$DOTFILES/zsh" "$XDG_CONFIG_HOME/zsh"
-	ln -fsv "$DOTFILES/.gitconfig" "$HOME/.gitconfig"
-	ln -fsv "$DOTFILES/.nanorc" "$HOME/.nanorc"
-	ln -fsv "$DOTFILES/.vimrc" "$HOME/.vimrc"
-	ln -fsv "$DOTFILES/.zshenv" "$HOME/.zshenv"
-	ln -fsv "$DOTFILES/.bashrc" "$HOME/.bashrc"
-	ln -fsv "$DOTFILES/.bash_profile" "$HOME/.bash_profile"
-
+get_linkables() {
+	find -H "$DOTFILES" -maxdepth 3 -name '*.symlink'
 }
 
-symdot
+setup_symlinks() {
+	title "Creating symlinks"
+
+	for file in $(get_linkables); do
+		target="$HOME/.$(basename "$file" '.symlink')"
+		if [ -e "$target" ]; then
+			info "~${target#$HOME} already exists... Skipping."
+		else
+			info "Creating symlink for $file"
+			ln -s "$file" "$target"
+		fi
+	done
+
+	echo -e
+	info "installing to ~/.config"
+	if [ ! -d "$HOME/.config" ]; then
+		info "Creating ~/.config"
+		mkdir -p "$HOME/.config"
+	fi
+
+	config_files=$(find "$DOTFILES/config" -maxdepth 1 2>/dev/null)
+	for config in $config_files; do
+		target="$HOME/.config/$(basename "$config")"
+		if [ -e "$target" ]; then
+			info "~${target#$HOME} already exists... Skipping."
+		else
+			info "Creating symlink for $config"
+			ln -s "$config" "$target"
+		fi
+	done
+}
+
+case "$1" in
+backup)
+	update_system
+	;;
+link)
+	setup_symlinks
+	;;
+all)
+	backup
+	setup_symlinks
+	;;
+*)
+	echo -e $"\nUsage: $(basename "$0") {backup|link|all}\n"
+	exit 1
+	;;
+esac
 
 # vim:ft=sh:nowrap

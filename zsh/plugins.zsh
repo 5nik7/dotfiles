@@ -66,8 +66,6 @@ export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=$base04,italic"
 ##
 
 # Load starship
-export STARSHIP_CONFIG=~/.config/starship/starship.toml
+export STARSHIP_CONFIG="$DOTFILES/starship/starship.toml"
 eval $(starship init zsh)
-
-[[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
 # vim:ft=zsh
