@@ -28,6 +28,7 @@ for file in $config_files[@]; do
   source "$file"
 done
 
+prepend_path $DOTFILES/bin
 prepend_path /usr/bin 
 prepend_path /usr/local/bin
 prepend_path $HOME/.local/bin
@@ -36,8 +37,6 @@ prepend_path $HOME/.local/share/bob/nvim-bin
 prepend_path $HOME/.fzf/bin
 prepend_path $HOME/.cargo/bin
 prepend_path $GOPATH/bin
-prepend_path $HOME/.scripts
-prepend_path $HOME/.cargo/bin
 prepend_path $HOME/node_modules/.bin
 prepend_path $HOME/.local/share/gem/ruby/3.0.0/bin
 prepend_path /usr/lib/wsl/lib

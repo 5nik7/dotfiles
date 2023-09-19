@@ -9,13 +9,6 @@ COLOR_PURPLE="\033[1;35m"
 COLOR_YELLOW="\033[1;33m"
 COLOR_NONE="\033[0m"
 
-menu() {
-	echo -e "  ${COLOR_GRAY}OPTIONS${COLOR_NONE}"
-	echo -e "    ${COLOR_GREEN}--link${COLOR_NONE}     ${COLOR_YELLOW}symlink dotfiles${COLOR_NONE}"
-	echo -e "    ${COLOR_GREEN}--nvim${COLOR_NONE}     ${COLOR_YELLOW}setup neoviim config${COLOR_NONE}"
-	echo -e "    ${COLOR_GREEN}--all${COLOR_NONE}      ${COLOR_YELLOW}do all the things${COLOR_NONE}\n"
-}
-
 logo() {
 
 	echo -e "${COLOR_BLUE}
@@ -24,6 +17,14 @@ logo() {
   ▒▒   ▒▒ ▒▒    ▒▒    ▒▒   ▒▒▒▒▒▒▒
   ▓▓   ▓▓ ▓▓    ▓▓   ▓▓         ▓▓
   ██████   ██████    ██    ███████\n${COLOR_NONE}"
+}
+
+menu() {
+
+	echo -e "  ${COLOR_GRAY}OPTIONS${COLOR_NONE}"
+	echo -e "    ${COLOR_GREEN}--link${COLOR_NONE}     ${COLOR_YELLOW}symlink dotfiles${COLOR_NONE}"
+	echo -e "    ${COLOR_GREEN}--nvim${COLOR_NONE}     ${COLOR_YELLOW}setup neoviim config${COLOR_NONE}"
+	echo -e "    ${COLOR_GREEN}--all${COLOR_NONE}      ${COLOR_YELLOW}do all the things${COLOR_NONE}\n"
 }
 
 title() {

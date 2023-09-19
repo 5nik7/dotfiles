@@ -6,7 +6,7 @@
 palette = "catppuccin_mocha"
 
 add_newline = true
-format='''$os[\[$username($hostname)\]](white) $directory ([\[$git_branch(:$git_commit)(:$git_status)(:$git_state)\]](yellow))$line_break$character'''
+format='''[\[$user($hostname)\]](white) $directory ([\[$git_branch(:$git_commit)(:$git_status)(:$git_state)\]](yellow))$line_break$character'''
 right_format = '''($jobs)($status)($cmd_duration)$time'''
 
 [os]

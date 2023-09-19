@@ -43,6 +43,9 @@ zinit light microsoft/vscode-node-debug2.git
 zinit ice lucid wait"0" as"program" from"gh-r"
 zinit light solidiquis/erdtree
 
+zinit ice depth=1
+zinit light jeffreytse/zsh-vi-mode
+
 ## zinit plugin config
 zstyle ':completion:*' matcher-list 'r:|?=** m:{a-z\-}={A-Z\_}'
 zstyle ':completion:*' menu select
@@ -65,7 +68,14 @@ export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=$base04,italic"
 ## Prompt
 ##
 
+# Download starship if not installed
+if ! command -v starship >/dev/null 2>&1 ; then
+    if command -v starship >/dev/null 2>&1 ; then
+        curl -sS https://starship.rs/install.sh | sh
+    fi
+fi
+
 # Load starship
-export STARSHIP_CONFIG="$DOTFILES/starship/starship.toml"
+export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 eval $(starship init zsh)
 # vim:ft=zsh
