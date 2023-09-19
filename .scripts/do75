@@ -9,26 +9,43 @@ COLOR_PURPLE="\033[1;35m"
 COLOR_YELLOW="\033[1;33m"
 COLOR_NONE="\033[0m"
 
+menu() {
+	echo -e "  ${COLOR_GRAY}OPTIONS${COLOR_NONE}"
+	echo -e "    ${COLOR_GREEN}--link${COLOR_NONE}     ${COLOR_YELLOW}symlink dotfiles${COLOR_NONE}"
+	echo -e "    ${COLOR_GREEN}--nvim${COLOR_NONE}     ${COLOR_YELLOW}setup neoviim config${COLOR_NONE}"
+	echo -e "    ${COLOR_GREEN}--all${COLOR_NONE}      ${COLOR_YELLOW}do all the things${COLOR_NONE}\n"
+}
+
+logo() {
+
+	echo -e "${COLOR_BLUE}
+  ░░░░░░   ░░░░░░  ░░░░░░░ ░░░░░░░
+  ▒▒   ▒▒ ▒▒    ▒▒      ▒▒ ▒▒
+  ▒▒   ▒▒ ▒▒    ▒▒    ▒▒   ▒▒▒▒▒▒▒
+  ▓▓   ▓▓ ▓▓    ▓▓   ▓▓         ▓▓
+  ██████   ██████    ██    ███████\n${COLOR_NONE}"
+}
+
 title() {
-	echo -e "\n${COLOR_PURPLE}$1${COLOR_NONE}"
-	echo -e "${COLOR_GRAY}==============================${COLOR_NONE}\n"
+	echo -e "\n  ${COLOR_PURPLE}$1${COLOR_NONE}"
+	echo -e "  ${COLOR_GRAY}==============================${COLOR_NONE}\n"
 }
 
 error() {
-	echo -e "${COLOR_RED}Error: ${COLOR_NONE}$1"
+	echo -e "    ${COLOR_RED}Error: ${COLOR_NONE}$1"
 	exit 1
 }
 
 warning() {
-	echo -e "${COLOR_YELLOW}Warning: ${COLOR_NONE}$1"
+	echo -e "    ${COLOR_YELLOW}Warning: ${COLOR_NONE}$1"
 }
 
 info() {
-	echo -e "${COLOR_BLUE}Info: ${COLOR_NONE}$1"
+	echo -e "    ${COLOR_BLUE}Info: ${COLOR_NONE}$1"
 }
 
 success() {
-	echo -e "${COLOR_GREEN}$1${COLOR_NONE}"
+	echo -e "    ${COLOR_GREEN}$1${COLOR_NONE}"
 }
 
 get_linkables() {
@@ -67,18 +84,67 @@ setup_symlinks() {
 	done
 }
 
+setup_nvim() {
+	title "Setting up Neoviim"
+
+	neorepo="https://github.com/5nik7/neoviim.git"
+	neodir="$HOME/.neoviim"
+	if [ -d "$neodir" ]; then
+		info "${neodir} already exists... Skipping."
+	else
+		info "Cloning Neovim from $neorepo"
+		git clone "$neorepo" "$neodir"
+	fi
+
+	echo -e
+	info "installing to ~/.config"
+	if [ ! -d "$HOME/.config" ]; then
+		info "Creating ~/.config"
+		mkdir -p "$HOME/.config"
+	fi
+
+	for filename in "$HOME/.config/nvim"; do
+		if [ ! -L "$filename" ]; then
+			info "backing up $filename"
+			mv -rf "$filename" "${filename}.bak"
+		else
+			rm -f "$filename"
+			info "Creating symlink for $neodir"
+			ln -s "$neodir" "$filename"
+		fi
+	done
+}
+
 case "$1" in
-link)
+--link)
+	clear
+	logo
 	setup_symlinks
 	;;
-all)
+--nvim)
+	clear
+	logo
+	setup_nvim
+	;;
+--all)
+	clear
+	logo
 	setup_symlinks
+	setup_nvim
+	;;
+--help)
+	clear
+	logo
+	menu
+	exit 1
 	;;
 *)
-	echo -e $"\nUsage: $(basename "$0")\n\n -link\n -all\n"
+	clear
+	logo
+	menu
 	exit 1
 	;;
 esac
 
 echo -e
-success "Done."
+success "Done.\n"

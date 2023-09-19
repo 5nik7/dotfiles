@@ -1,3 +1,11 @@
+#
+#     _____  _____ __  _________   ___    __
+#    /__  / / ___// / / / ____/ | / / |  / /
+#      / /  \__ \/ /_/ / __/ /  |/ /| | / /
+#   _ / /_____/ / __  / /___/ /|  / | |/ /
+#  (_)____/____/_/ /_/_____/_/ |_/  |___/
+#
+
 export DOTFILES="$(dirname "$(dirname "$(readlink "${(%):-%N}")")")"
 export CACHEDIR="$HOME/.local/share"
 export VIM_TMP="$HOME/.vim-tmp"

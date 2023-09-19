@@ -1,3 +1,11 @@
+#
+#     _____  _____ __  ______  ______
+#    /__  / / ___// / / / __ \/ ____/
+#      / /  \__ \/ /_/ / /_/ / /
+#   _ / /_____/ / __  / _, _/ /___
+#  (_)____/____/_/ /_/_/ |_|\____/
+#
+
 export ZSH=$DOTFILES/zsh
 
 if [[ -d $DOTFILES/zsh/functions ]]; then
@@ -8,7 +16,7 @@ while read file
 do
   source "$ZSH/$file.zsh"
 done <<-EOF
-funtions
+functions
 options
 plugins
 aliases
@@ -38,6 +46,7 @@ prepend_path /usr/bin/site_perl
 prepend_path /usr/bin/vendor_perl
 prepend_path /usr/bin/core_perl
 prepend_path /usr/lib/rustup/bin
+
 
 if [ -f $HOME/.fzf.zsh ]; then
   source $HOME/.fzf.zsh
@@ -82,4 +91,4 @@ fi
 
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
-# bun completions
+# vim:ft=zsh:nowrap
