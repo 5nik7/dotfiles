@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOTFILES="$(pwd)"
+DOTFILES="$HOME/dotfiles"
 COLOR_GRAY="\033[1;38;5;243m"
 COLOR_BLUE="\033[1;34m"
 COLOR_GREEN="\033[1;32m"
@@ -75,7 +75,7 @@ all)
 	setup_symlinks
 	;;
 *)
-	echo -e $"\nUsage: $(basename "$0") {link|all}\n"
+	echo -e $"\nUsage: $(basename "$0") -link\n -all}\n"
 	exit 1
 	;;
 esac
