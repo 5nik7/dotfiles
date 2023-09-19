@@ -75,7 +75,7 @@ all)
 	setup_symlinks
 	;;
 *)
-	echo -e $"\nUsage: $(basename "$0")\n\n -link\n -all\n"
+	echo -e $"\nUsage: $(basename "$0") -link\n -all}\n"
 	exit 1
 	;;
 esac

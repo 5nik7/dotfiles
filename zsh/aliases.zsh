@@ -33,7 +33,6 @@ alias lld="ls -l | grep ^d"
 alias srm='sudo rm -rfv'
 alias mkdir='mkdir -pv'
 alias path='echo $PATH | tr ":" "\n"'
-alias cat='bat'
 alias mv='mv -v'
 alias cp='cp -vr'
 alias rm='rm -vrf'
