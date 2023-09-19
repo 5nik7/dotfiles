@@ -106,7 +106,7 @@ setup_nvim() {
 	for filename in "$HOME/.config/nvim"; do
 		if [ ! -L "$filename" ]; then
 			info "backing up $filename"
-			mv "$filename" "${filename}.bak"
+			ln -s "$neodir" "$filename"
 		else
 			rm -f "$filename"
 			info "Creating symlink for $neodir"
