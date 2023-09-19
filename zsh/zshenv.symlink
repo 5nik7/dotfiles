@@ -5,6 +5,11 @@ export VIM_TMP="$HOME/.vim-tmp"
 [[ -d "$CACHEDIR" ]] || mkdir -p "$CACHEDIR"
 [[ -d "$VIM_TMP" ]] || mkdir -p "$VIM_TMP"
 
+env_files=($DOTFILES/**/environment.zsh)
+for file in $env_files[@]; do
+  source "$file"
+done
+
 fpath=(
     $DOTFILES/zsh/functions
     /usr/local/share/zsh/site-functions
@@ -12,10 +17,5 @@ fpath=(
 )
 
 typeset -aU path
-
-env_files=($DOTFILES/**/environment.zsh)
-for file in $env_files[@]; do
-  source "$file"
-done
 
 # vim:ft=zsh:nowrap
