@@ -33,7 +33,6 @@ alias vi="nvim"
 alias d='ranger'
 alias update='sudo pacman -Syyu --noconfirm'
 alias dots='cd $DOTFILES'
-# alias do75='$DOTFILES/bin/do75'
 alias repos='cd /mnt/c/repos'
 
 alias lg="lazygit"
