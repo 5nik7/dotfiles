@@ -5,163 +5,46 @@
 
 palette = "catppuccin_mocha"
 
+format="$directory$git_branch$git_status$line_break$character"
 add_newline = true
-format="""\
-($directory)[](fg:green bg:surface1)\
-($git_branch)[](fg:surface1)\
-($line_break)\
-($character)\
-"""
-right_format = """\
-($git_commit)\
-($git_status)\
-($git_state)\
-($jobs$status)\
-[](fg:surface1)($cmd_duration)\
-[](bg:surface1 fg:blue)($time)\
-"""
-
-[os]
-disabled = false
-style = "bg:green fg:mantle"
-format = '[ $symbol]($style)'
-
-[hostname]
-format = '[ @$hostname ]($style)'
-style = 'bold bg:surface1 fg:sapphire'
-ssh_only = false
-
-[shell]
-disabled = true
-bash_indicator = '\$_'
-fish_indicator = "" # Empty string as Fish Shell is my default shell
-# fish_indicator = "⋖⋗⋖"
-zsh_indicator = "%_"
-powershell_indicator = "" # nf-seti-powershell
-ion_indicator = '(\$_)'
-elvish_indicator = "󰘧" # nf-md-lambda
-tcsh_indicator = "󰇥 " # nf-md-duck
-nu_indicator = "[󰥭](fg:color_base_green)" # nf-md-greater_than
-xonsh_indicator = "🐚" # seashell emoji
-cmd_indicator = "" # nf-cod-terminal_cmd
-unknown_indicator = " " # nf-fa-question_circle
-style = "bg:color_foreground_dark fg:color_foreground_light"
-format = "[$indicator]($style)"
-
-[character]
-success_symbol = "[  ](green)"
-error_symbol = "[  ](red)"
-vimcmd_symbol = "[  ](blue)"
-vimcmd_visual_symbol = "[  ](mauve)"
-vimcmd_replace_symbol = "[  ](peach"
-format = "$symbol"
 
 [directory]
-format = "[$read_only]($read_only_style)[ $path ]($style)"
-style = 'bold bg:green fg:mantle'
-read_only = " "
-read_only_style = 'bold bg:green fg:mantle'
-truncation_length = 6
-truncation_symbol = '.../'
+format = "[$path](blue) "
+truncation_length = 10
 truncate_to_repo = false
 use_os_path_sep = false
 use_logical_path = true
 
 [git_branch]
-format = "([  $branch ](bg:surface1 fg:teal))"
-
-[git_commit]
-format = '[$hash](yellow)'
+format = "[ $branch](bold mauve) "
 
 [git_status]
 # disabled = true
 style = "yellow"
-staged = " ${count}" # nf-fa-check
-modified = "  ${count}" # nf-fa-edit
+staged = " ${count} " # nf-fa-check
+modified = " ${count} " # nf-fa-edit
 # modified = "  ${count}" # nf-fa-pencil
-renamed = "󰗧 ${count}" # nf-md-cursor_text
-untracked = "  ${count}]" # nf-fa-question
-deleted = "[  ${count}](red)" # nf-fa-remove
-conflicted = " ${count}" # nf-fa-flag
-stashed = "  ${count}" # nf-fa-bank
+renamed = "󰗧 ${count} " # nf-md-cursor_text
+untracked = " ${count} " # nf-fa-question
+deleted = "[ ${count} ](red)" # nf-fa-remove
+conflicted = " ${count} " # nf-fa-flag
+stashed = " ${count} " # nf-fa-bank
 # stashed = "  ${count}" # nf-fa-inbox
 up_to_date = ""
-ahead = "󰞙 ${count}" # nf-md-arrow_expand_up
-behind = "󰞖 ${count}" # nf-md-arrow_expand_down
-diverged = "󰡏 ${ahead_count} ${behind_count}" # nf-md-arrow_expand_vertical
+ahead = "󰞙 ${count} " # nf-md-arrow_expand_up
+behind = "󰞖 ${count} " # nf-md-arrow_expand_down
+diverged = "󰡏 ${ahead_count} ${behind_count} " # nf-md-arrow_expand_vertical
 # diverged = "󰯎 ${ahead_count} ${behind_count}" # nf-md-swap_vertical_bold
 # ignore_submodules = true
-format = "[($staged$modified$renamed$untracked$deleted$conflicted$stashed$ahead_behind )]($style)"
+format = "[($staged$modified$renamed$untracked$deleted$conflicted$stashed$ahead_behind)]($style)"
 
-[git_state]
-format = '[$state($progress_current/$progress_total)](yellow)'
-
-[line_break] 
-disabled = false
-
-[time]
-format = '[  $time ](bold bg:blue fg:mantle)'
-disabled = false
-time_format = '%H:%M'
-
-[cmd_duration]
-format = '[ $duration  ](bg:surface1 fg:teal)'
-min_time = 1
-show_milliseconds = true
-disabled = false
-
-[status]
-format = '[$status(:$common_meaning)(:$signal_name)](pink)'
-disabled = false
-
-[jobs]
-format = '[$symbol $number](yellow)'
-symbol = '⚙'
-symbol_threshold = 1
-number_threshold = 1
-
-[os.symbols]
-Alpaquita = " "
-Alpine = " "
-Amazon = " "
-Android = " "
-Arch = " "
-Artix = " " 
-CentOS = " " 
-Debian = " "
-DragonFly = " " 
-Emscripten = " " 
-EndeavourOS = " " 
-Fedora = " " 
-FreeBSD = " " 
-Garuda = "󰛓 " 
-Gentoo = " " 
-HardenedBSD = "󰔇  " 
-Illumos = " " 
-Linux = " " 
-Mabox = "󰆦  " 
-Macos = " " 
-Manjaro = " " 
-Mariner = " " 
-MidnightBSD = " "
-Mint = "󰣭  "
-NetBSD = " "
-NixOS = " "
-OpenBSD = " "
-OpenCloudOS = " " 
-openEuler = "󰏒  " 
-openSUSE = " " 
-OracleLinux = "󰌷  " 
-Pop = " " 
-Raspbian = " " 
-Redhat = "󱄛 " 
-RedHatEnterprise = " "
-Redox = "󰀘  "
-Solus = " " 
-SUSE = " " 
-Ubuntu = " "
-Unknown = " " 
-Windows = " "
+[character]
+success_symbol = "[](green)"
+error_symbol = "[](red)"
+vimcmd_symbol = "[](blue)"
+vimcmd_visual_symbol = "[](mauve)"
+vimcmd_replace_symbol = "[](peach"
+format = "$symbol "
 
 [palettes.catppuccin_mocha]
 rosewater = "#f5e0dc"
