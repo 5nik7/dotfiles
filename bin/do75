@@ -105,11 +105,9 @@ setup_nvim() {
 	fi
 
 	for filename in "$HOME/.config/nvim"; do
-		if [ ! -L "$filename" ]; then
-			info "backing up $filename"
-			ln -s "$neodir" "$filename"
+		if [ ! -e "$filename" ]; then
+			info "$filename already exists"
 		else
-			rm -f "$filename"
 			info "Creating symlink for $neodir"
 			ln -s "$neodir" "$filename"
 		fi

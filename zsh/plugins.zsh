@@ -76,6 +76,6 @@ if ! command -v starship >/dev/null 2>&1 ; then
 fi
 
 # Load starship
-export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
+export STARSHIP_CONFIG="${DOTFILES}/starship/starship.toml"
 eval $(starship init zsh)
 # vim:ft=zsh
