@@ -13,7 +13,7 @@ alias parucheck="paru -Gp"
 alias cleanpac='sudo pacman -Rns $(pacman -Qtdq); paru -c'
 alias installed="grep -i installed /var/log/pacman.log"
 
-# use exa if available
+# use eza if available
 if [[ -x "$(command -v eza)" ]]; then
 	alias ll="eza -laHgMSih --icons --hyperlink --git-repos --git --group-directories-first"
 	alias l="eza -la --icons --hyperlink --git-repos --git --group-directories-first --no-filesize --no-user --no-time"
@@ -33,7 +33,7 @@ alias vi="nvim"
 alias d='ranger'
 alias update='sudo pacman -Syyu --noconfirm'
 alias dots='cd $DOTFILES'
-alias repos='cd /mnt/c/repos'
+alias -g win='/mnt/c/'
 
 alias lg="lazygit"
 
