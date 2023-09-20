@@ -4,7 +4,6 @@ alias :q="exit"
 alias z='zip -r'
 alias uz='unzip'
 alias ..="cd .."
-alias mkdir="mkdir -p"
 alias pacrem="pacman -Qq | fzf --multi --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns"
 alias pac="pacman -Q | fzf"
 alias parucom="paru -Gc"
@@ -24,12 +23,10 @@ else
 fi
 
 alias lld="ls -l | grep ^d"
-alias srm='sudo rm -rfv'
-alias mkdir='mkdir -pv'
+alias surm='sudo rm -rfv'
+alias mkdirp='mkdir -pv'
 alias path='echo $PATH | tr ":" "\n"'
-alias mv='mv -v'
-alias cp='cp -vr'
-alias rm='rm -vrf'
+alias cpr='cp -vr'
 alias e="nvim"
 alias v="nvim"
 alias vi="nvim"
