@@ -23,7 +23,7 @@ menu() {
 
 	echo -e "  ${COLOR_GRAY}OPTIONS${COLOR_NONE}"
 	echo -e "    ${COLOR_GREEN}--link${COLOR_NONE}     ${COLOR_YELLOW}symlink dotfiles${COLOR_NONE}"
-	# echo -e "    ${COLOR_GREEN}--nvim${COLOR_NONE}     ${COLOR_YELLOW}setup neoviim config${COLOR_NONE}"
+	echo -e "    ${COLOR_GREEN}--nvim${COLOR_NONE}     ${COLOR_YELLOW}setup neoviim config${COLOR_NONE}"
 	echo -e "    ${COLOR_GREEN}--all${COLOR_NONE}      ${COLOR_YELLOW}do all the things${COLOR_NONE}\n"
 }
 
@@ -85,28 +85,18 @@ setup_symlinks() {
 	done
 }
 
-# setup_nvim() {
-# 	title "Setting up Neoviim"
-#
-# 	neorepo="https://github.com/5nik7/neoviim.git"
-# 	neodir="$HOME/.neoviim"
-#   if [ -d "$neodir" ]; then
-# 		info "${neodir} already exists... Skipping."
-# 	else
-# 		info "Cloning Neovim from $neorepo"
-# 		git clone "$neorepo" "$neodir"
-# 	fi
-#
-# 	for config in $cfgnvim; do
-# 	cfgnvim="$HOME/.config/nvim"
-#     if ( -e "$cfgnvim" ]; then
-#       if [ "$(readlink $cfgnvim)" = "$neodir" ]; then
-#        exit
-#       fi
-# 			info "Creating symlink for $neodir"
-# 			ln -s "$neodir" "$cfgnvim"
-#     fi
-# }
+setup_nvim() {
+	title "Setting up Neoviim"
+
+	neorepo="https://github.com/5nik7/neoviim.git"
+	neodir="$HOME/.neoviim"
+	if [ -d "$neodir" ]; then
+		info "${neodir} already exists... Skipping."
+	else
+		info "Cloning Neovim from $neorepo"
+		git clone "$neorepo" "$neodir"
+	fi
+}
 
 case "$1" in
 --link)
@@ -114,16 +104,16 @@ case "$1" in
 	logo
 	setup_symlinks
 	;;
-# --nvim)
-# 	clear
-# 	logo
-# 	setup_nvim
+--nvim)
+	clear
+	logo
+	setup_nvim
 	;;
 --all)
 	clear
 	logo
 	setup_symlinks
-	# setup_nvim
+	setup_nvim
 	;;
 --help)
 	clear
