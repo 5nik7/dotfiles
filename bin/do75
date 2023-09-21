@@ -99,12 +99,14 @@ setup_nvim() {
 
 	cfgnvim="$HOME/.config/nvim"
 		if ( -e "$filename" ]; then
-			info "$filename already exists"
+    if [ "$(readlink $target_file)" = "$source_file" ]; then
+      exit
+    fi
+    rm -rf "$target_file" && ln
 		else
 			info "Creating symlink for $neodir"
 			ln -s "$neodir" "$filename"
 		fi
-	done
 }
 
 case "$1" in
