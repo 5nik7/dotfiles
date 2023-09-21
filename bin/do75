@@ -97,15 +97,8 @@ setup_nvim() {
 		git clone "$neorepo" "$neodir"
 	fi
 
-	echo -e
-	info "installing to ~/.config"
-	if [ ! -d "$HOME/.config" ]; then
-		info "Creating ~/.config"
-		mkdir -p "$HOME/.config"
-	fi
-
-	for filename in "$HOME/.config/nvim"; do
-		if [ ! -e "$filename" ]; then
+	cfgnvim="$HOME/.config/nvim"
+		if ( -e "$filename" ]; then
 			info "$filename already exists"
 		else
 			info "Creating symlink for $neodir"
