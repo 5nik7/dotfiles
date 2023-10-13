@@ -6,7 +6,6 @@ if [[ -d "$HOME/.nvm" ]]; then
   export NVM_DIR="$HOME/.nvm"
 fi
 
-# Locale
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
@@ -53,3 +52,5 @@ export XDG_PICTURES_DIR="$HOME/Pictures"
 export XDG_VIDEOS_DIR="$HOME/Videos"
 
 export RUSTFLAGS="--remap-path-prefix $HOME=~"
+
+# vim:ft=zsh:nowrap

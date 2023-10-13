@@ -2,4 +2,4 @@
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
-PATH=$PATH:/usr/bin:/usr/local/bin:/bin
+export PATH=$PATH:/usr/bin:/usr/local/bin:/bin

@@ -1,3 +1,11 @@
+#
+#     _____  _____ __  ______  ______
+#    /__  / / ___// / / / __ \/ ____/
+#      / /  \__ \/ /_/ / /_/ / /
+#   _ / /_____/ / __  / _, _/ /___
+#  (_)____/____/_/ /_/_/ |_|\____/
+#
+
 export ZSH=$DOTFILES/zsh
 
 if [[ -d $DOTFILES/zsh/functions ]]; then
@@ -8,6 +16,7 @@ while read file
 do
   source "$ZSH/$file.zsh"
 done <<-EOF
+functions
 options
 plugins
 aliases
@@ -19,11 +28,15 @@ for file in $config_files[@]; do
   source "$file"
 done
 
+prepend_path $DOTFILES/bin
+prepend_path /usr/bin 
+prepend_path /usr/local/bin
+prepend_path $HOME/.local/bin
+prepend_path /bin
 prepend_path $HOME/.local/share/bob/nvim-bin
+prepend_path $HOME/.fzf/bin
 prepend_path $HOME/.cargo/bin
 prepend_path $GOPATH/bin
-prepend_path $HOME/.scripts
-prepend_path $HOME/.cargo/bin
 prepend_path $HOME/node_modules/.bin
 prepend_path $HOME/.local/share/gem/ruby/3.0.0/bin
 prepend_path /usr/lib/wsl/lib
@@ -32,7 +45,7 @@ prepend_path /usr/bin/site_perl
 prepend_path /usr/bin/vendor_perl
 prepend_path /usr/bin/core_perl
 prepend_path /usr/lib/rustup/bin
-prepend_path /home/snikt/.fzf/bin
+
 
 if [ -f $HOME/.fzf.zsh ]; then
   source $HOME/.fzf.zsh
@@ -72,13 +85,11 @@ export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 fi
 
-# if [ -d /opt/anaconda/bin ]; then
-#  source /opt/anaconda/bin/activate root
-# fi
-
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
-# bun completions
+# vim:ft=zsh:nowrap
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
