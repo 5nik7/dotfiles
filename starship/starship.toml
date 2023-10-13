@@ -5,7 +5,7 @@
 
 palette = "catppuccin_mocha"
 
-format="$directory$git_branch$git_status$line_break$character"
+format="$directory$git_branch$git_status$character"
 add_newline = true
 
 [directory]
