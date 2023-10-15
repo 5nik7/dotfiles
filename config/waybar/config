@@ -14,7 +14,7 @@
     "tray"
   ],
   "custom/launcher": {
-    "format": " 󰚌  ",
+    "format": " 󰚌 ",
     "on-click": "~/.config/rofi/launcher.sh",
     "tooltip": false
   },
