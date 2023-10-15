@@ -5,7 +5,11 @@
 
 palette = "catppuccin_mocha"
 
-format="$directory$git_branch$git_status$character"
+<<<<<<< HEAD
+format = "$directory$git_branch$git_status$character"
+=======
+format = "$directory$git_branch$git_status$character"
+>>>>>>> 6d9cab0e16deb3934910c2d573d7cd5e0eed2449
 add_newline = false
 
 [directory]
@@ -21,18 +25,18 @@ format = "[ $branch](bold mauve) "
 [git_status]
 # disabled = true
 style = "yellow"
-staged = " ${count} " # nf-fa-check
+staged = " ${count} "   # nf-fa-check
 modified = " ${count} " # nf-fa-edit
 # modified = "  ${count}" # nf-fa-pencil
-renamed = "󰗧 ${count} " # nf-md-cursor_text
-untracked = " ${count} " # nf-fa-question
+renamed = "󰗧 ${count} "        # nf-md-cursor_text
+untracked = " ${count} "      # nf-fa-question
 deleted = "[ ${count} ](red)" # nf-fa-remove
-conflicted = " ${count} " # nf-fa-flag
-stashed = " ${count} " # nf-fa-bank
+conflicted = " ${count} "     # nf-fa-flag
+stashed = " ${count} "        # nf-fa-bank
 # stashed = "  ${count}" # nf-fa-inbox
 up_to_date = ""
-ahead = "󰞙 ${count} " # nf-md-arrow_expand_up
-behind = "󰞖 ${count} " # nf-md-arrow_expand_down
+ahead = "󰞙 ${count} "                          # nf-md-arrow_expand_up
+behind = "󰞖 ${count} "                         # nf-md-arrow_expand_down
 diverged = "󰡏 ${ahead_count} ${behind_count} " # nf-md-arrow_expand_vertical
 # diverged = "󰯎 ${ahead_count} ${behind_count}" # nf-md-swap_vertical_bold
 # ignore_submodules = true
@@ -73,4 +77,3 @@ surface0 = "#313244"
 base = "#1e1e2e"
 mantle = "#181825"
 crust = "#11111b"
-

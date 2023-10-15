@@ -15,7 +15,7 @@ alias installed="grep -i installed /var/log/pacman.log"
 
 # use eza if available
 if [[ -x "$(command -v eza)" ]]; then
-	alias ll="eza -laHgMSih --icons --hyperlink --git-repos --git --group-directories-first"
+	alias ll="eza -la --icons --hyperlink --git-repos --git --group-directories-first"
 	alias l="eza -la --icons --hyperlink --git-repos --git --group-directories-first --no-filesize --no-user --no-time"
 else
 	alias l="ls -lah"
