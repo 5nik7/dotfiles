@@ -5,11 +5,7 @@
 
 palette = "catppuccin_mocha"
 
-<<<<<<< HEAD
 format = "$directory$git_branch$git_status$character"
-=======
-format = "$directory$git_branch$git_status$character"
->>>>>>> 6d9cab0e16deb3934910c2d573d7cd5e0eed2449
 add_newline = false
 
 [directory]
