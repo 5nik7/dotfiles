@@ -1,6 +1,7 @@
 lastupdatecheck: 0
 recentrepos:
 - /home/snikt/dotfiles
+- /home/snikt/dotfiles/config/nvim
 - /home/snikt/dev/neoviim
 - /mnt/c/repos/dotfiles
 startuppopupversion: 5
