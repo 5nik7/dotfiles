@@ -29,7 +29,7 @@
     
     bindsym $alt+o exec killall -SIGUSR1 waybar
 
-    output * mode 2560x1410@170Hz scale 1 pos 0 0
+    output * mode 2560x1410@170Hz scale 1 pos -30 0
 
     exec ~/.config/sway/wallpaper.sh
     
