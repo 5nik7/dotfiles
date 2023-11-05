@@ -62,7 +62,7 @@ export ZSH_AUTOSUGGEST_COMPLETION_IGNORE="git *"
 export ZSH_AUTOSUGGEST_USE_ASYNC="true"
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor regexp root line)
 export ZSH_HIGHLIGHT_MAXLENGTH=512
-export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=$base04,italic"
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=$base04"
 
 ##
 ## Prompt
