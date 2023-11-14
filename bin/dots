@@ -68,7 +68,7 @@ createdir() {
 }
 
 installpkgs() {
-	deps=(git build-essential zsh ranger)
+	deps=(git ninja-build gettext cmake unzip curl build-essential wget vim neofetch ranger)
 	for pkgs in ${deps[@]}; do
 		sudo apt install "$pkgs" -y
 	done
@@ -87,7 +87,6 @@ setup_start() {
 	installpkgs
 	createdir "$HOME/.local/bin"
 	createdir "$HOME/.config"
-	setshell
 }
 
 case "$1" in
