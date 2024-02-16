@@ -1,55 +1,39 @@
-#!/bin/bash
+alias c='clear'
+alias q='exit'
 
-function cd() {
-	builtin cd "$@" && eza -la --icons --hyperlink --git-repos --git --group-directories-first --no-filesize --no-user --no-time --no-permissions
-}
-
-alias c="clear"
-alias q="exit"
-alias :q="exit"
-alias z='zip -r'
-alias uz='unzip'
-alias ..="cd .."
-alias mkdir="mkdir -p"
-alias pacrem="pacman -Qq | fzf --multi --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns"
-alias pac="pacman -Q | fzf"
-alias parucom="paru -Gc"
-alias parupd="paru -Qua"
-alias pacupd="pacman -Qu"
-alias parucheck="paru -Gp"
-alias cleanpac='sudo pacman -Rns $(pacman -Qtdq); paru -c'
-alias installed="grep -i installed /var/log/pacman.log"
-
-# use exa if available
-if [[ -x "$(command -v eza)" ]]; then
-	alias ll="eza -laHgMSih --icons --hyperlink --git-repos --git --group-directories-first"
-	alias l="eza -la --icons --hyperlink --git-repos --git --group-directories-first --no-filesize --no-user --no-time --no-permissions"
-else
-	alias l="ls -lah"
-	alias ll="ls -lFh"
-fi
-
-alias lld="ls -l | grep ^d"
-alias srm='sudo rm -rfv'
-alias mkdir='mkdir -pv'
-alias path='echo $PATH | tr ":" "\n"'
 alias cat='bat'
-alias mv='mv -v'
-alias cp='cp -vr'
-alias rm='rm -vrf'
-alias e="nvim"
-alias v="nvim"
-alias vi="nvim"
+
+alias path='echo $PATH | tr ":" "\n"'
+alias open='explorer.exe'
+
 alias d='ranger'
-alias update='sudo pacman -Syyu --noconfirm'
-alias dots='cd $DOTFILES'
-alias do75='~/.scripts/do75'
-alias repos='cd /mnt/c/repos'
+alias ddot="ranger $DOTFILES"
+alias dconf="ranger $HOME/.config"
 
-alias lg="lazygit"
+alias so='source'
 
-function fixpath() {
-	PATH=$(echo $(sed 's/:/\n/g' <<<$PATH | sort | uniq) | sed -e 's/\s/':'/g')
-}
+alias sobash="source $BASHRC"
 
-# vim:ft=sh
+alias pac='pacman'
+alias pacman='sudo pacman'
+
+alias v='$EDITOR'
+alias sv="sudo $EDITOR"
+alias vdot="$EDITOR $DOTFILES"
+alias bashrc="$EDITOR $BASHRC"
+alias aliases="$EDITOR $ALIASES"
+
+alias ls='eza -A --icons --color=auto --group-directories-first'
+alias ll='ls -l'
+alias l='ll --git --git-repos --no-time --no-user --no-filesize --no-permissions'
+alias grep='grep --color=auto'
+
+alias py='python'
+
+alias ".."="cd .."
+alias "..."="cd ../.."
+alias "...."="cd ../../.."
+alias "....."="cd ../../../.."
+alias "......"="cd ../../../../.."
+alias "......."="cd ../../../../../.."
+alias "........"="cd ../../../../../../.."

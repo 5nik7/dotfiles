@@ -1,0 +1,94 @@
+/* @import url("/home/njen/.config/waybar/colors.css"); */
+
+@define-color foreground #D1EAFF;
+@define-color background #161E39;
+@define-color cursor #6807F9;
+
+@define-color color0 #303C63;
+@define-color color1 #FF4F9E;
+@define-color color2 #4FFFDC;
+@define-color color3 #FFBDA1;
+@define-color color4 #6188FF;
+@define-color color5 #B48AFF;
+@define-color color6 #24DEFF;
+@define-color color7 #C4E5FF;
+@define-color color8 #394764;
+@define-color color9 #FF4FBE;
+@define-color color10 #4FFFDC;
+@define-color color11 #FFE7A1;
+@define-color color12 #6188FF;
+@define-color color13 #B48AFF;
+@define-color color14 #5EE7FF;
+@define-color color15 #C4E5FF;
+
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "JetBrainsMono Nerd Font";
+    font-weight: bold;
+    font-size: 10pt;
+    min-height: 0;
+}
+
+window#waybar {
+    background: @background;
+}
+window > box {
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  background: @transparent;
+}
+#workspaces {
+  padding-left: 0px;
+  padding-right: 0px;
+  color: @color6;
+  background-color: @background;
+}
+#workspaces button {
+    padding-left: 5px;
+    padding-right: 5px;
+    color: @color0;
+    background: @transparent;
+    border-bottom: .1rem solid @background;
+}
+#workspaces button.active {
+    color: @color1;
+}
+/* Removes Strange Hover effect */
+#workspaces button:hover {
+    box-shadow: inherit;
+    text-shadow: inherit;
+}
+
+#workspaces button.focused,
+#mode
+{
+    
+    background-color: @color0;
+    color: @color2;
+    border-bottom: .1rem solid @color4;
+}
+#custom-separator {
+  color: @color0;
+  padding-left: 4px;
+  padding-right: 2px;
+
+}
+
+#window {
+
+  color: @color7;
+  background-color: @transparent;
+  padding-left: 15px;
+  padding-right: 15px;
+
+}
+
+#mode, #clock, #memory, #cpu, #custom-powermenu {
+
+  color: @color4;
+  background-color: #20294d;
+  padding-left: 5px;
+  padding-right: 5px;
+}
