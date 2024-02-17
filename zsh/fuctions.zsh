@@ -36,7 +36,11 @@ function lnk() {
     mkdir -p "$(dirname "$orig_file")"
     mkdir -p "$(dirname "$dest_file")"
 
-    rm -rf "$dest_file"
+    if [ -e "$dest_file" ]; then
+        mv "$dest_file" "$dest_file.bak"
+        echo "Existing $dest_file renamed to $dest_file.bak"
+    fi
+
     ln -s "$orig_file" "$dest_file"
     echo "$orig_file -> $dest_file"
 }
