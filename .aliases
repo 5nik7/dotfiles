@@ -28,6 +28,8 @@ alias ll='ls -l'
 alias l='ll --git --git-repos --no-time --no-user --no-filesize --no-permissions'
 alias grep='grep --color=auto'
 
+alias npmup='npm install -g npm@latest'
+
 alias py='python'
 
 alias ".."="cd .."
