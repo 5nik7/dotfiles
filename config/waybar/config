@@ -11,13 +11,15 @@
     ],
     "modules-right": [
         "cpu",
+        "custom/separator",
         "memory",
+        "custom/separator",
         "custom/weather"
     ],
     "fixed-center": true,
 
     "custom/launcher": {
-        "format": " 󰚌 ",
+        "format": "󰚌",
         "on-click": "~/.config/rofi/launcher.sh",
         "tooltip": false
     },
@@ -35,7 +37,7 @@
         "format": " {usage}%"
     },
     "memory": {
-        "format": " {}% "
+        "format": " {}%"
     },
     "custom/weather": {
     "format": "{}°",

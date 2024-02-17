@@ -36,8 +36,8 @@ font pango:$font $font_size
 
 default_border pixel 1
 default_floating_border normal
-gaps inner 0
-# gaps outer 2
+gaps inner 10
+gaps outer 5
 # gaps horizontal 10
 # gaps vertical 10
 # gaps top 10
