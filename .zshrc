@@ -77,6 +77,7 @@ extend_path "$GOBIN"
 prepend_path "$HOME/.local/share/bob/nvim-bin"
 
 source_file "$HOME/.aliases"
+source_file "$ZSH/util.zsh"
 source_file "$ZSH/fuctions.zsh"
 source_file "$ZSH/plugins.zsh"
 

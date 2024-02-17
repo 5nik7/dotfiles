@@ -7,6 +7,11 @@ function ya() {
 	rm -f -- "$tmp"
 }
 
+function cd() {
+    echo -e ""
+    builtin cd "$@" && l
+}
+
 function weather {
     if [[ "$1" == "help" ]]; then
         curl "wttr.in/:help"
@@ -45,13 +50,20 @@ function lnk() {
     mkdir -p "$(dirname "$orig_file")"
     mkdir -p "$(dirname "$dest_file")"
 
+    rel1=$(rel_path $orig_file)
+	  rel2=$(rel_path $dest_file)
+
+
     if [ -e "$dest_file" ]; then
         mv "$dest_file" "$dest_file.bak"
-        echo "Existing $dest_file renamed to $dest_file.bak"
+        print_in_bright_black "\n  Backing up $rel2 to"
+        print_in_red " $rel2.bak\n"
     fi
 
     ln -s "$orig_file" "$dest_file"
-    echo "$orig_file -> $dest_file"
+    print_in_blue "\n  $rel1"
+    print_in_bright_black " -> "
+    print_in_cyan "$rel2\n"
 }
 
 function 256color() {
