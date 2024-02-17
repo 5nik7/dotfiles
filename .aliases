@@ -1,14 +1,10 @@
 alias c='clear'
 alias q='exit'
 
-alias cat='bat'
-
 alias path='echo $PATH | tr ":" "\n"'
 alias open='explorer.exe'
 
-alias d='ranger'
-alias ddot="ranger $DOTFILES"
-alias dconf="ranger $HOME/.config"
+alias d='ya'
 
 alias so='source'
 
