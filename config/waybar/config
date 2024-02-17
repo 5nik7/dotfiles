@@ -3,6 +3,7 @@
     "position": "top",
     "height": 30,
     "modules-left": [
+        "custom/launcher",
         "sway/workspaces"
     ],
     "modules-center": [
@@ -10,9 +11,16 @@
     ],
     "modules-right": [
         "cpu",
-        "memory"
+        "memory",
+        "custom/weather"
     ],
     "fixed-center": true,
+
+    "custom/launcher": {
+        "format": " 󰚌 ",
+        "on-click": "~/.config/rofi/launcher.sh",
+        "tooltip": false
+    },
 
     "sway/workspaces": {
         "disable-scroll": true,
@@ -28,6 +36,13 @@
     },
     "memory": {
         "format": " {}% "
+    },
+    "custom/weather": {
+    "format": "{}°",
+    "tooltip": true,
+    "interval": 3600,
+    "exec": "wttrbar --fahrenheit --location 'Yakima'",
+    "return-type": "json"
     },
 
     "custom/separator": {
