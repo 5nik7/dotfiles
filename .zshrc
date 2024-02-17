@@ -18,6 +18,7 @@ export MANPAGER="less -RF"
 export BAT_PAGER="less -RF"
 export PAGER="less -RF"
 export GOBIN="$HOME/go/bin"
+export BAT_CONFIG_PATH="$HOME/.config/bat/bat.conf"
 
 if [ $commands[fzf] ]
 then

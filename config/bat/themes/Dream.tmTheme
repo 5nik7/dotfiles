@@ -10,33 +10,33 @@
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#D1EAFF</string>
+          <string>#cdd6f4</string>
           <key>background</key>
-          <string>#161E39</string>
+          <string>#1e1e2e</string>
           <key>caret</key>
-          <string>#C4E5FF</string>
+          <string>#bac2de</string>
           <key>invisibles</key>
-          <string>#b8d5ec</string>
+          <string>#a6adc8</string>
           <key>gutterForeground</key>
-          <string>#a0bbcf</string>
+          <string>#9399b2</string>
           <key>gutterForegroundHighlight</key>
-          <string>#4FFFDC</string>
+          <string>#a6e3a1</string>
           <key>lineHighlight</key>
-          <string>#2b426f</string>
+          <string>#585b70</string>
           <key>selection</key>
-          <string>#2b426f</string>
+          <string>#6c7086</string>
           <key>selectionBorder</key>
-          <string>#161E39</string>
+          <string>#1e1e2e</string>
           <key>activeGuide</key>
-          <string>#FFC0A1</string>
+          <string>#fab387</string>
           <key>findHighlightForeground</key>
-          <string>#161E39</string>
+          <string>#181825</string>
           <key>findHighlight</key>
-          <string>#FFD5A1</string>
+          <string>#f9e2af</string>
           <key>bracketsForeground</key>
-          <string>#2b426f</string>
+          <string>#9399b2</string>
           <key>bracketContentsForeground</key>
-          <string>#2b426f</string>
+          <string>#9399b2</string>
         </dict>
       </dict>
       <dict>
@@ -47,7 +47,7 @@
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#2b426f</string>
+          <string>#6c7086</string>
           <key>fontStyle</key>
           <string>italic</string>
         </dict>
@@ -250,7 +250,7 @@
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#2b426f</string>
+          <string>#2B426F</string>
           <key>fontStyle</key>
           <string></string>
         </dict>
