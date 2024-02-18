@@ -1,5 +1,5 @@
 dir="$HOME/.config/rofi"
-theme='t4s1'
+theme='style-6'
 
 ## Run
 rofi \
