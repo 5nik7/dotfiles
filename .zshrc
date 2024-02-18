@@ -10,6 +10,7 @@ export ALIASES="$HOME/.aliases"
 export WIN='/mnt/c'
 export REPOS="$WIN/repos"
 
+# export EDITOR="code"
 export EDITOR="nvim"
 export SYSTEMD_EDITOR=$EDITOR
 export VISUAL="$EDITOR"
@@ -92,3 +93,5 @@ source_file "$HOME/.cargo/env"
 eval "$(rbenv init - zsh)"
 
 eval "$(starship init zsh)"
+
+if [ -e /home/njen/.nix-profile/etc/profile.d/nix.sh ]; then . /home/njen/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
