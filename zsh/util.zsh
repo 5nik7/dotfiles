@@ -1,3 +1,5 @@
+#! /usr/bin/env zsh
+
 print_in_color() {
     printf "%b" \
         "$(tput setaf "$2" 2> /dev/null)" \

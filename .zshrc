@@ -1,3 +1,45 @@
+#     ____  ______ _____  _____
+#    /_  / / __/ // / _ \/ ___/
+#   _ / /__\ \/ _  / , _/ /__
+#  (_)___/___/_//_/_/|_|\___/
+
+setopt HIST_FCNTL_LOCK
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_SPACE
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt SHARE_HISTORY
+unsetopt EXTENDED_HISTORY
+setopt autocd
+
+# setopt AUTO_LIST
+# setopt AUTO_MENU
+# setopt AUTO_PARAM_SLASH
+# setopt COMPLETE_IN_WORD
+# setopt NO_MENU_COMPLETE
+# setopt HASH_LIST_ALL
+# setopt ALWAYS_TO_END
+#
+# setopt HIST_SAVE_NO_DUPS
+# setopt HIST_IGNORE_ALL_DUPS
+# setopt SHARE_HISTORY
+# setopt HIST_FIND_NO_DUPS
+#
+# setopt INTERACTIVE_COMMENTS
+# setopt NOBEEP
+#
+# setopt extended_history
+# setopt append_history
+# setopt hist_ignore_dups
+# setopt hist_ignore_space
+# setopt hist_reduce_blanks
+# setopt hist_expand
+# setopt auto_cd
+# setopt nonomatch
+# setopt glob
+# setopt extended_glob
+# setopt rmstarsilent
+# setopt prompt_subst
+
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
@@ -5,6 +47,7 @@ export LANGUAGE=en_US.UTF-8
 export SUDO_PROMPT="passwd: "
 export DOTFILES="$HOME/.dotfiles"
 export ZSH="$DOTFILES/zsh"
+export ZFUNCDIR="$HOME/.zfunc"
 export BASHRC="$HOME/.bashrc"
 export ALIASES="$HOME/.aliases"
 export WIN='/mnt/c'
@@ -44,7 +87,9 @@ HISTSIZE=10000                    # Number of histories in memory
 SAVEHIST=100000                   # Number of histories to be saved
 HISTORY_IGNORE="(ls|cd|pwd|zsh|exit|cd ..)"
 
-WORDCHARS='*?_-[]~&;!#$%^(){}<>|'
+WORDCHARS='*?[]~=&;!#$%^(){}<>'
+
+# WORDCHARS='*?_-[]~&;!#$%^(){}<>|'
 
 function source_file() {
 	if [ -f "$1" ]; then
@@ -68,30 +113,50 @@ function prepend_path() {
 	fi
 }
 
-
+prepend_path "$HOME/.local/share/bob/nvim-bin"
 extend_path "$DOTFILES/bin"
 extend_path "$HOME/.local/bin"
+extend_path "$WIN/Windows"
 extend_path "$WIN/vscode/bin"
 extend_path "$WIN/bin"
-extend_path "$WIN/Windows"
 extend_path "$GOBIN"
-prepend_path "$HOME/.local/share/bob/nvim-bin"
+extend_path "$WIN/ProgramData/scoop/shims"
 
-source_file "$HOME/.aliases"
 source_file "$ZSH/util.zsh"
-source_file "$ZSH/fuctions.zsh"
+source_file "$HOME/.aliases"
+source_file "$HOME/.functions"
 source_file "$ZSH/plugins.zsh"
+source_file "$ZSH/completions.zsh"
+
+fpath=(
+	$ZFUNCDIR
+	/usr/local/share/zsh/site-functions
+	/usr/share/zsh/site-functions
+	$fpath
+)
+export fpath
 
 zle_highlight=('paste:none')
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
 source_file "$HOME/.cargo/env"
 
-eval "$(rbenv init - zsh)"
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
-eval "$(starship init zsh)"
+# bun
+[ -s "/home/njen/.bun/_bun" ] && source "/home/njen/.bun/_bun"
+export BUN_INSTALL="$HOME/.bun"
+prepend_path "$BUN_INSTALL/bin"
+
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+eval "$(rbenv init -)"
 
 if [ -e /home/njen/.nix-profile/etc/profile.d/nix.sh ]; then . /home/njen/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+eval "$(starship init zsh)"

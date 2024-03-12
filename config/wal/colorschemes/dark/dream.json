@@ -1,27 +1,27 @@
 {
-	"wallpaper": "~/wallpapers/dream.jpg",
-	"alpha": "100",
-	"special": {
-		"background": "#161E39",
-		"foreground": "#D1EAFF",
-		"cursor": "#6807F9"
-	},
-	"colors": {
-		"color0": "#161E39",
-		"color1": "#FF4F9E",
-		"color2": "#4FFFDC",
-		"color3": "#FFBDA1",
-		"color4": "#6188FF",
-		"color5": "#B48AFF",
-		"color6": "#24DEFF",
-		"color7": "#C4E5FF",
-		"color8": "#20294d",
-		"color9": "#FF4FBE",
-		"color10": "#4FFFDC",
-		"color11": "#FFE7A1",
-		"color12": "#6188FF",
-		"color13": "#B48AFF",
-		"color14": "#5EE7FF",
-		"color15": "#D1EAFF"
-	}
+  "wallpaper": "~/.dotfiles/wallpapers/dream.jpg",
+  "alpha": "100",
+  "special": {
+    "background": "#161E39",
+    "foreground": "#D1EAFF",
+    "cursor": "#6807F9"
+  },
+  "colors": {
+    "color0": "#161E39",
+    "color1": "#FF4F9E",
+    "color2": "#4FFFDC",
+    "color3": "#FFBDA1",
+    "color4": "#6188FF",
+    "color5": "#B48AFF",
+    "color6": "#24DEFF",
+    "color7": "#C4E5FF",
+    "color8": "#20294d",
+    "color9": "#FF4FBE",
+    "color10": "#4FFFDC",
+    "color11": "#FFE7A1",
+    "color12": "#6188FF",
+    "color13": "#B48AFF",
+    "color14": "#5EE7FF",
+    "color15": "#D1EAFF"
+  }
 }

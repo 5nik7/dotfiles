@@ -19,4 +19,9 @@ zinit light-mode for \
     hlissner/zsh-autopair \
     zdharma-continuum/fast-syntax-highlighting \
     zsh-users/zsh-autosuggestions \
-    Aloxaf/fzf-tab
+    Aloxaf/fzf-tab \
+    zsh-users/zsh-completions \
+    zsh-users/zsh-history-substring-search \
+    jeffreytse/zsh-vi-mode \
+    marlonrichert/zsh-autocomplete \
+    chitoku-k/fzf-zsh-completions
