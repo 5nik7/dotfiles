@@ -3,42 +3,58 @@
 #   _ / /__\ \/ _  / , _/ /__
 #  (_)___/___/_//_/_/|_|\___/
 
-setopt HIST_FCNTL_LOCK
-setopt HIST_IGNORE_DUPS
-setopt HIST_IGNORE_SPACE
-setopt HIST_EXPIRE_DUPS_FIRST
-setopt SHARE_HISTORY
-unsetopt EXTENDED_HISTORY
-setopt autocd
 
-# setopt AUTO_LIST
-# setopt AUTO_MENU
-# setopt AUTO_PARAM_SLASH
-# setopt COMPLETE_IN_WORD
-# setopt NO_MENU_COMPLETE
-# setopt HASH_LIST_ALL
-# setopt ALWAYS_TO_END
-#
-# setopt HIST_SAVE_NO_DUPS
-# setopt HIST_IGNORE_ALL_DUPS
-# setopt SHARE_HISTORY
-# setopt HIST_FIND_NO_DUPS
-#
-# setopt INTERACTIVE_COMMENTS
-# setopt NOBEEP
-#
-# setopt extended_history
-# setopt append_history
-# setopt hist_ignore_dups
-# setopt hist_ignore_space
-# setopt hist_reduce_blanks
-# setopt hist_expand
-# setopt auto_cd
-# setopt nonomatch
-# setopt glob
-# setopt extended_glob
-# setopt rmstarsilent
-# setopt prompt_subst
+export LSCOLORS="exfxcxdxbxegedabagacad"
+export CLICOLOR=true
+
+export ZFUNCDIR="$HOME/.zfunc"
+
+fpath=($HOME/.zfunc $fpath)
+autoload -U $HOME/.zfunc/*(:t)
+
+# fpath=(
+# 	$ZFUNCDIR
+# 	/usr/local/share/zsh/site-functions
+# 	/usr/share/zsh/site-functions
+# 	$fpath
+# )
+# export fpath
+
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+
+setopt NO_BG_NICE # don't nice background tasks
+setopt NO_HUP
+setopt NO_LIST_BEEP
+setopt LOCAL_OPTIONS # allow functions to have local options
+setopt LOCAL_TRAPS # allow functions to have local traps
+setopt HIST_VERIFY
+setopt SHARE_HISTORY # share history between sessions ???
+setopt EXTENDED_HISTORY # add timestamps to history
+setopt PROMPT_SUBST
+setopt CORRECT
+setopt COMPLETE_IN_WORD
+setopt IGNORE_EOF
+
+setopt APPEND_HISTORY # adds history
+setopt INC_APPEND_HISTORY SHARE_HISTORY  # adds history incrementally and share it across sessions
+setopt HIST_IGNORE_ALL_DUPS  # don't record dupes in history
+setopt HIST_REDUCE_BLANKS
+
+# don't expand aliases _before_ completion has finished
+#   like: git comm-[tab]
+setopt complete_aliases
+
+WORDCHARS='*?[]~=&;!#$%^(){}<>'
+
+bindkey '^[^[[D' backward-word
+bindkey '^[^[[C' forward-word
+bindkey '^[[5D' beginning-of-line
+bindkey '^[[5C' end-of-line
+bindkey '^[[3~' delete-char
+bindkey '^?' backward-delete-char
+
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
@@ -82,15 +98,6 @@ then
   fi
 fi
 
-HISTFILE="$HOME/.zsh_history"
-HISTSIZE=10000                    # Number of histories in memory
-SAVEHIST=100000                   # Number of histories to be saved
-HISTORY_IGNORE="(ls|cd|pwd|zsh|exit|cd ..)"
-
-WORDCHARS='*?[]~=&;!#$%^(){}<>'
-
-# WORDCHARS='*?_-[]~&;!#$%^(){}<>|'
-
 function source_file() {
 	if [ -f "$1" ]; then
 		source "$1"
@@ -128,13 +135,6 @@ source_file "$HOME/.functions"
 source_file "$ZSH/plugins.zsh"
 source_file "$ZSH/completions.zsh"
 
-fpath=(
-	$ZFUNCDIR
-	/usr/local/share/zsh/site-functions
-	/usr/share/zsh/site-functions
-	$fpath
-)
-export fpath
 
 zle_highlight=('paste:none')
 
@@ -160,3 +160,12 @@ if [ -e /home/njen/.nix-profile/etc/profile.d/nix.sh ]; then . /home/njen/.nix-p
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 eval "$(starship init zsh)"
+
+# Better history
+# Credits to https://coderwall.com/p/jpj_6q/zsh-better-history-searching-with-arrow-keys
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "^[[A" up-line-or-beginning-search # Up
+bindkey "^[[B" down-line-or-beginning-search # Down
