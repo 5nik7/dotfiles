@@ -22,6 +22,5 @@ zinit light-mode for \
     Aloxaf/fzf-tab \
     zsh-users/zsh-completions \
     zsh-users/zsh-history-substring-search \
-    jeffreytse/zsh-vi-mode \
     marlonrichert/zsh-autocomplete \
-    chitoku-k/fzf-zsh-completions
+    jeffreytse/zsh-vi-mode

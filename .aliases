@@ -1,28 +1,26 @@
 #! /usr/bin/env zsh
 
-alias refresh="source ${HOME}/.zshrc"
+alias refresh='source ${HOME}/.zshrc'
 
 alias c='clear'
 alias q='exit'
 
 alias path='echo $PATH | tr ":" "\n"'
 alias open='/mnt/c/Windows/explorer.exe'
-alias gc="nix-collect-garbage --delete-old"
+alias gc='nix-collect-garbage --delete-old'
 
-alias pbcopy="/mnt/c/Windows/System32/clip.exe"
-alias pbpaste="/mnt/c/bin/pwsh/pwsh.exe -command 'Get-Clipboard'"
-alias explorer="/mnt/c/Windows/explorer.exe"
+alias clip="/mnt/c/Windows/System32/clip.exe"
 
-alias d='ya'
+alias yank='win32yank.exe -i --crlf'
+alias paste='win32yank.exe -o --lf'
+
+alias explorer='/mnt/c/Windows/explorer.exe'
 
 alias so='source'
 
-alias sobash="source $BASHRC"
-
-alias install='sudo nala install'
-alias search='sudo nala search'
-alias uninstall='sudo nala remove'
-
+alias pkgi='sudo nala install'
+alias pkgs='nala search'
+alias pkgr='sudo nala remove'
 
 alias v='$EDITOR'
 alias sv="sudo $EDITOR"
@@ -33,8 +31,6 @@ alias aliases="$EDITOR $ALIASES"
 alias grep='grep --color=auto'
 
 alias npmup='npm install -g npm@latest'
-
-alias py='python'
 
 alias ".."="cd .."
 alias "..."="cd ../.."
