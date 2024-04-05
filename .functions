@@ -8,7 +8,7 @@ function rngr() {
     fi
     rm -f "$tmp"
 }
-alias d='rngr'
+alias dd='rngr'
 
 function ya() {
     local tmp="$(mktemp -t "yazi-cwd.XXXXX")"
@@ -18,7 +18,7 @@ function ya() {
     fi
     rm -f "$tmp"
 }
-# alias d='ya'
+alias d='ya'
 
 alias ll='echo -e "" && exa -la --icons --group-directories-first --git'
 alias l='echo -e "" && exa -la --icons --group-directories-first --git --no-permissions --no-filesize --no-user --no-time'

@@ -105,7 +105,7 @@ export FZF_DEFAULT_OPTS="
 --preview '([[ -f {} ]] && (bat --style=numbers --color=always --line-range=:500 {} || cat {})) || ([[ -d {} ]] \
 && (exa -TFl --group-directories-first --icons -L 2 --no-user {} | less)) || echo {} 2> /dev/null | head -200'
 --prompt=' ' --pointer=' ' --marker=' '
---color fg:-1,bg:-1,hl:5:underline,fg+:3,bg+:-1,hl+:5:underline,gutter:-1,border:8
+--color fg:-1,bg:-1,hl:5:underline,fg+:3,bg+:-1,hl+:5:underline,gutter:-1,border:0
 --color info:2,prompt:-1,spinner:2,pointer:6,marker:4
 --preview-window='border-sharp'
 --no-scrollbar

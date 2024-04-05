@@ -5,14 +5,13 @@ exec nwg-look -a
 exec sworkstyle &> /tmp/sworkstyle.log
 exec --no-startup-id flashfocus
 exec_always wl-paste --watch cliphist store
-exec_always wl-paste --watch pbcopy
 # exec eww open-many bar0 bar1 bar2
-# exec_always --no-startup-id ~/.config/waybar/scripts/launch_waybar.sh
+exec_always --no-startup-id ~/.config/waybar/scripts/launch_waybar.sh
 # exec_always --no-startup-id ~/.config/sway/scripts/wallpaper.sh
 
-bar {
-  swaybar_command waybar
-}
+# bar {
+#   swaybar_command waybar
+# }
 
 include "$HOME/.config/sway/colors"
 
@@ -39,8 +38,8 @@ font pango:$font $font_size
 
 default_border pixel 1
 default_floating_border normal
-gaps inner 6
-gaps outer 3
+gaps inner 4
+gaps outer 2
 # gaps horizontal 10
 # gaps vertical 10
 # gaps top 10
