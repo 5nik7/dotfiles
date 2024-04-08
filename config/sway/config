@@ -1,11 +1,11 @@
-#!
+# sway config
 
-exec --no-startup-id autotiling-rs
+exec autotiling-rs
 exec nwg-look -a
 exec sworkstyle &> /tmp/sworkstyle.log
-exec --no-startup-id flashfocus
+exec flashfocus
 # exec eww open-many bar0 bar1 bar2
-exec_always --no-startup-id ~/.config/waybar/scripts/launch_waybar.sh
+exec_always ~/.config/waybar/scripts/launch_waybar.sh
 # exec_always --no-startup-id ~/.config/sway/scripts/wallpaper.sh
 
 exec waypaper --restore
@@ -122,6 +122,16 @@ popup_during_fullscreen smart
 #
 # Workspaces:
 #
+    # bindsym $mod+1 exec workspacefade.sh 1
+    # bindsym $mod+2 exec workspacefade.sh 2
+    # bindsym $mod+3 exec workspacefade.sh 3
+    # bindsym $mod+4 exec workspacefade.sh 4
+    # bindsym $mod+5 exec workspacefade.sh 5
+    # bindsym $mod+6 exec workspacefade.sh 6
+    # bindsym $mod+7 exec workspacefade.sh 7
+    # bindsym $mod+8 exec workspacefade.sh 8
+    # bindsym $mod+9 exec workspacefade.sh 9
+    # bindsym $mod+0 exec workspacefade.sh 10
     # Switch to workspace
     bindsym $mod+1 workspace number 1
     bindsym $mod+2 workspace number 2
@@ -130,9 +140,9 @@ popup_during_fullscreen smart
     bindsym $mod+5 workspace number 5
     bindsym $mod+6 workspace number 6
     bindsym $mod+7 workspace number 7
-    bindsym $mod+8 workspace number 8
-    bindsym $mod+9 workspace number 9
-    bindsym $mod+0 workspace number 10
+    # bindsym $mod+8 workspace number 8
+    # bindsym $mod+9 workspace number 9
+    # bindsym $mod+0 workspace number 10
     # Move focused container to workspace
     bindsym $mod+Shift+1 move container to workspace number 1
     bindsym $mod+Shift+2 move container to workspace number 2

@@ -130,6 +130,7 @@ prepend_path "$HOME/.local/share/bob/nvim-bin"
 prepend_path "$GOBIN"
 prepend_path "$BUN_INSTALL/bin"
 prepend_path "$PYENV_ROOT/bin"
+prepend_path "$DOTFILES/bin"
 
 autoload -U up-line-or-beginning-search
 autoload -U down-line-or-beginning-search
