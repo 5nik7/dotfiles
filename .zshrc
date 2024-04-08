@@ -32,6 +32,8 @@ export PYENV_ROOT="$HOME/.pyenv"
 export BUN_INSTALL="$HOME/.bun"
 export NVM_DIR="$HOME/.nvm"
 
+export WAL_BACKEND="$(< "$HOME/.backend")"
+
 fpath=(
 	$ZSH/functions
 	/usr/local/share/zsh/site-functions

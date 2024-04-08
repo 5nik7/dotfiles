@@ -4,7 +4,7 @@
 include "/home/njen/.gtkrc-2.0.mine"
 gtk-theme-name="Catppuccin-Frappe-Standard-Blue-Dark"
 gtk-icon-theme-name="Papirus"
-gtk-font-name="JetBrainsMono Nerd Font Medium 10"
+gtk-font-name="JetBrainsMono Nerd Font Medium 12"
 gtk-cursor-theme-name="Adwaita"
 gtk-cursor-theme-size=24
 gtk-toolbar-style=GTK_TOOLBAR_ICONS

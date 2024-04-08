@@ -4,16 +4,26 @@ exec --no-startup-id autotiling-rs
 exec nwg-look -a
 exec sworkstyle &> /tmp/sworkstyle.log
 exec --no-startup-id flashfocus
-exec_always wl-paste --watch cliphist store
 # exec eww open-many bar0 bar1 bar2
 exec_always --no-startup-id ~/.config/waybar/scripts/launch_waybar.sh
 # exec_always --no-startup-id ~/.config/sway/scripts/wallpaper.sh
 
+exec waypaper --restore
+
+exec_always wl-paste --watch cliphist store
 # bar {
 #   swaybar_command waybar
 # }
 
-include "$HOME/.config/sway/colors"
+include "$HOME/.cache/wal/colors-sway"
+
+# target                 title          bg                text          indicator      border
+client.focused           $color4        $background       $foreground   $color4        $color4
+client.focused_inactive  $color8        $background       $foreground   $background    $background
+client.unfocused         $color8        $background       $foreground   $background    $background
+client.urgent            $color1        $background       $color1       $color1        $color1
+client.placeholder       $background    $background       $foreground   $background    $background
+client.background        $background
 
 set $mod Mod1
 
@@ -30,7 +40,7 @@ set $term kitty
 set $browser firefox
 set $filemanager thunar
 
-output "*" background ~/.dotfiles/wallpapers/dream.jpg fill
+# output "*" background ~/.dotfiles/wallpapers/dream.jpg fill
 # output "*" resolution 2560x1410@170Hz scale 1 pos 0 0
 output "*" resolution 2560x1410@170Hz pos 0 0
 
