@@ -7,15 +7,13 @@ export LC_ALL='en_US.UTF-8'
 export LANG='en_US.UTF-8'
 export LANGUAGE='en_US.UTF-8'
 
-export SUDO_PROMPT="passwd: "
-export DOTFILES="$HOME/.dotfiles"
-export ZSH="$DOTFILES/zsh"
 export WIN='/mnt/c'
 export REPOS="$WIN/repos"
 
+export SUDO_PROMPT="passwd: "
+export DOTFILES="$HOME/.dotfiles"
+export ZSH="$DOTFILES/zsh"
 export SHELL='/usr/bin/zsh'
-export CLIPCOPY='wl-copy'
-export CLIPPASTE='wl-paste'
 
 export TERMINAL='kitty'
 export BROWSER='firefox'
@@ -77,10 +75,6 @@ source_file "$NVM_DIR/bash_completion"
 source_file "$HOME/.bun/_bun"
 source_file "$HOME/.nix-profile/etc/profile.d/nix.sh"
 
-HISTFILE=~/.zsh_history
-HISTSIZE=10000
-SAVEHIST=10000
-
 # Options
 setopt no_bg_nice
 setopt no_hup
@@ -99,6 +93,10 @@ setopt local_options
 setopt prompt_subst
 
 setopt complete_aliases
+
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
 
 WORDCHARS='*?[]~=&;!#$%^(){}<>'
 
